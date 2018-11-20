@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Item List</title>
+    <link rel="stylesheet" type="text/css" href="../static/stylesMain.css" th:href="@{/styleMain.css}">
+</head>
+<body>
+<div class="topnav">
+    <a href="/">Back</a>
+    <a href="adminMenu">Excel</a>
+    <a class="active" href="itemList">Item List</a>
+    <a href="/">Log off</a>
+</div>
+
+<div style="padding-left: 38px;padding-right: 4px;" ;>
+    <h2>Item List</h2>
+
+    <div class="search-container">
+        <form class="example" action="/searchByTitle/" method="get" style="max-width:1000px">
+            <input type="text" placeholder="Search.." name="Search">
+            <button type="submit" value="Search"><span>Search by Item</span><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+<div>1. Item Price Date (Edit button)...</div>
+
+
+        <a href="/createItem">
+            <button class="button"><span>Add new item</span></button>
+        </a>
+</body>
+</html>
