@@ -2,12 +2,15 @@
 package snsinternaltransfer.sns;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 @org.springframework.stereotype.Controller
 public class MainController {
+
 
 
 
@@ -20,6 +23,15 @@ public class MainController {
         return "index";
 
     }
+
+    @GetMapping("/login")
+    public String login (){
+
+
+        return "login";
+
+    }
+
 
     @GetMapping("/userCreate")
     public String userCreate(){

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Create Actor</h1>
+    <form th:action="@{/login}" th:object="${user}" method="Post">
+        <hr>
+
+
+        <p>Enter username</p>
+        <input type="text" th:field="${user.username}"/>
+
+        <p>Enter password</p>
+        <input type="text" th:field="${user.password}"/>
+
+
+        <input type="hidden" th:field="${actor.userRole}"/>
+        <input type="hidden" th:field="${actor.loggedIn}"/>
+
+
+
+        <input class="registerbtn" type="submit" value="Submit"/>
+
+
+        <hr>
+    </form>
+</div>
+</body>
+</html>
