@@ -3,6 +3,7 @@ package snsinternaltransfer.sns.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import snsinternaltransfer.sns.models.User;
 import snsinternaltransfer.sns.repo.UserRepo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -14,14 +15,18 @@ public class LoginService {
     BCryptPasswordEncoder encoder;
 
 
-    public void login(String username, String password){
+    public User login(String username, String password){
 
         String hashedAndSaltedPassword = encoder.encode(password+userRepo.getSaltViaUsername(username));
 
         if (hashedAndSaltedPassword.equals(userRepo.getPasswordViaUsername(username))){
 
-            // something something
+            userRepo.getUserViaUsername(username).setLoggedIn(true);
+
+            return userRepo.getUserViaUsername(username);
+
         }
+        else return null;
     }
 
     // den her er til for at vi kan lave og teste passwords

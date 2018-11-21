@@ -6,12 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 
-    @Autowired
-    Role role;
 
     private String username;
     private String password;
-    private Role userRole;
+    private String role;
     private boolean loggedIn;
 
     public User(String username, String password) {
@@ -30,12 +28,12 @@ public class User {
         this.loggedIn = loggedIn;
     }
 
-    public Role getUserRole() {
-        return userRole;
+    public String getUserRole() {
+        return role;
     }
 
-    public void setUserRole(Role userRole) {
-        this.userRole = userRole;
+    public void setUserRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {

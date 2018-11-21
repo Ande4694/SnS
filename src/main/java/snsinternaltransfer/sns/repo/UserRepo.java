@@ -15,7 +15,7 @@ public class UserRepo {
     User user;
     JdbcTemplate template;
 
-    public User getUserViaUser(String username){
+    public User getUserViaUsername(String username){
 
         String sql = "SELECT * FROM sns.users WHERE username=?";
 
