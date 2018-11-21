@@ -13,10 +13,9 @@
 </style>
 <body>
 <div class="topnav">
-    <a href="/">IMDB</a>
-    <a class="active" href="movie">Movie</a>
-    <a href="contact">Contact</a>
-    <a href="aboutUs">About us</a>
+    <a href="/">Log off</a>
+    <a class="active" href="userCreate">Send Item</a>
+
 </div>
 
 <div class="container">
@@ -26,7 +25,9 @@
 
 
         <p>Enter Date</p>
-        <input type="date">
+        <input type="date" id="start" name="trip-start"
+               value="2018-11-21"
+               min="2018-11-21">
         <p>Enter Item</p>
         <input type="text">
         <p>Enter Amount</p>
@@ -42,6 +43,8 @@
     </form>
 </div>
 <div class="logo-TopRight"> <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="150" height="50"> </div>
-<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"  >
+
+</script>
 </body>
 </html>

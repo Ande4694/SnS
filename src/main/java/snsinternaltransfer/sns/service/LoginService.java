@@ -1,4 +1,4 @@
-package snsinternaltransfer.sns.service;
+/*package snsinternaltransfer.sns.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +30,4 @@ public class LoginService {
 
 
     }
-}
+}*/
