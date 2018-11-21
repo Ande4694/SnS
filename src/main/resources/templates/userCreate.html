@@ -17,10 +17,12 @@
     <a class="active" href="movie">Movie</a>
     <a href="contact">Contact</a>
     <a href="aboutUs">About us</a>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
 </div>
 
 <div class="container">
-    <h1>Create Request</h1>
+    <h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>
     <form th:action="@{/create}" th:object="${movie}" method="Post">
         <hr>
 
@@ -33,6 +35,8 @@
         <input type="text">
         <p>Enter Your name</p>
         <input type="text">
+
+
 
 
         <input class="registerbtn" type="submit" value="Submit"/>

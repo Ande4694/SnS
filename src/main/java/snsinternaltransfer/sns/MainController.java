@@ -3,18 +3,15 @@ package snsinternaltransfer.sns;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import snsinternaltransfer.sns.models.User;
-import snsinternaltransfer.sns.service.LoginService;
 
-import java.util.ArrayList;
+
+
 import java.util.logging.Logger;
 
 @org.springframework.stereotype.Controller
 public class MainController {
 
-    @Autowired
-    LoginService loginService;
-    ArrayList<User> loggedInUsers;
+
 
 
 
@@ -33,6 +30,7 @@ public class MainController {
 
         log.info("userCreate call");
         return "userCreate";
+
     }
 
     @GetMapping("/adminMenu")
