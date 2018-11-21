@@ -213,6 +213,76 @@
             width: 100%;
         }
     }
+
+    .box{
+        width: 300px;
+        padding: 40px;
+        position: absolute;
+        top: 50%;
+        left: 78%;
+        transform: translate(-50%,-50%);
+        background: #191919;
+        text-align: center;
+    }
+
+    .box h1{
+        color: white;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .box input[type = "text"], .box input[type = "password"]{
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border:	2px solid #3498db;
+        padding: 14px 10px;
+        width: 200px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+    }
+
+    .box input[type = "text"]:focus, .box input[type = "password"]:focus{
+        width: 280px;
+        border-color: #2ecc71;
+    }
+
+    .box input[type="submit"]{
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border:	2px solid #2ecc71;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+
+    .box input[type="submit"]:hover{
+        background: #2ecc71
+    }
+
+    .frontsize-u{
+        font-size: 15px;
+    }
+
+    .frontsize-l{
+        font-size: 14px;
+    }
+
+    .box{
+        border-radius: 50px;
+        display: transparent;
+    }
+
 </style>
 
 <body>
@@ -226,33 +296,6 @@
     <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
     <a style="width:auto;" href="/userCreate" class = "button" >User</a>
     <button style="width:auto;">Admin</button>
-</div>
-<div id="id01" class="modal">
-
-    <form class="modal-content animate" action="/action_page.php">
-        <div class="imgcontainer">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" alt="Avatar" class="avatar">
-        </div>
-
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
 </div>
 
 <script>
