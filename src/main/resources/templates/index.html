@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <link rel="shortcut icon"href="https://i.imgur.com/VKkRjuB.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../static/stylesMain.css" th:href="@{/styleMain.css}">
     <!--<link rel="stylesheet" type="text/css" href="../static/styles22.css" th:href="@{/styles22.css}">-->
 </head>
 <style>
@@ -29,6 +31,9 @@
         left: 50%;
         transform: translate(-50%, -50%);
         color: #fffbff;
+    }
+    .hero-text2{
+        font-style: ;
     }
 
     .hero-text button {
@@ -173,7 +178,7 @@
 
     .logo-topmid {
         position: relative;
-        right: -1%;
+        right: -38px;
         top: 44px;
     }
 
@@ -287,7 +292,8 @@
 
     .tm-header{
         background: #6b0212;
-        background-color: rgba(0,0,0,0.9)
+        background-color: rgba(0,0,0,0.9);
+        margin: -17px;
 
     }
 
@@ -296,11 +302,14 @@
         clear: both;
         display: block;
         visibility: none;
-        padding: 0;
+        padding: 12px 14px;
     }
 
     .tm-logo{
+        position: relative;
         float: left;
+        top: 24px;
+        left: -117px;
     }
     .tm-nav{
         float: right;
@@ -319,7 +328,11 @@
         text-decoration: none;
         color: #f1f1f1;
         line-height: 60px;
-
+        font-weight: 400;
+        border-right:1px solid #bbb;
+        position: relative;
+        top: 4px;
+        left: 127px;
     }
 
     .tm-nav ul li a:hover{
@@ -331,11 +344,11 @@
 <body>
 <header class="tm-header">
     <div class="tm-container">
-        <img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" alt="logo" width="150" class="tm-logo">
+        <img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" alt="logo" width="100" class="tm-logo">
 
         <nav class="tm-nav">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Contact</a></li>
