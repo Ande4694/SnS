@@ -322,11 +322,11 @@
 
     <div id="id01" class="modal">
         <!--class="modal-content animate"-->
-        <form  class="box animate" action="/action_page.php">
+        <form  class="box animate" th:action="@{/}" method="post">
             <h1>Login</h1>
-            <input type="text" name="" placeholder="Username" class="frontsize-u">
-            <input type="password" name="" placeholder="Password" class="frontsize-u">
-            <input type="submit" name="" value="Login" class="frontsize-l">
+            <input type="text" name="username" placeholder="Username" class="frontsize-u"/>
+            <input type="password" name="password" placeholder="Password" class="frontsize-u"/>
+            <input type="submit" name ="Sign In" value="Sign In" class="frontsize-l"/>
         </form>
     </div>
 
