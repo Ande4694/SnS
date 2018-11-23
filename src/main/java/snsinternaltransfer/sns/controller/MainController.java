@@ -18,7 +18,8 @@ public class MainController {
 
     @Autowired
     LoginService loginService;
-    ArrayList<User> loggedInUsers;
+
+    ArrayList<User> loggedInUsers = new ArrayList<>();
 
     private final Logger log = Logger.getLogger(MainController.class.getName());
 
