@@ -2,25 +2,14 @@
 package snsinternaltransfer.sns.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import snsinternaltransfer.sns.models.User;
-import snsinternaltransfer.sns.repo.UserRepo;
-import snsinternaltransfer.sns.service.LoginService;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 @org.springframework.stereotype.Controller
 public class MainController {
-
-
-    @Autowired
-    LoginService loginService;
-
-    User loggedIn = new User();
 
     private final Logger log = Logger.getLogger(MainController.class.getName());
 
@@ -36,40 +25,9 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login (Model model){
+    public String login (){
         log.info("login attempted");
-
-        model.addAttribute("user",new User());
-        model.addAttribute("isLogin", true);
-
-        if(loggedIn.getUserState() == 1) {
-            model.addAttribute("isLoggedin", true);
-            model.addAttribute("isAdmin", true);
-            model.addAttribute("userName", loggedIn.getUsername());
-        } else if (loggedIn.getUserState() == 0){
-            model.addAttribute("isLoggedin", true);
-            model.addAttribute("userName", loggedIn.getUsername());
-        }
         return "/login";
-    }
-
-    @PostMapping("/login")
-    public String login(@ModelAttribute User user, Model model) throws NoSuchAlgorithmException {
-        boolean loginMatch = false;
-        loginMatch = loginService.loginMatch(user);
-
-        if(loginMatch == true) {
-
-
-            loggedIn = loginService.loggedIn(user);
-
-            return "redirect:/";
-        }
-        else {
-
-
-            return "redirect:/login";
-        }
     }
 
 
