@@ -24,17 +24,28 @@ public class MainController {
     private final Logger log = Logger.getLogger(MainController.class.getName());
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(){
 
         log.info("index called");
 
-        model.addAttribute("user",new User());
+
 
         return "index";
 
     }
 
-    @PostMapping("/")
+    @GetMapping("/login")
+    public String index(Model model){
+
+        log.info("login called");
+
+        model.addAttribute("user",new User());
+
+        return "login";
+
+    }
+
+    @PostMapping("/login")
     public String index(@ModelAttribute User user){
 
         log.info("someone logged in as: "+user.getUsername());
@@ -43,7 +54,7 @@ public class MainController {
         if(loginService.login(user.getUsername(),user.getPassword())!=null){
             loggedInUsers.add(loginService.login(user.getUsername(),user.getPassword()));
 
-            return "index";
+            return "redirect:/userCreate";
 
         } else {
             return "loginFail";
