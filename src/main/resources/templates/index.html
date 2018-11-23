@@ -1,90 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head> <link rel="shortcut icon"href="https://i.imgur.com/VKkRjuB.png"/>
+<head> <link rel="shortcut icon"href="https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/f1/6d/08/f16d0880-85fa-b16b-9b5c-f94b4ea173bd/AppIcon-1x_U007emarketing-85-220-4.png/246x0w.jpg"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="stylesheet" type="text/css" href="../static/styles22.css" th:href="@{/styles22.css}">-->
 </head>
 <style>
-    .box{
-        width: 300px;
-        padding: 40px;
-        position: absolute;
-        top: 25%;
-        left: 37%;
-        /*transform: translate(-50%,-50%);*/
-        background: #191919;
-        text-align: center;
-    }
-    .box h1{
-        color: white;
-        text-transform: uppercase;
-        font-weight: 500;
-    }
-    .box input[type = "text"], .box input[type = "password"]{
-        border: 0;
-        background: none;
-        display: block;
-        margin: 20px auto;
-        text-align: center;
-        border:	2px solid #3498db;
-        padding: 14px 10px;
-        width: 200px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
-    }
-    .box input[type = "text"]:focus, .box input[type = "password"]:focus{
-        width: 280px;
-        border-color: #2ecc71;
-    }
-    .box input[type="submit"]{
-        border: 0;
-        background: none;
-        display: block;
-        margin: 20px auto;
-        text-align: center;
-        border:	2px solid #2ecc71;
-        padding: 14px 40px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
-        cursor: pointer;
-    }
-    .box input[type="submit"]:hover{
-        background: #2ecc71
-    }
-    .frontsize-u{
-        font-size: 15px;
-    }
-    .frontsize-l{
-        font-size: 14px;
-    }
-    .box{
-        border-radius: 50px;
-        opacity: 0.8;
-    }
+
     body, html {
         height: 100%;
         margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: sans-serif;
     }
     .hero-image {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://ak6.picdn.net/shutterstock/videos/1008944036/thumb/12.jpg");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url("https://yutakasawa.com.au/wp-content/uploads/2015/03/slider-11.jpg");
         height: 100%;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         position: relative;
+        max-width: 100%;
     }
     .hero-text {
         text-align: center;
         position: absolute;
-        top: 20%;
+        top: 42%;
         left: 50%;
         transform: translate(-50%, -50%);
         color: #fffbff;
+    }
+    .hero-text2{
+        font-style: ;
     }
     .hero-text button {
         padding: 15px 13px;
@@ -106,7 +51,7 @@
         right: 15px;
         bottom: 0PX;
     }
-    body {
+    .body {
         font-family: Arial, Helvetica, sans-serif;
     }
     /* Full-width input fields */
@@ -118,7 +63,30 @@
         border: 1px solid #ccc;
         box-sizing: border-box;
     }
-    body {font-family: Arial, Helvetica, sans-serif;}
+    /* Set a style for all buttons */
+    .button {
+        border: 0;
+        background: #191919;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border:	2px solid #2ecc71;
+        padding: 14px 10px;
+        width: 200px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        text-decoration: none;
+    }
+    .button:focus {
+        width: 280px;
+        border-color: #2ecc71;
+    }
+    .button:hover{
+        background: #2ecc71;
+    }
+    body {font-family: sans-serif;}
     /* Full-width input fields */
     input[type=text], input[type=password] {
         width: 100%;
@@ -183,7 +151,7 @@
     }
     .logo-topmid {
         position: relative;
-        right: -27px;
+        right: -38px;
         top: 44px;
     }
     .close:hover,
@@ -214,60 +182,179 @@
             width: 100%;
         }
     }
+    .box{
+        width: 300px;
+        padding: 40px;
+        position: absolute;
+        top: 25%;
+        left: 66%;
+        /* transform: translate(-50%,-50%); */
+        background: #191919;
+        text-align: center;
+    }
+    .box h1{
+        color: white;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+    .box input[type = "text"], .box input[type = "password"]{
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border:	2px solid #3498db;
+        padding: 14px 10px;
+        width: 200px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+    }
+    .box input[type = "text"]:focus, .box input[type = "password"]:focus{
+        width: 280px;
+        border-color: #2ecc71;
+    }
+    .box input[type="submit"]{
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border:	2px solid #2ecc71;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+    .box input[type="submit"]:hover{
+        background: #2ecc71
+    }
+    .frontsize-u{
+        font-size: 15px;
+    }
+    .frontsize-l{
+        font-size: 14px;
+    }
+    .box{
+        border-radius: 50px;
+        opacity: 0.8;
+    }
+    .box{
+        border-radius: 50px;
+        display: transparent;
+    }
+    .tm-container{
+        max-width: 1200px;
+        margin: 0px auto;
+    }
+    .tm-header{
+        background: #6b0212;
+        background-color: rgba(0,0,0,0.9);
+        margin: -17px;
+    }
+    .tm-header:after{
+        content: "";
+        clear: both;
+        display: block;
+        visibility: none;
+        padding: 12px 14px;
+    }
+    .tm-logo{
+        position: relative;
+        float: left;
+        top: 24px;
+        left: -117px;
+    }
+    .tm-nav{
+        float: right;
+    }
+    .tm-nav ul{
+        margin-bottom: 0;
+    }
+    .tm-nav ul li{
+        display: inline-block;
+    }
+    .tm-nav ul li a {
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #f1f1f1;
+        line-height: 60px;
+        font-weight: 400;
+        border-right:1px solid #bbb;
+        position: relative;
+        top: 4px;
+        left: 127px;
+    }
+    .tm-nav ul li a:hover{
+        color: #3e99ff;
+    }
 </style>
 
 <body>
+<header class="tm-header">
+    <div class="tm-container">
+        <img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" alt="logo" width="100" class="tm-logo">
+
+        <nav class="tm-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 <div class="hero-image"></div>
+
 <div class="logo-LeftCorner"><img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="300" height="100"></div>
 <div class="hero-text">
-    <div class = "logo-topmid"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="125" width="200"></div>
+    <div class = "logo-topmid"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="200" width="800"></div>
 
     <h1 style="font-size:50px">Sticks'n'Sushi</h1>
-    <p>We believe in fine Sushi and Anders</p>
 
-
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-
-    <a href="/userCreate" class ="button"  >User</a>
-    <button onclick="myFunction() " >Admin</button>
-
-    <p id="demo"></p>
-
-</div>
-<div id="id01" class="modal">
-    <!--class="modal-content animate"-->
-    <form  class="box animate" action="/action_page.php">
-        <h1>Login</h1>
-        <input type="text" name="" placeholder="Username" class="frontsize-u">
-        <input type="password" name="" placeholder="Password" class="frontsize-u">
-        <input type="submit" name="" value="Login" class="frontsize-l">
-    </form>
+    <a onclick="document.getElementById('id01').style.display='block'" class = "button" >User</a>
+    <a onclick="myFunction() " class = "button" >Admin</a>
 </div>
 
-<script>
-    // Get the modal
-    var modal = document.getElementById('id01');
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    <div id="id01" class="modal">
+        <!--class="modal-content animate"-->
+        <form  class="box animate" action="/action_page.php">
+            <h1>Login</h1>
+            <input type="text" name="" placeholder="Username" class="frontsize-u">
+            <input type="password" name="" placeholder="Password" class="frontsize-u">
+            <input type="submit" name="" value="Login" class="frontsize-l">
+        </form>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
-    }
-    function myFunction() {
-        if (confirm("Are you sure?")) {
-            AreYouSure()
+        function myFunction() {
+            if (confirm("Are you sure?")) {
+                AreYouSure()
+            }
         }
-    }
-    function AreYouSure() {
-        if (confirm("ARE YOU ABSOLUT SURE MATE?")) {
-            LastChance()
+        function AreYouSure() {
+            if (confirm("ARE YOU ABSOLUT SURE MATE?")) {
+                LastChance()
+            }
         }
-    }
-    function LastChance() {
-        if (confirm("LAST CHANCE!")) {
-            window.location.href = "http://localhost:5000/userCreate";
+        function LastChance() {
+            if (confirm("LAST CHANCE!")) {
+                document.getElementById('id01').style.display='block'
+                /*window.location.href = "http://localhost:5000/userCreate";*/
+            }
         }
-    }
-</script>
+    </script>
 </body>
 </html>

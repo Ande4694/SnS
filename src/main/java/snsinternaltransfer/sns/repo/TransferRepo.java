@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public interface TransferRepo {
 
 
-    int getSenderDepartment();
+/*    int getSenderDepartment();*/
 
     void sendItem(Transfer transfer) throws SQLException;
     //indsæt i db

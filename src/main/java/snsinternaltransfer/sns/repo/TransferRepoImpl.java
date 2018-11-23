@@ -6,14 +6,11 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import snsinternaltransfer.sns.config.WebSecurityConfig;
 import snsinternaltransfer.sns.models.Department;
 import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
 
-import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 @Repository
 public class TransferRepoImpl implements TransferRepo{
@@ -21,11 +18,11 @@ public class TransferRepoImpl implements TransferRepo{
     @Autowired
     Transfer transfer;
     JdbcTemplate template;
-    WebSecurityConfig websec;
+
 
     int departmentId;
 
-    @Override
+/*    @Override
     public int getSenderDepartment(){
         if (websec.userDetailsService().equals("glk")){
             departmentId = 5;
@@ -65,13 +62,13 @@ public class TransferRepoImpl implements TransferRepo{
         }
 
         return departmentId;
-    }
+    }*/
 
     @Override
     public void sendItem(Transfer transfer)  {
         String sql ="INSERT INTO sns.sendings VALUES (default, ?,?,?,?,?,?,?,?)";
 
-        int from = getSenderDepartment();
+        int from = 10 ;
         int to = transfer.getTo();
         Date date = transfer.getSendingDate();
         int item = transfer.getItem().getId();
