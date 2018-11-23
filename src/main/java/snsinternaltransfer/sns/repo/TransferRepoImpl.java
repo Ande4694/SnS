@@ -71,9 +71,9 @@ public class TransferRepoImpl implements TransferRepo{
         int from = 10 ;
         int to = transfer.getTo();
         Date date = transfer.getSendingDate();
-        int item = transfer.getItem().getId();
-        double totalPrice = transfer.getAmount()* getItem(transfer.getItem().getName()).getUnitPrice();
-        int itemCode = getItem(transfer.getItem().getName()).getItemCode();
+        String item = transfer.getItem();
+        double totalPrice = transfer.getAmount()* getItem(transfer.getItem()).getUnitPrice();
+        int itemCode = getItem(transfer.getItem()).getItemCode();
         String senderName = transfer.getSenderName();
         double amount = transfer.getAmount();
 

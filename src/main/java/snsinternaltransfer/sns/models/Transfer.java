@@ -13,9 +13,9 @@ public class Transfer {
     private int id;
     private int from;
     private int to;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date sendingDate;
-    private Item item;
+    private String item;
     private double totalPrice;
     private int itemCode;
     private String senderName;
@@ -24,7 +24,7 @@ public class Transfer {
     public Transfer() {
     }
 
-    public Transfer(int from, int to, Date sendingDate, Item item, double totalPrice, int itemCode, String senderName, double amount) {
+    public Transfer(int from, int to, Date sendingDate, String item, double totalPrice, int itemCode, String senderName, double amount) {
         this.from = from;
         this.to = to;
         this.sendingDate = sendingDate;
@@ -63,11 +63,11 @@ public class Transfer {
         this.sendingDate = sendingDate;
     }
 
-    public Item getItem() {
+    public String getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(String item) {
         this.item = item;
     }
 
