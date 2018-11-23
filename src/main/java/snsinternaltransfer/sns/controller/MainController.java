@@ -23,7 +23,8 @@ public class MainController {
     public String index(){
 
         log.info("index called");
-        log.info(websec.);
+        log.info(websec.userDetailsService().toString());
+
 
         return "index";
 
