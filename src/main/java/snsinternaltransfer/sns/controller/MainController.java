@@ -26,6 +26,7 @@ public class MainController {
         log.info(websec.userDetailsService().toString());
 
 
+
         return "index";
 
     }
