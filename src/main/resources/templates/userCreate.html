@@ -28,7 +28,7 @@
     <form th:action="@{/create}" th:object="${movie}" method="Post">
         <hr>
 
-
+        <input type="text" name="from" placeholder="[[${#httpServletRequest.remoteUser}]]">
         <p>Enter Date</p>
         <input type="date">
         <p>Enter Item</p>
