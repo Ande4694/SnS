@@ -268,7 +268,7 @@
     <a href="/userCreate" class ="button"  >User</a>
     <button onclick="myFunction() " >Admin</button>
 
-    <p id="demo1"></p>
+    <p id="demo"></p>
 
 </div>
 <div id="id01" class="modal">
@@ -292,34 +292,22 @@
         }
     }
     function myFunction() {
-        var txt;
         if (confirm("Are you sure?")) {
             AreYouSure()
-        } else {
-            txt = "You pressed Cancel!";
         }
-        document.getElementById("demo").innerHTML = txt;
     }
 
 
     function AreYouSure() {
-        var txt;
         if (confirm("ARE YOU ABSOLUT SURE MATE?")) {
             LastChance()
-        } else {
-            txt = "You pressed Cancel!";
         }
-        document.getElementById("demo").innerHTML = txt;
     }
 
     function LastChance() {
-        var txt;
         if (confirm("LAST CHANCE!")) {
-            txt = "Its on you now";
-        } else {
-            txt = "You pressed Cancel!";
+            window.location.href = "http://localhost:5000/userCreate";
         }
-        document.getElementById("demo1").innerHTML = txt;
     }
 </script>
 </body>
