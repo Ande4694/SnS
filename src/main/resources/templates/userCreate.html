@@ -7,22 +7,88 @@
 </head>
 <style>
 
-    body {
+    body, html {
+        height: 100%;
+        margin: 0;
         font-family: sans-serif;
-        background-color: black;
+    }
+
+    .tm-container{
+        max-width: 1200px;
+        margin: 0px auto;
+    }
+
+    .tm-header{
+        background: #6b0212;
+        background-color: rgba(0,0,0,0.9);
+        margin: -17px;
+
+    }
+
+    .tm-header:after{
+        content: "";
+        clear: both;
+        display: block;
+        visibility: none;
+        padding: 12px 14px;
+    }
+
+    .tm-logo{
+        position: relative;
+        float: left;
+        top: 24px;
+        left: -117px;
+    }
+    .tm-nav{
+        float: right;
+    }
+
+    .tm-nav ul{
+        margin-bottom: 0;
+    }
+
+    .tm-nav ul li{
+        display: inline-block;
+    }
+
+    .tm-nav ul li a {
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #f1f1f1;
+        line-height: 60px;
+        font-weight: 400;
+        border-right:1px solid #bbb;
+        position: relative;
+        top: 4px;
+        left: 127px;
+    }
+
+    .tm-nav ul li a:hover{
+        color: #3e99ff;
+
     }
 
 </style>
 <body>
-<div class="topnav">
-    <a href="/">IMDB</a>
-    <a class="active" href="movie">Movie</a>
-    <a href="contact">Contact</a>
-    <a href="aboutUs">About us</a>
+
+<header class="tm-header">
+    <div class="tm-container">
+        <img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" alt="logo" width="100" class="tm-logo">
+        <nav class="tm-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
 </div>
-
 <div class="container">
     <h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>
     <form th:action="@{/create}" th:object="${movie}" method="Post">
@@ -47,7 +113,7 @@
         <hr>
     </form>
 </div>
-<div class="logo-TopRight"> <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="150" height="50"> </div>
+
 <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
 </body>
 </html>
