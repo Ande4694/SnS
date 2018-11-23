@@ -72,11 +72,13 @@ public class TransferRepoImpl implements TransferRepo{
         String sql ="INSERT INTO sns.sendings VALUES (default, ?,?,?,?,?,?,?,?)";
 
         int from = getSenderDepartment();
+        //VIRKER IKKE
         int to = transfer.getTo();
         Date date = transfer.getSendingDate();
         int item = transfer.getItem().getId();
         double totalPrice = transfer.getAmount()* getItem(transfer.getItem().getName()).getUnitPrice();
         int itemCode = getItem(transfer.getItem().getName()).getItemCode();
+        //laves om i DB
         String senderName = transfer.getSenderName();
         double amount = transfer.getAmount();
 

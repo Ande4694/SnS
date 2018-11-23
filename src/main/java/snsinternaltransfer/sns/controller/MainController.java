@@ -23,7 +23,7 @@ public class MainController {
     public String index(){
 
         log.info("index called");
-        log.info(websec.toString());
+        log.info(websec.);
 
         return "index";
 
