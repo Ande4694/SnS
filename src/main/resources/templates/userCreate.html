@@ -74,12 +74,7 @@
     .box input[type="submit"]:hover{
         background: #2ecc71
     }
-    .frontsize-u{
-        font-size: 15px;
-    }
-    .frontsize-l{
-        font-size: 14px;
-    }
+
     .box{
         border-radius: 50px;
         opacity: 0.8;
@@ -88,6 +83,11 @@
         border-radius: 50px;
         display: transparent;
     }
+
+    .frontsize-l{
+        font-size: 20px;
+    }
+
     .tm-container{
         max-width: 1200px;
         margin: 0px auto;
@@ -187,11 +187,28 @@
         width: 450px;
     }
 
+    .tm-signOut{
+        text-decoration: none;
+        padding: 0px;
+        position: absolute;
+        top: 16px;
+        left: 197px;
+
+    }
+
 </style>
 <body>
 
-<header class="tm-header">
+<header class="tm-header" style=" width: 1457px">
     <div class="tm-container">
+        <img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" alt="logo" width="100" class="tm-logo">
+
+        <div class="tm-signOut">
+            <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
         <nav class="tm-nav">
             <ul>
                 <li><a href="/">Home</a></li>
@@ -208,6 +225,7 @@
 <div>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
+    </form>
 </div>
 
 <div class="box">
