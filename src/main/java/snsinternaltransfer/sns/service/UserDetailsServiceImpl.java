@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import snsinternaltransfer.sns.models.AppUser;
-import snsinternaltransfer.sns.repo.AppRoleDAO;
-import snsinternaltransfer.sns.repo.AppUserDAO;
+import snsinternaltransfer.sns.repo.login.AppRoleDAO;
+import snsinternaltransfer.sns.repo.login.AppUserDAO;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

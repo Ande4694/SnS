@@ -1,4 +1,4 @@
-package snsinternaltransfer.sns.repo;
+package snsinternaltransfer.sns.repo.login;
 
 import java.util.List;
 

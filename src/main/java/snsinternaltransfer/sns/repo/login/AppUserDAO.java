@@ -1,4 +1,4 @@
-package snsinternaltransfer.sns.repo;
+package snsinternaltransfer.sns.repo.login;
 
 import javax.sql.DataSource;
 
@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import snsinternaltransfer.sns.models.AppUser;
-import snsinternaltransfer.sns.repo.AppUserMapper;
 
 @Repository
 @Transactional
