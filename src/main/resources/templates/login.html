@@ -1,41 +1,50 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
-    <!--<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
 </head>
 <body>
-<div class="container">
-    </head>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
 
+<h1>Login</h1>
 
-
-    <h1>Login</h1>
-
-    <div class="alert alert-danger alert-dismissible" th:classappend="${loginError} ? '' : 'd-none'">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Login Error!</strong> Wrong username or password, you little bitch...
-    </div>
-
-    <form method="Post" th:action="@{/login}">
-
-        <label>Username:</label>
-        <input type="text" class="form-control mr-sm-2" th:name="username"/>
-
-        <label>Password:</label>
-        <input type="password" class="form-control mr-sm-2" th:name="userPassword"/>
-
-        <br>
-
-        <input class="btn btn-light" type="reset" value="Reset">
-
-        <button class="btn btn-primary" type="submit">Login</button>
-
-    </form>
-    <br/>
-    <a href="/createuser">
-        <button class="btn btn-success"><span class="fas fa-plus"></span> Create new User</button>
-    </a>
+<!-- /login?error=true -->
+<div th:if="${#request.getParameter('error') == 'true'}"
+     style="color:red;margin:10px 0px;">
+    Login Failed!!!<br />
+    Reason :
+    <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+          th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
 
 </div>
+
+<h3>Enter user name and password:</h3>
+<form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+    <table>
+        <tr>
+            <td>User:</td>
+            <td><input type='text' name='username' value=''></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type='password' name='password' /></td>
+        </tr>
+        <tr>
+            <td><input name="submit" type="submit" value="submit" /></td>
+        </tr>
+    </table>
+</form>
+
+<br>
+Username/pass:
+<ul>
+    <li>dbuser1/123</li>
+    <li>dbadmin1/123</li>
+</ul>
+
 </body>
+
 </html>
