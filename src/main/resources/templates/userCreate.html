@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head> <link rel="shortcut icon"href="https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/f1/6d/08/f16d0880-85fa-b16b-9b5c-f94b4ea173bd/AppIcon-1x_U007emarketing-85-220-4.png/246x0w.jpg"/>
     <meta charset="UTF-8">
     <title>UserCreate</title>
     <link rel="stylesheet" type="text/css" href="../static/stylesMain.css" th:href="@{/styleMain.css}">
@@ -13,35 +13,45 @@
 </style>
 <body>
 <div class="topnav">
-    <a href="/">IMDB</a>
-    <a class="active" href="movie">Movie</a>
-    <a href="contact">Contact</a>
-    <a href="aboutUs">About us</a>
+    <a href="/">Log off</a>
+    <a class="active" href="userCreate">Send Item</a>
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
 </div>
 
+
 <div class="container">
-    <h1>Create Request</h1>
-    <form th:action="@{/create}" th:object="${movie}" method="Post">
+    <h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>
+    <form th:action="@{/userCreate}" th:object="${transfer}" method="Post">
         <hr>
 
-
+        <p>Enter from</p>
+        <input type="text" th:name="from">
+        <p>Enter to</p>
+        <input type="text" th:name="to">
         <p>Enter Date</p>
-        <input type="date">
+        <input type="date" th:name= "date" >
         <p>Enter Item</p>
-        <input type="text">
-        <p>Enter Amount</p>
-        <input type="text">
-        <p>Enter Your name</p>
-        <input type="text">
+        <input type="text" th:name="item">
+        <p>Enter your name</p>
+        <input type="text" th:name="sender">
+        <p>Enter amount</p>
+        <input type="double" th:name="amount">
 
 
-        <input class="registerbtn" type="submit" value="Submit"/>
+
+        <input class="registerbtn" type="submit" value="send"/>
 
 
         <hr>
     </form>
 </div>
 <div class="logo-TopRight"> <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="150" height="50"> </div>
-<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"  >
+
+</script>
 </body>
 </html>

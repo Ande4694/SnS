@@ -10,26 +10,27 @@ import java.util.Date;
 public class Transfer {
 
     private int id;
-    private int from;
-    private int to;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String from;
+    private String to;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
+    // VI SKAL HUSKE AT MATCHE FORMAT MED HqTML
+
     private Date sendingDate;
-    private Item item;
-    private double totalPrice;
-    private int itemCode;
+    private String item;
+
     private String senderName;
     private double amount;
 
     public Transfer() {
     }
 
-    public Transfer(int from, int to, Date sendingDate, Item item, double totalPrice, int itemCode, String senderName, double amount) {
+    public Transfer(String from, String to, Date sendingDate, String item, String senderName, double amount) {
         this.from = from;
         this.to = to;
         this.sendingDate = sendingDate;
         this.item = item;
-        this.totalPrice = totalPrice;
-        this.itemCode = itemCode;
+
         this.senderName = senderName;
         this.amount = amount;
     }
@@ -38,19 +39,19 @@ public class Transfer {
         return id;
     }
 
-    public int getFrom() {
+    public String getFrom() {
         return from;
     }
 
-    public void setFrom(int from) {
+    public void setFrom(String from) {
         this.from = from;
     }
 
-    public int getTo() {
+    public String getTo() {
         return to;
     }
 
-    public void setTo(int to) {
+    public void setTo(String to) {
         this.to = to;
     }
 
@@ -62,28 +63,12 @@ public class Transfer {
         this.sendingDate = sendingDate;
     }
 
-    public Item getItem() {
+    public String getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(String item) {
         this.item = item;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public int getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(int itemCode) {
-        this.itemCode = itemCode;
     }
 
     public String getSenderName() {
