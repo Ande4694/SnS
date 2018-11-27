@@ -13,14 +13,11 @@ import javax.sql.DataSource;
 
 
 @Repository
-public class ItemRepo extends JdbcDaoSupport {
+public class ItemRepo  {
 
     @Autowired
     JdbcTemplate template;
-    @Autowired
-    public ItemRepo(DataSource dataSource) {
-        this.setDataSource(dataSource);
-    }
+
 
     public Item getItem(String itemName) {
         String sql = "SELECT *  FROM sns.items WHERE name=?";
