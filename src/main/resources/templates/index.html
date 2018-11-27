@@ -65,7 +65,7 @@
     /* Set a style for all buttons */
     .button {
         border: 0;
-        background: #0e1d27;
+        background: #d10a12;
         display: block;
         margin: 20px auto;
         text-align: center;
@@ -80,11 +80,37 @@
     }
     .button:focus {
         width: 280px;
-        border-color: #020202;
+        border-color: #ff000a;
     }
     .button:hover{
-        background: #020202;
+        background: #ff000a;
     }
+
+    .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    .button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    .button:hover span {
+        padding-right: 25px;
+    }
+
+    .button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+
     body {font-family: sans-serif;}
     /* Full-width input fields */
     input[type=text], input[type=password] {
@@ -315,7 +341,7 @@
 
     <h1 style="font-size:50px">Sticks'n'Sushi</h1>
 
-    <a onclick="document.getElementById('id01').style.display='block'" class = "button" >Login</a>
+    <a onclick="document.getElementById('id01').style.display='block'" class = "button" ><span>Login</span></a>
 
 </div>
 
