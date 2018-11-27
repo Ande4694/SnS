@@ -5,7 +5,6 @@
     <!--<link rel="stylesheet" type="text/css" href="../static/styles22.css" th:href="@{/styles22.css}">-->
 </head>
 <style>
-
     body, html {
         height: 100%;
         margin: 0;
@@ -313,42 +312,42 @@
 
 </div>
 
-    <div id="id01" class="modal">
-        <!--class="modal-content animate"-->
-        <form  class="box animate" th:action="@{/}" method="post">
-            <h1>Login</h1>
-            <input type="text" name="username" placeholder="Username" class="frontsize-u"/>
-            <input type="password" name="password" placeholder="Password" class="frontsize-u"/>
-            <input type="submit" name ="Sign In" value="Sign In" class="frontsize-l"/>
-        </form>
-    </div>
+<div id="id01" class="modal">
+    <!--class="modal-content animate"-->
+    <form  class="box animate" th:action="@{/}" method="post">
+        <h1>Login</h1>
+        <input type="text" name="username" placeholder="Username" class="frontsize-u"/>
+        <input type="password" name="password" placeholder="Password" class="frontsize-u"/>
+        <input type="submit" name ="Sign In" value="Sign In" class="frontsize-l"/>
+    </form>
+</div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
         }
-        function myFunction() {
-            if (confirm("Are you sure?")) {
-                AreYouSure()
-            }
+    }
+    function myFunction() {
+        if (confirm("Are you sure?")) {
+            AreYouSure()
         }
-        function AreYouSure() {
-            if (confirm("ARE YOU ABSOLUT SURE MATE?")) {
-                LastChance()
-            }
+    }
+    function AreYouSure() {
+        if (confirm("ARE YOU ABSOLUT SURE MATE?")) {
+            LastChance()
         }
-        function LastChance() {
-            if (confirm("LAST CHANCE!")) {
-                document.getElementById('id01').style.display='block'
-                /*window.location.href = "http://localhost:5000/userCreate";*/
-            }
+    }
+    function LastChance() {
+        if (confirm("LAST CHANCE!")) {
+            document.getElementById('id01').style.display='block'
+            /*window.location.href = "http://localhost:5000/userCreate";*/
         }
 
-    </script>
+</script>
+
 </body>
 </html>
