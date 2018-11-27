@@ -37,7 +37,7 @@ public class MainController {
 
     }
 
-    @RequestMapping(value = "/adminMenu", method = RequestMethod.GET)
+    @RequestMapping(value = "/adminPage", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();

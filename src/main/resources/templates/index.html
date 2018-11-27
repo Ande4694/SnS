@@ -223,18 +223,18 @@
 
     <h1 style="font-size:50px">Sticks'n'Sushi</h1>
     <p>We believe in fine Sushi and Anders</p>
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-    <a style="width:auto;" href="/adminMenu" class = "button" >Login</a>
+
+    <a style="width:auto;" href="/adminMenu" class = "button" >admin</a>
     <a style="width:auto;" href="/userCreate" class = "button" >User</a>
 
     <a style="width:auto;" href="/login" class = "button" >loginreal</a>
-    <button style="width:auto;">Admin</button>
+
 </div>
 <div id="id01" class="modal">
 
 
 
-    <form th:action="@{/}" th:object="${user}" method="Post">
+
         <div class="imgcontainer">
             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             <img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" alt="Avatar" class="avatar">
