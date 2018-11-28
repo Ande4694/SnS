@@ -28,51 +28,53 @@ public class TransferRepo  {
     @Autowired
     ItemRepo itemRepo;
 
+    int department;
+
 
 
 
 
     public int getToFromViaName(String name){
-        int department = 0;
 
-        if (name == "Gammel Kongevej"){
-            department = 5;
+
+        if (name.equals("Gammel Kongevej")){
+             return department = 5;
         }
-        if (name == "Nansensgade"){
-            department = 1;
+        if (name.equals("Nansensgade")){
+            return department = 1;
         }
-        if (name == "Hellerup"){
-            department = 2;
+        if (name.equals("Hellerup")){
+            return department = 2;
         }
-        if (name == "Østerbro"){
-            department = 3;
+        if (name.equals("Østerbro")){
+            return department = 3;
         }
-        if (name == "Istedgade"){
-            department = 4;
+        if (name.equals("Istedgade")){
+            return department = 4;
         }
-        if (name == "Valby"){
-            department = 6;
+        if (name.equals("Valby")){
+            return department = 6;
         }
-        if (name == "Tivoli Hotel"){
-            department = 8;
+        if (name.equals("Tivoli Hotel")){
+            return department = 8;
         }
-        if (name == "Lyngby"){
-            department = 7;
+        if (name.equals("Lyngby")){
+            return department = 7;
         }
-        if (name == "Rungsted"){
-            department = 9;
+        if (name.equals("Rungsted")){
+            return department = 9;
         }
-        if (name == "Borgergade"){
-            department = 10;
+        if (name.equals("Borgergade")){
+            return department = 10;
         }
-        if (name == "Krudthuset"){
-            department = 11;
+        if (name.equals("Krudthuset")){
+            return department = 11;
         }
-        if (name == "Tivoli Garden"){
-            department = 12;
+        if (name.equals("Tivoli Garden")){
+            return department = 12;
         }
-        if (name == "Baghuset"){
-            department = 13;
+        if (name.equals("Baghuset")){
+            return department = 13;
         }
 
         return department;

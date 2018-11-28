@@ -29,17 +29,17 @@
         <hr>
 
         <p>Enter from</p>
-        <input type="text" th:name="from">
+        <input type="text" th:field="${transfer.from}">
         <p>Enter to</p>
-        <input type="text" th:name="to">
+        <input type="text" th:field="${transfer.to}">
         <p>Enter Date</p>
-        <input type="date" th:name= "date" >
+        <input type="date" th:field= "${transfer.sendingDate}" >
         <p>Enter Item</p>
-        <input type="text" th:name="item">
+        <input type="text" th:field="${transfer.item}">
         <p>Enter your name</p>
-        <input type="text" th:name="sender">
+        <input type="text" th:field="${transfer.senderName}">
         <p>Enter amount</p>
-        <input type="double" th:name="amount">
+        <input type="number" th:field="${transfer.amount}">
 
 
 
