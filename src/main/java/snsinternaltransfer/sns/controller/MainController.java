@@ -36,7 +36,9 @@ public class MainController {
 
     @Autowired
     AppUserDAO appUserDAO;
+    @Autowired
     TransferRepo transferRepo;
+    @Autowired
     ItemRepo itemRepo;
 
     @GetMapping("/")

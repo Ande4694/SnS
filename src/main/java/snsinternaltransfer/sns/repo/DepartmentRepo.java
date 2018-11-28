@@ -14,7 +14,7 @@ public class DepartmentRepo {
     JdbcTemplate template;
 
     public Department getDepartment(int departmentId) {
-        String sql = "Select department FROM sns.department WHERE deartmentID="+departmentId;
+        String sql = "Select department FROM snsto.department WHERE deartmentID="+departmentId;
 
         RowMapper<Department> rm = new BeanPropertyRowMapper<>(Department.class);
         Department department = template.queryForObject(sql, rm);

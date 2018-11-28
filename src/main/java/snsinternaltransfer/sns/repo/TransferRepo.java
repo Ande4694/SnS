@@ -2,54 +2,166 @@ package snsinternaltransfer.sns.repo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import snsinternaltransfer.sns.models.Department;
-import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
 
-
-import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Repository
-public class TransferRepo extends JdbcDaoSupport {
+public class TransferRepo  {
 
     @Autowired
     Transfer transfer;
+    @Autowired
     JdbcTemplate template;
+    @Autowired
     ItemRepo itemRepo;
 
-    @Autowired
-    public TransferRepo(DataSource dataSource) {
-        this.setDataSource(dataSource);
+    int department;
+
+
+
+
+
+    public int getToFromViaName(String name){
+
+
+        if (name.equals("Gammel Kongevej")){
+            return department = 5;
+        }
+        if (name.equals("Nansensgade")){
+            return department = 1;
+        }
+        if (name.equals("Hellerup")){
+            return department = 2;
+        }
+        if (name.equals("Østerbro")){
+            return department = 3;
+        }
+        if (name.equals("Istedgade")){
+            return department = 4;
+        }
+        if (name.equals("Valby")){
+            return department = 6;
+        }
+        if (name.equals("Tivoli Hotel")){
+            return department = 8;
+        }
+        if (name.equals("Lyngby")){
+            return department = 7;
+        }
+        if (name.equals("Rungsted")){
+            return department = 9;
+        }
+        if (name.equals("Borgergade")){
+            return department = 10;
+        }
+        if (name.equals("Krudthuset")){
+            return department = 11;
+        }
+        if (name.equals("Tivoli Garden")){
+            return department = 12;
+        }
+        if (name.equals("Baghuset")){
+            return department = 13;
+        }
+
+        return department;
     }
 
 
 
+    public void sendItem(Transfer transfer)  {
+        String sql ="INSERT INTO snsto.sendings  VALUES (default ,?,?,?,?,?,?,?,?)";
 
 
-
-    public Transfer sendItem(String to, String from, String date, String item, String sender, double amount)  {
-        String sql ="INSERT INTO sns.sendings  VALUES (default ,?,?,?,?,?,?,?,?)";
-
+        int to = getToFromViaName(transfer.getTo());
+        int from = getToFromViaName(transfer.getFrom());
+        Date date = transfer.getSendingDate();
+        String item = transfer.getItem();
+        String sender = transfer.getSenderName();
+        Double amount = transfer.getAmount();
 
         double totalPrice = amount* itemRepo.getItem(item).getUnitPrice();
         int itemCode = itemRepo.getItem(item).getItemCode();
 
-
-        /// userdetails app.user    this.appuser = name
-
-
-
         this.template.update(sql, from, to, date, item, totalPrice, itemCode, sender, amount);
 
+
+    }
+
+    public List<Transfer> getAllTransfers(){
+        String sql ="SELECT * FROM snsto.sendings";
+
+        return this.template.query(sql, new ResultSetExtractor<List<Transfer>>() {
+            @Override
+            public List<Transfer> extractData(ResultSet rs) throws SQLException, DataAccessException {
+                int id, from, to, itemCode;
+                String item, senderName;
+                double totalPrice, amount;
+                Date sendingDate;
+
+
+                ArrayList<Transfer> allTransfers = new ArrayList<>();
+
+                while (rs.next()) {
+                    id = rs.getInt("idSendings");
+                    from = rs.getInt("from");
+                    to = rs.getInt("to");
+                    sendingDate = rs.getDate("date");
+                    item = rs.getString("item");
+                    totalPrice = rs.getDouble("price");
+                    itemCode = rs.getInt("itemCodes");
+                    senderName = rs.getString("senderName");
+                    amount = rs.getDouble("amount");
+
+
+                    allTransfers.add(new Transfer(id, from, to, sendingDate, item, totalPrice, itemCode, senderName, amount));
+                }
+                return allTransfers;
+            }
+        });
+    }
+
+    public Transfer selectTransfer(int id) {
+        String sql = "SELECT * FROM snsto.sendings WHERE idSendings=?";
+
+        RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
+        Transfer transfer = template.queryForObject(sql, rm, id);
         return transfer;
 
-}
+    }
+
+    public void updateTransfer(Transfer transfer, int id) {
+
+
+        String sql = "UPDATE snsto.sendings " +
+                "SET from=?, to=?, date=?, item=?, price=?, itemCodes=?, senderName=?, amount=? " +
+                "WHERE idSendings =" + id;
+
+        this.template.update(sql, transfer.getFromInt(), transfer.getToInt(), transfer.getSendingDate(), transfer.getTotalPrice(), transfer.getItemCode(), transfer.getSenderName(), transfer.getAmount());
+
+
+    }
+
+    public List<Transfer> searchTransferByDep(String from) {
+
+        String sql = "SELECT * FROM snsto.sendings WHERE from =?";
+
+        RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
+
+        List<Transfer> searched = template.query(sql, rm, from);
+        return searched;
+    }
 
 
 

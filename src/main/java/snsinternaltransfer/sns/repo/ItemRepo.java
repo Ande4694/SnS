@@ -17,14 +17,16 @@ public class ItemRepo extends JdbcDaoSupport {
 
     @Autowired
     JdbcTemplate template;
-    DataSource dataSource;
     @Autowired
+    DataSource dataSource;
+
+
     public ItemRepo(DataSource dataSource) {
         this.setDataSource(dataSource);
     }
 
     public Item getItem(String itemName) {
-        String sql = "SELECT *  FROM sns.items WHERE name=?";
+        String sql = "SELECT *  FROM snsto.items WHERE itemName=?";
         JdbcTemplate template = new JdbcTemplate(dataSource);
 
 
