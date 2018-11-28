@@ -17,6 +17,7 @@ public class ItemRepo extends JdbcDaoSupport {
 
     @Autowired
     JdbcTemplate template;
+    DataSource dataSource;
     @Autowired
     public ItemRepo(DataSource dataSource) {
         this.setDataSource(dataSource);
@@ -24,10 +25,13 @@ public class ItemRepo extends JdbcDaoSupport {
 
     public Item getItem(String itemName) {
         String sql = "SELECT *  FROM sns.items WHERE name=?";
+        JdbcTemplate template = new JdbcTemplate(dataSource);
 
 
         RowMapper<Item> rm = new BeanPropertyRowMapper<>(Item.class);
         Item item = template.queryForObject(sql, rm, itemName);
+
+
 
         return item;
     }
