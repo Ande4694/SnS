@@ -16,17 +16,15 @@ import javax.sql.DataSource;
 import java.util.Date;
 
 @Repository
-public class TransferRepo extends JdbcDaoSupport {
+public class TransferRepo  {
 
     @Autowired
     Transfer transfer;
+    @Autowired
     JdbcTemplate template;
+    @Autowired
     ItemRepo itemRepo;
 
-    @Autowired
-    public TransferRepo(DataSource dataSource) {
-        this.setDataSource(dataSource);
-    }
 
 
 

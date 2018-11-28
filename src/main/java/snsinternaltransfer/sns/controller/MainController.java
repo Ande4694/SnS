@@ -21,6 +21,7 @@ import snsinternaltransfer.sns.models.Transfer;
 import snsinternaltransfer.sns.repo.ItemRepo;
 import snsinternaltransfer.sns.repo.TransferRepo;
 import snsinternaltransfer.sns.repo.login.AppUserDAO;
+import snsinternaltransfer.sns.service.TransferService;
 import snsinternaltransfer.sns.service.UserDetailsServiceImpl;
 import snsinternaltransfer.sns.utility.WebUtils;
 
@@ -36,8 +37,8 @@ public class MainController {
 
     @Autowired
     AppUserDAO appUserDAO;
+    @Autowired
     TransferRepo transferRepo;
-    ItemRepo itemRepo;
 
     @GetMapping("/")
     public String index(){
