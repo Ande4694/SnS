@@ -52,7 +52,7 @@ public class AppUser {
 
     @Override
     public String toString() {
-        return this.userName + "/" + this.encrytedPassword;
+        return this.userName;
     }
 
 }

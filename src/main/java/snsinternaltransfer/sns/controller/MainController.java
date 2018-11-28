@@ -38,7 +38,7 @@ public class MainController {
     @Autowired
     AppUserDAO appUserDAO;
     @Autowired
-    TransferRepo transferRepo;
+    TransferService transferService;
 
     @GetMapping("/")
     public String index(){
@@ -106,45 +106,68 @@ public class MainController {
         return "userCreate";
     }
 
-//    @PostMapping("/userCreate")
-//    public String userCreate(@ModelAttribute Transfer transfer) {
-//
-//        transferRepo.sendItem(transfer);
-//
-//
-//
-//        log.info("bla bla:"+transfer.getItem());
-//
-//        return "redirect:/userCreate";
-//    }
+    @PostMapping("/userCreate")
+    public String userCreate(@ModelAttribute Transfer transfer) {
 
-    @RequestMapping(value = "/userCreate")
-    public void sendItem (@RequestParam("to")String to,
-                                  @RequestParam("from")String from,
-                                  @RequestParam("date") String date,
-                                  @RequestParam("item")String item,
-                                  @RequestParam("sender")String sender,
-                                  @RequestParam("amount")double amount) throws Exception {
+        transferService.sendItem(transfer);
 
+        //HTML MANGLER DOUBLE PÅ amount
+        // HTML MANGLER DROP DOWN PÅ TO OG FROM
 
+        /*
+        brug disse navne:
+        Nansensgade
+        Hellerup
+        Østerbro
+        Istedgade
+        Gammel Kongevej
+        Valby
+        Lyngby
+        Tivoli Hotel
+        Rungsted
+        Borgergade
+        Krudthuset
+        Tivoli Garden
+        Baghuset
+         */
 
+        log.info("from:" + transfer.getFrom());
+        log.info("to:" + transfer.getTo());
+        log.info("date:" + transfer.getSendingDate());
+        log.info("item:" + transfer.getItem());
+        log.info("sender:" + transfer.getSenderName());
+        log.info("amount:" + transfer.getAmount());
 
-
-
-        log.info("from:" + from);
-        log.info("to:" + to);
-        log.info("date:" + date);
-        log.info("item:" + item);
-        log.info("sender:" + sender);
-        log.info("amount:" + amount);
-
-
-
-
-
-        transferRepo.sendItem(to, from, date, item, sender, amount);
-
+        return "redirect:/userCreate";
     }
+
+//    @RequestMapping(value = "/userCreate")
+//    public void sendItem (@RequestParam("to")String to,
+//                                  @RequestParam("from")String from,
+//                                  @RequestParam("date") String date,
+//                                  @RequestParam("item")String item,
+//                                  @RequestParam("sender")String sender,
+//                                  @RequestParam("amount")double amount) throws Exception {
+//
+//
+//
+//
+//
+//
+//        log.info("from:" + from);
+//        log.info("to:" + to);
+//        log.info("date:" + date);
+//        log.info("item:" + item);
+//        log.info("sender:" + sender);
+//        log.info("amount:" + amount);
+//
+//
+//
+//
+//
+//        transferService.sendItem(to, from, date, item, sender, amount);
+//
+//    }
 
     @GetMapping("/adminMenu")
     public String adminMenu(){

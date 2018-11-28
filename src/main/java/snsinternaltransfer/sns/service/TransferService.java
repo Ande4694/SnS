@@ -11,7 +11,7 @@ public class TransferService {
     @Autowired
     TransferRepo transferRepo;
 
-    public Transfer sendItem(String to, String from, String date, String item, String sender, double amount){
-        return transferRepo.sendItem(to, from, date, item, sender, amount);
+    public void sendItem(Transfer transfer){
+        transferRepo.sendItem(transfer);
     }
 }

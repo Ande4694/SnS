@@ -25,6 +25,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private AppRoleDAO appRoleDAO;
 
+    private String username;
+
+    public String getUsername(){
+        return username;
+
+    }
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         AppUser appUser = this.appUserDAO.findUserAccount(userName);
@@ -35,6 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         System.out.println("Found User: " + appUser);
+        userName = appUser.getUserName();
 
         // [ROLE_USER, ROLE_ADMIN,..]
         List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());
