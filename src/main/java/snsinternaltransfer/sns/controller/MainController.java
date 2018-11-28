@@ -6,28 +6,20 @@ package snsinternaltransfer.sns.controller;
 import java.security.Principal;
 
 
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import snsinternaltransfer.sns.config.WebSecurityConfig;
 import snsinternaltransfer.sns.models.Transfer;
-import snsinternaltransfer.sns.repo.ItemRepo;
-import snsinternaltransfer.sns.repo.TransferRepo;
 import snsinternaltransfer.sns.repo.login.AppUserDAO;
+import snsinternaltransfer.sns.service.ItemService;
 import snsinternaltransfer.sns.service.TransferService;
-import snsinternaltransfer.sns.service.UserDetailsServiceImpl;
 import snsinternaltransfer.sns.utility.WebUtils;
 
-
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.logging.Logger;
 
 @org.springframework.stereotype.Controller
@@ -39,6 +31,8 @@ public class MainController {
     AppUserDAO appUserDAO;
     @Autowired
     TransferService transferService;
+    @Autowired
+    ItemService itemService;
 
     @GetMapping("/")
     public String index(){
@@ -140,34 +134,6 @@ public class MainController {
 
         return "redirect:/userCreate";
     }
-
-//    @RequestMapping(value = "/userCreate")
-//    public void sendItem (@RequestParam("to")String to,
-//                                  @RequestParam("from")String from,
-//                                  @RequestParam("date") String date,
-//                                  @RequestParam("item")String item,
-//                                  @RequestParam("sender")String sender,
-//                                  @RequestParam("amount")double amount) throws Exception {
-//
-//
-//
-//
-//
-//
-//        log.info("from:" + from);
-//        log.info("to:" + to);
-//        log.info("date:" + date);
-//        log.info("item:" + item);
-//        log.info("sender:" + sender);
-//        log.info("amount:" + amount);
-//
-//
-//
-//
-//
-//        transferService.sendItem(to, from, date, item, sender, amount);
-//
-//    }
 
     @GetMapping("/adminMenu")
     public String adminMenu(){

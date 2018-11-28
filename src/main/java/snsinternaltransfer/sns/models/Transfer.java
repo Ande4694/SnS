@@ -1,6 +1,6 @@
 package snsinternaltransfer.sns.models;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +12,30 @@ public class Transfer {
     private int id;
     private String from;
     private String to;
+    private int fromInt;
+    private int toInt;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-
-    // VI SKAL HUSKE AT MATCHE FORMAT MED HqTML
-
+    // VI SKAL HUSKE AT MATCHE FORMAT MED HTML
     private Date sendingDate;
     private String item;
-
+    private double totalPrice;
+    private int itemCode;
     private String senderName;
     private double amount;
 
     public Transfer() {
+    }
+
+    public Transfer(int id, int fromInt, int toInt, Date sendingDate, String item, double totalPrice, int itemCode, String senderName, double amount) {
+        this.id = id;
+        this.from = from;
+        this.to = to;
+        this.sendingDate = sendingDate;
+        this.item = item;
+        this.totalPrice = totalPrice;
+        this.itemCode = itemCode;
+        this.senderName = senderName;
+        this.amount = amount;
     }
 
     public Transfer(String from, String to, Date sendingDate, String item, String senderName, double amount) {
@@ -33,6 +46,42 @@ public class Transfer {
 
         this.senderName = senderName;
         this.amount = amount;
+    }
+
+    public int getFromInt() {
+        return fromInt;
+    }
+
+    public void setFromInt(int fromInt) {
+        this.fromInt = fromInt;
+    }
+
+    public int getToInt() {
+        return toInt;
+    }
+
+    public void setToInt(int toInt) {
+        this.toInt = toInt;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public int getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(int itemCode) {
+        this.itemCode = itemCode;
     }
 
     public int getId() {

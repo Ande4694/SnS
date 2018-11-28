@@ -2,21 +2,19 @@ package snsinternaltransfer.sns.repo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import snsinternaltransfer.sns.models.AppUser;
-import snsinternaltransfer.sns.models.Department;
-import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
-import snsinternaltransfer.sns.repo.login.AppUserDAO;
-import snsinternaltransfer.sns.service.UserDetailsServiceImpl;
 
-
-import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public class TransferRepo  {
@@ -100,6 +98,62 @@ public class TransferRepo  {
 
 
 }
+
+    public List<Transfer> getAllTransfers(){
+        String sql ="SELECT * FROM sns.sendings";
+
+        return this.template.query(sql, new ResultSetExtractor<List<Transfer>>() {
+            @Override
+            public List<Transfer> extractData(ResultSet rs) throws SQLException, DataAccessException {
+                int id, from, to, itemCode;
+                String item, senderName;
+                double totalPrice, amount;
+                Date sendingDate;
+
+
+                ArrayList<Transfer> allTransfers = new ArrayList<>();
+
+                while (rs.next()) {
+                    id = rs.getInt("idSendings");
+                    from = rs.getInt("from");
+                    to = rs.getInt("to");
+                    sendingDate = rs.getDate("date");
+                    item = rs.getString("item");
+                    totalPrice = rs.getDouble("price");
+                    itemCode = rs.getInt("itemCodes");
+                    senderName = rs.getString("senderName");
+                    amount = rs.getDouble("amount");
+
+
+                    allTransfers.add(new Transfer(id, from, to, sendingDate, item, totalPrice, itemCode, senderName, amount));
+                }
+                return allTransfers;
+            }
+        });
+    }
+
+    public Transfer selectTransfer(int id) {
+        String sql = "SELECT * FROM sns.sendings WHERE idSendings=?";
+
+        RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
+        Transfer transfer = template.queryForObject(sql, rm, id);
+        return transfer;
+
+    }
+
+    public void updateTransfer(Transfer transfer, int id) {
+
+
+        String sql = "UPDATE sns.sendings " +
+                "SET from=?, to=?, date=?, item=?, price=?, itemCodes=?, senderName=?, amount=? " +
+                "WHERE idSendings =" + id;
+
+        this.template.update(sql, transfer.getFromInt(), transfer.getToInt(), transfer.getSendingDate(), transfer.getTotalPrice(), transfer.getItemCode(), transfer.getSenderName(), transfer.getAmount());
+
+
+    }
+
+    //// SEARCH
 
 
 
