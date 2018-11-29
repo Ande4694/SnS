@@ -3,7 +3,7 @@ body {
 }
 
 .sidenav {
-    height: 97%;
+    height: 73%;
     width: 200px;
     position: fixed;
     z-index: 1;
@@ -28,7 +28,7 @@ body {
 }
 
 .sidenavbuttom {
-    height: 97%;
+    height: 22%;
     width: 200px;
     position: fixed;
     z-index: 1;
