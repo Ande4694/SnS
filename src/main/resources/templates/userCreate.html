@@ -11,7 +11,11 @@
 
 <div class="hero-image"></div>
 
-
+<div class="tm-signOut">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
 
 <div>
     <form id="form" class="box" th:action="@{/create}" th:object="${movie}" method="Post">

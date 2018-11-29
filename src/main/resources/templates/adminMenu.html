@@ -8,10 +8,30 @@
 <body>
 
 
-<div class="hero-image">
-    <input type="text" id="myInput" onkeyup="SearchJava()" placeholder="Search for Title.." title="Type in a name">
+<!--<div class="hero-image"></div>-->
+
+    <!--<input type="text" id="myInput" onkeyup="SearchJava()" placeholder="Search for Title.." title="Type in a name">-->
+
+<form action="http://localhost:5000/userCreate">
+    <input type="submit" value="UserCrater" class="button" />
+</form>
+<form action="http://localhost:5000/searchItem">
+    <input type="submit" value="searchItem" class="button" />
+</form>
+<form action="http://localhost:5000/editItem">
+    <input type="submit" value="editItem" class="button" />
+</form>
+<form action="http://localhost:5000/createItem">
+    <input type="submit" value="createItem" class="button" />
+</form>
+
+<div class="tm-signOut">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 </div>
-<input type="text" id="myInput" onkeyup="SearchJava()" placeholder="Search for Title.." title="Type in a name">
+
+
 </body>
 <script>
     function SearchJava() {
