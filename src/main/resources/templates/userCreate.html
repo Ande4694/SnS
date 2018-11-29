@@ -28,8 +28,8 @@
     <form th:action="@{/userCreate}" th:object="${transfer}" method="Post">
         <hr>
 
-        <p>Enter from</p>
-        <input type="text" th:field="${transfer.from}">
+
+        <input type="hidden" th:field="${transfer.from}">
         <p>Enter to</p>
         <input type="text" th:field="${transfer.to}">
         <p>Enter Date</p>

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import snsinternaltransfer.sns.models.Transfer;
+import snsinternaltransfer.sns.service.UserDetailsServiceImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +26,8 @@ public class TransferRepoImpl  implements TransferRepo{
     JdbcTemplate template;
     @Autowired
     ItemRepo itemRepo;
+    @Autowired
+    UserDetailsServiceImpl user;
 
     int department;
     String departmentto;
@@ -76,6 +79,52 @@ public class TransferRepoImpl  implements TransferRepo{
         return departmentto = "error loading";
     }
 
+
+    public int getToViaUsername(String username){
+
+
+        if (user.getUsername().equals("nansens")){
+            return department = 1;
+        }
+        if (user.getUsername().equals("hell")){
+            return department = 2;
+        }
+        if (user.getUsername().equals("øst")){
+            return department = 3;
+        }
+        if (user.getUsername().equals("istedgade")){
+            return department = 4;
+        }
+        if (user.getUsername().equals("glk")){
+            return department = 5;
+        }
+        if (user.getUsername().equals("valby")){
+            return department = 6;
+        }
+        if (user.getUsername().equals("lyngby")){
+            return department = 7;
+        }
+        if (user.getUsername().equals("hotel")){
+            return department = 8;
+        }
+        if (user.getUsername().equals("rungsted")){
+            return department = 9;
+        }
+        if (user.getUsername().equals("borgergade")){
+            return department = 10;
+        }
+        if (user.getUsername().equals("krudthuset")){
+            return department = 11;
+        }
+        if (user.getUsername().equals("garden")){
+            return department = 12;
+        }
+        if (user.getUsername().equals("finans")){
+            return department = 13;
+        }
+
+        return department;
+    }
 
     @Override
     public int getToFromViaName(String name){
@@ -136,8 +185,9 @@ public class TransferRepoImpl  implements TransferRepo{
         String sql ="INSERT INTO sns.sendings  VALUES (default ,?,?,?,?,?,?,?,?)";
 
 
+
         int to = getToFromViaName(transfer.getTo());
-        int from = getToFromViaName(transfer.getFrom());
+        int from = getToViaUsername(transfer.getFrom());
         Date date = transfer.getSendingDate();
         String item = transfer.getItem();
         String sender = transfer.getSenderName();
