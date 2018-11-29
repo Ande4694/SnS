@@ -5,49 +5,22 @@
     <title>UserCreate</title>
     <link rel="stylesheet" type="text/css" href="../static/stylesMain.css" th:href="@{/styleMain.css}">
 </head>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: black;
-    }
-</style>
 <body>
-<div class="topnav">
-    <a href="/">Log off</a>
-    <a class="active" href="userCreate">Send Item</a>
 
-</div>
+
+
+<div class="hero-image"></div>
+
+
+
 <div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-</div>
+    <form class="box" th:action="@{/create}" th:object="${movie}" method="Post">
+        <h1>Create Request</h1>
+        <input type="date" id="start" name="trip-start" value="2018-11-23" min="2018-11-23" class="button"/>
+        <input type="text" name="Item"  placeholder="Enter item"  class="frontsize-l"/>
+        <input type="text" name ="Amount" placeholder="Enter amount" class="frontsize-l"/>
+        <input type="text" name ="Name" placeholder="Enter name" class="frontsize-l"/>
+        <input type="submit" name ="Submit" value="Submit" class="frontsize-l"/>
 
-<div class="container">
-    <h1>Create Request</h1>
-    <form th:action="@{/create}" th:object="${movie}" method="Post">
-        <hr>
-
-
-        <p>Enter Date</p>
-        <input type="date" id="start" name="trip-start"
-               value="2018-11-23"
-               min="2018-11-23">
-        <p>Enter Item</p>
-        <input type="text">
-        <p>Enter Amount</p>
-        <input type="text">
-        <p>Enter Your name</p>
-        <input type="text">
-
-
-        <input class="registerbtn" type="submit" value="Submit"/>
-
-
-        <hr>
     </form>
 </div>
-<div class="logo-TopRight"> <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="150" height="50"> </div>
-<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"  >
-</script>
-</body>
-</html>

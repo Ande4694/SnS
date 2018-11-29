@@ -252,7 +252,7 @@
     .tm-header{
         background: #6b0212;
         background-color: rgba(0,0,0,0.9);
-        margin: -17px;
+        margin: -17px auto;
     }
     .tm-header:after{
         content: "";
@@ -293,30 +293,23 @@
 </style>
 
 <body>
-<header class="tm-header">
-    <div class="tm-container">
-        <img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" alt="logo" width="100" class="tm-logo">
 
-        <nav class="tm-nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+
 <div class="hero-image"></div>
+
+
 
 <div class="logo-LeftCorner"><img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="300" height="100"></div>
 <div class="hero-text">
+
     <div class = "logo-topmid"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="200" width="800"></div>
 
     <h1 style="font-size:50px">Sticks'n'Sushi</h1>
 
-    <a onclick="document.getElementById('id01').style.display='block'" class = "button" >User</a>
-    <a onclick="myFunction() " class = "button" >Admin</a>
+    <a onclick="document.getElementById('id01').style.display='block'" class = "button" >Login</a>
+    <!--<a onclick="RunFile() " class = "button" >Admin</a>-->
+
+
 </div>
 
 <div id="id01" class="modal">
@@ -353,7 +346,8 @@
             document.getElementById('id01').style.display='block'
             /*window.location.href = "http://localhost:5000/userCreate";*/
         }
-    }
+
 </script>
+
 </body>
 </html>
