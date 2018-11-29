@@ -82,7 +82,7 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
         if (name.equals("Gammel Kongevej")){
-            return department = 5;
+             return department = 5;
         }
         if (name.equals("Nansensgade")){
             return department = 1;
@@ -149,7 +149,7 @@ public class TransferRepoImpl  implements TransferRepo{
         this.template.update(sql, from, to, date, item, totalPrice, itemCode, sender, amount);
 
 
-    }
+}
 
     @Override
     public List<Transfer> getAllTransfers(){
