@@ -45,14 +45,20 @@ public class ExcelRepo {
                 "snsgrp5k"
         );
 
-        File f = new File("TransferSheet"+transferService.getFromViaInt(dep)+".xlsx");
-        Statement statement = connect.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date >"+ after);
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        String sheetname = transferService.getFromViaInt(dep);
-        XSSFSheet spreadsheet = workbook.createSheet(sheetname);
+        File f = new File("TransferSheet"+dep+".xlsx");
 
-        XSSFRow row = spreadsheet.createRow(1);
+
+
+        Statement statement = connect.createStatement();
+        ResultSet resultSetnan = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date >"+ after);
+
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        String sheetname = transferService.getFromViaInt(dep);
+        XSSFSheet nan = workbook.createSheet(sheetname);
+
+
+        XSSFRow row = nan.createRow(1);
         XSSFCell cell;
         cell = row.createCell(1);
         cell.setCellValue("TO");
@@ -71,24 +77,29 @@ public class ExcelRepo {
         int i = 2;
 
 
-        while(resultSet.next()) {
-            row = spreadsheet.createRow(i);
+        while(resultSetnan.next()) {
+            row = nan.createRow(i);
             cell = row.createCell(1);
-            cell.setCellValue(transferService.getFromViaInt(resultSet.getInt("to")));
+            cell.setCellValue(transferService.getFromViaInt(resultSetnan.getInt("to")));
             cell = row.createCell(2);
-            cell.setCellValue(resultSet.getDate("date"));
+            cell.setCellValue(resultSetnan.getDate("date"));
             cell = row.createCell(3);
-            cell.setCellValue(resultSet.getString("item"));
+            cell.setCellValue(resultSetnan.getString("item"));
             cell = row.createCell(4);
-            cell.setCellValue(resultSet.getDouble("amount"));
+            cell.setCellValue(resultSetnan.getDouble("amount"));
             cell = row.createCell(5);
-            cell.setCellValue(resultSet.getString("senderName"));
+            cell.setCellValue(resultSetnan.getString("senderName"));
             cell = row.createCell(6);
-            cell.setCellValue(resultSet.getDouble("totalPrice"));
+            cell.setCellValue(resultSetnan.getDouble("totalPrice"));
             cell = row.createCell(7);
-            cell.setCellValue(resultSet.getInt("itemCode"));
+            cell.setCellValue(resultSetnan.getInt("itemCode"));
             i++;
         }
+
+
+
+
+
         FileOutputStream out = new FileOutputStream(f);
         workbook.write(out);
         out.close();
@@ -116,6 +127,21 @@ public class ExcelRepo {
         write(11, date);
         write(12, date);
         write(13, date);
+
+        //Open the first excel file.
+        Workbook SourceBook1 = new Workbook("F:\\Downloads\\charts.xlsx");
+
+        //Define the second source book.
+        //Open the second excel file.
+        Workbook SourceBook2 = new Workbook("F:\\Downloads\\picture.xlsx");
+
+        //Combining the two workbooks
+        SourceBook1.combine(SourceBook2);
+
+        SourceBook1.
+
+        //Save the target book file.
+        SourceBook1.save("F:\\Downloads\\combined.xlsx");
 
     }
 
