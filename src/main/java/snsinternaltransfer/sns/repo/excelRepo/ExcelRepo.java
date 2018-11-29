@@ -7,16 +7,20 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import snsinternaltransfer.sns.controller.MainController;
 import snsinternaltransfer.sns.models.Transfer;
 import snsinternaltransfer.sns.service.TransferService;
 
+import javax.swing.tree.DefaultTreeCellEditor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,9 +34,10 @@ public class ExcelRepo {
     TransferService transferService;
 
     private final Logger log = Logger.getLogger(MainController.class.getName());
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 
 
-    public void write(int dep, Date after)throws SQLException, ClassNotFoundException, IOException{
+    public void write(int dep, LocalDate after)throws SQLException, ClassNotFoundException, IOException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection connect = DriverManager.getConnection(
                 "jdbc:mysql://snsgrp5k.ctjynaaxvgot.eu-central-1.rds.amazonaws.com:3306/sns" ,
@@ -40,12 +45,12 @@ public class ExcelRepo {
                 "snsgrp5k"
         );
 
-        File f = new File("exceldatabase.xlsx");
+        File f = new File("sheets\\TransferSheet"+transferService.getFromViaInt(dep)+".xlsx");
         Statement statement = connect.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date >"+ after);
         XSSFWorkbook workbook = new XSSFWorkbook();
         String sheetname = transferService.getFromViaInt(dep);
-        XSSFSheet spreadsheet = workbook.createSheet("sheetname");
+        XSSFSheet spreadsheet = workbook.createSheet(sheetname);
 
         XSSFRow row = spreadsheet.createRow(1);
         XSSFCell cell;
@@ -69,19 +74,19 @@ public class ExcelRepo {
         while(resultSet.next()) {
             row = spreadsheet.createRow(i);
             cell = row.createCell(1);
-            cell.setCellValue(resultSet.getInt("TO"));
+            cell.setCellValue(transferService.getFromViaInt(resultSet.getInt("to")));
             cell = row.createCell(2);
-            cell.setCellValue(resultSet.getDate("DATE"));
+            cell.setCellValue(resultSet.getDate("date"));
             cell = row.createCell(3);
-            cell.setCellValue(resultSet.getString("ITEM"));
+            cell.setCellValue(resultSet.getString("item"));
             cell = row.createCell(4);
-            cell.setCellValue(resultSet.getDouble("AMOUNT"));
+            cell.setCellValue(resultSet.getDouble("amount"));
             cell = row.createCell(5);
-            cell.setCellValue(resultSet.getString("SENDERS NAME"));
+            cell.setCellValue(resultSet.getString("senderName"));
             cell = row.createCell(6);
-            cell.setCellValue(resultSet.getDouble("PRICE"));
+            cell.setCellValue(resultSet.getDouble("totalPrice"));
             cell = row.createCell(7);
-            cell.setCellValue(resultSet.getInt("ITEM CODE"));
+            cell.setCellValue(resultSet.getInt("itemCode"));
             i++;
         }
         FileOutputStream out = new FileOutputStream(f);
@@ -91,20 +96,26 @@ public class ExcelRepo {
 
     }
 
-    public void writeAll(Date after)throws SQLException, ClassNotFoundException, FileNotFoundException, IOException{
-        write(1, after);
-        write(2, after);
-        write(3, after);
-        write(4, after);
-        write(5, after);
-        write(6, after);
-        write(7, after);
-        write(8, after);
-        write(9, after);
-        write(10, after);
-        write(11, after);
-        write(12, after);
-        write(13, after);
+    public void writeAll(String s)throws SQLException, ClassNotFoundException, IOException{
+
+
+
+        LocalDate date = YearMonth.now().atDay( 1 );
+
+
+        write(1, date);
+        write(2, date);
+        write(3, date);
+        write(4, date);
+        write(5, date);
+        write(6, date);
+        write(7, date);
+        write(8, date);
+        write(9, date);
+        write(10, date);
+        write(11, date);
+        write(12, date);
+        write(13, date);
 
     }
 

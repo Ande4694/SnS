@@ -56,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/updateSending").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/deleteSending").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/deleteItem").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/excel").access("hasRole('ROLE_ADMIN')");
 
         // When the user has logged in as XX.
         // But access a page that requires role YY,

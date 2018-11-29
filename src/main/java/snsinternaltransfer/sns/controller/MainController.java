@@ -3,10 +3,11 @@ package snsinternaltransfer.sns.controller;
 
 
 
+import java.io.IOException;
 import java.security.Principal;
 
 
-
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.ui.Model;
@@ -16,11 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
+import snsinternaltransfer.sns.repo.excelRepo.ExcelRepo;
 import snsinternaltransfer.sns.repo.login.AppUserDAO;
 import snsinternaltransfer.sns.service.ItemService;
 import snsinternaltransfer.sns.service.TransferService;
 import snsinternaltransfer.sns.utility.WebUtils;
 
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Logger;
 
 @org.springframework.stereotype.Controller
@@ -28,6 +32,7 @@ public class MainController {
 
     private final Logger log = Logger.getLogger(MainController.class.getName());
     private int tempId;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 
     @Autowired
     AppUserDAO appUserDAO;
@@ -35,6 +40,8 @@ public class MainController {
     TransferService transferService;
     @Autowired
     ItemService itemService;
+    @Autowired
+    ExcelRepo excelRepo;
 
     @GetMapping("/")
     public String index(){
@@ -91,6 +98,27 @@ public class MainController {
         return "403Page";
     }
 
+    @GetMapping("/excel")
+    public String excel(Model model){
+
+        log.info("someone called /excel");
+
+
+        model.addAttribute("date", new Item());
+
+
+        return "excel";
+    }
+
+    @PostMapping("/excel")
+    public String excel(@ModelAttribute String s)throws IOException, ClassNotFoundException, SQLException {
+
+        log.info("someone is writing to excel with all info from after: ");
+
+        excelRepo.writeAll(s);
+
+        return "redirect:adminMenu";
+    }
 
     @GetMapping("/userCreate")
     public String userCreate(Model model){
