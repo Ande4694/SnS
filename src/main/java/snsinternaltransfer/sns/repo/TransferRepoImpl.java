@@ -82,7 +82,7 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
         if (name.equals("Gammel Kongevej")){
-             return department = 5;
+            return department = 5;
         }
         if (name.equals("Nansensgade")){
             return department = 1;
@@ -146,10 +146,10 @@ public class TransferRepoImpl  implements TransferRepo{
         double totalPrice = amount* itemRepo.getItem(item).getUnitPrice();
         int itemCode = itemRepo.getItem(item).getItemCode();
 
-        this.template.update(sql, from, to, date, item, totalPrice, itemCode, sender, amount);
+        this.template.update(sql, from, to, date, item, amount, sender, totalPrice, itemCode);
 
 
-}
+    }
 
     @Override
     public List<Transfer> getAllTransfers(){
@@ -172,8 +172,8 @@ public class TransferRepoImpl  implements TransferRepo{
                     to = rs.getInt("to");
                     sendingDate = rs.getDate("date");
                     item = rs.getString("item");
-                    totalPrice = rs.getDouble("price");
-                    itemCode = rs.getInt("itemCodes");
+                    totalPrice = rs.getDouble("totalPrice");
+                    itemCode = rs.getInt("itemCode");
                     senderName = rs.getString("senderName");
                     amount = rs.getDouble("amount");
 

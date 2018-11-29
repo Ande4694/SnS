@@ -309,18 +309,26 @@
     <a onclick="document.getElementById('id01').style.display='block'" class = "button" >Login</a>
     <!--<a onclick="RunFile() " class = "button" >Admin</a>-->
 
-
+    <div th:if="${#request.getParameter('error') == 'true'}"
+         style="color:red;margin:10px 0px;">
+        Login Failed!!!<br />
+        Reason :
+        <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+              th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
+    </div>
 </div>
-
 <div id="id01" class="modal">
     <!--class="modal-content animate"-->
-    <form  class="box animate" th:action="@{/}" method="post">
+    <form  class="box animate" th:action="@{/j_spring_security_check}" method='POST'>
         <h1>Login</h1>
         <input type="text" name="username" placeholder="Username" class="frontsize-u"/>
         <input type="password" name="password" placeholder="Password" class="frontsize-u"/>
-        <input type="submit" name ="Sign In" value="Sign In" class="frontsize-l"/>
+        <input name="submit" type="submit" value="Login" class="frontsize-l"/>
     </form>
 </div>
+
 
 <script>
     // Get the modal
