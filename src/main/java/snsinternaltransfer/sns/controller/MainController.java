@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
 import snsinternaltransfer.sns.repo.login.AppUserDAO;
 import snsinternaltransfer.sns.service.ItemService;
@@ -143,10 +144,37 @@ public class MainController {
     }
 
     @GetMapping("/itemList")
-    public String itemList(){
+    public String itemList(Model model){
+
+        model.addAttribute("items", itemService.getAllItems());
+
+        //mangler search med javascript funtion i html
+        // skal tilføjes til admin only
 
         log.info("itemList call");
         return "itemList";
+    }
+
+    @GetMapping("/createItem")
+    public String createItem(Model model){
+
+        log.info("someone is trying to create an item");
+
+        model.addAttribute("newItem", new Item());
+
+        // skal tilføjes til admin only
+
+        return "createItem";
+    }
+
+    @PostMapping("/createItem")
+    public String createItem(@ModelAttribute Item item){
+
+        itemService.createItem(item);
+
+        log.info("someone created a new item: "+item.getName());
+
+        return "redirect:/itemList";
     }
 }
 

@@ -22,8 +22,51 @@
             <button type="submit" value="Search"><span>Search by Item</span><i class="fa fa-search"></i></button>
         </form>
     </div>
+
+    <div class="container">
+
+
+        <table id="myTable">
+            <thead>
+            <tr class="header">
+                <th style="width:25%;">Item Id</th>
+                <th style="width:25%;">Name</th>
+                <th style="width:25%;">Unit Prce</th>
+                <th style="width:25%;">Item Code</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="items: ${items}">
+                <td th:text="${items.id}"/>
+                <td th:text="${items.name}"/>
+                <td th:text="${items.unitPrice}"/>
+                <td th:text="${items.itemCode}"/>
+
+                <td>
+                    <div class="dropdown">
+                        <button class="dropbtn">Options</button>
+                        <div class="dropdown-content">
+                            <a th:href="${'select/' + items.id}">
+                                Select</button>
+                            </a>
+                            <a th:href="${'update/' + items.id}">
+                                Update</button>
+                            </a>
+                            <a th:href="${'delete/' + items.id}">
+                                Delete</button>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
 </div>
-<div>1. Item Price Date (Edit button)...</div>
+
 
 
         <a href="/createItem">

@@ -30,4 +30,12 @@ public class ItemService {
     public void updateItem(Item item, int id){
         itemRepo.updateItem(item, id);
     }
+
+    public void createItem(Item item){
+        itemRepo.createItem(item);
+    }
+
+    public void deleteItem(int id){
+        itemRepo.deleteItem(id);
+    }
 }

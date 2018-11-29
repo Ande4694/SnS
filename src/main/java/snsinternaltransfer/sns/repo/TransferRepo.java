@@ -155,7 +155,7 @@ public class TransferRepo  {
 
     public List<Transfer> searchTransferByDep(String from) {
 
-        String sql = "SELECT * FROM sns.sendings WHERE from =?";
+        String sql = "SELECT * FROM sns.sendings WHERE `from` =?";
 
         RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
 

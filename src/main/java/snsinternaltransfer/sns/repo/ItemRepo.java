@@ -95,6 +95,20 @@ public class ItemRepo  {
 
     }
 
+    public void createItem(Item item){
+
+        String sql = "INSERT INTO sns.items VALUES(default, ?, ?, ?)";
+
+        this.template.update(sql, item.getName(), item.getUnitPrice(), item.getItemCode());
+    }
+
+    public void deleteItem(int id){
+
+        String sql ="DELETE FROM sns.items WHERE idItems =?";
+
+        this.template.update(sql, id);
+    }
+
 
 
 
