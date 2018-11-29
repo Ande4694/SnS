@@ -16,7 +16,7 @@
 <div>
     <form class="box" th:action="@{/create}" th:object="${movie}" method="Post">
         <h1>Create Request</h1>
-        <input type="date" id="start" name="trip-start" value="2018-11-29" min="2018-11-29" class="button"/>
+        <input type="date" id="start" name="trip-start" required value="2018-11-29" min="2018-11-29" class="button"/>
         <input type="hidden" th:field="${transfer.from}">
 
         <!--<select name="Department" class="frontsize-l button">
@@ -35,10 +35,10 @@
             <option value="Baghuset">Baghuset</option>
     </select>-->
 
-        <input type="text" name="Item"  placeholder="Enter item"  class="frontsize-l"/>
-        <input type="text" name ="Amount" placeholder="Enter amount" class="frontsize-l"/>
-        <input type="text" name ="Name" placeholder="Enter name" class="frontsize-l"/>
-        <input type="text" name ="Name" placeholder="Enter To" class="frontsize-l"/>
+        <input type="text" name="Item" required  placeholder="Enter item"  class="frontsize-l"/>
+        <input type="number" step="any" name ="Amount" required placeholder="Enter amount" class="frontsize-l button"/>
+        <input type="text" name ="Name" required placeholder="Enter name" class="frontsize-l"/>
+        <input type="text" name ="Name" required placeholder="Enter To" class="frontsize-l"/>
         <input type="submit" name ="Submit" value="Submit" class="frontsize-l"/>
 
     </form>

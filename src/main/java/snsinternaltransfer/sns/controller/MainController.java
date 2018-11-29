@@ -107,9 +107,9 @@ public class MainController {
 
         transferService.sendItem(transfer);
 
-        //HTML MANGLER DOUBLE PÅ amount
-        // HTML MANGLER DROP DOWN PÅ TO OG FROM
-        // logout url er /logout
+        //HTML MANGLER DOUBLE PÅ amount                   DONE
+        // HTML MANGLER DROP DOWN PÅ TO OG FROM           Done
+        // logout url er /logout                           ok
 
         /*
         brug disse navne:
