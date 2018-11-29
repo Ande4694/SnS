@@ -24,6 +24,11 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
+    public String getFromViaInt(int id){
+        return transferRepo.getToFromViaInt(id);
+    }
+
+    @Override
     public void deleteSending(int id){
         transferRepo.deleteTransfer(id);
     }

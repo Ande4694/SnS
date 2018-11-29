@@ -13,4 +13,5 @@ public interface TransferService {
     void updateTransfer(Transfer transfer, int id);
     List<Transfer> searchTransferByDep(String from);
     List<Transfer> getTransfersFrom(int dep);
+    String getFromViaInt(int id);
 }
