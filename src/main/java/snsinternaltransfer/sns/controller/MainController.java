@@ -155,6 +155,21 @@ public class MainController {
         return "itemList";
     }
 
+    @GetMapping("/deleteItem/{deleted}")
+    public String deleteItem(@PathVariable("deleted") int idForDelete) {
+
+        log.info("Thomas has tried to delete: " + idForDelete);
+
+        if (itemService.selectItem(idForDelete) != null) {
+
+            itemService.deleteItem(idForDelete);
+
+        }
+
+
+        return "redirect:/itemList";
+    }
+
     @GetMapping("/createItem")
     public String createItem(Model model){
 

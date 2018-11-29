@@ -47,13 +47,10 @@
                     <div class="dropdown">
                         <button class="dropbtn">Options</button>
                         <div class="dropdown-content">
-                            <a th:href="${'select/' + items.id}">
-                                Select</button>
-                            </a>
                             <a th:href="${'update/' + items.id}">
                                 Update</button>
                             </a>
-                            <a th:href="${'delete/' + items.id}">
+                            <a th:href="${'deleteItem/' + items.id}">
                                 Delete</button>
                             </a>
                         </div>
