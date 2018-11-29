@@ -12,4 +12,5 @@ public interface TransferService {
     Transfer selectTranfer(int id);
     void updateTransfer(Transfer transfer, int id);
     List<Transfer> searchTransferByDep(String from);
+    List<Transfer> getTransfersFrom(int dep);
 }

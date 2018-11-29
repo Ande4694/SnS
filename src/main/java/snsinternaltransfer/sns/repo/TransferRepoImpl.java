@@ -35,6 +35,22 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
     @Override
+    public List<Transfer> getTransfersFrom(int dep){
+
+        List<Transfer> outgoingTransfers;
+
+
+        String sql = "SELECT * FROM sns.sendings WHERE `from`=?";
+
+        RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
+        outgoingTransfers = template.query(sql, rm, dep);
+
+
+        return outgoingTransfers;
+
+    }
+
+    @Override
     public String getToFromViaInt(int id){
 
         if (id==1){

@@ -17,6 +17,7 @@ public interface TransferRepo {
     List<Transfer> searchTransferByDep(String from);
     void deleteTransfer(int id);
     int getToViaUsername(String username);
+    List<Transfer> getTransfersFrom(int dep);
 
 
 }

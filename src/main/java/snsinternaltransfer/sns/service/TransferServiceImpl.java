@@ -14,6 +14,11 @@ public class TransferServiceImpl implements TransferService {
     TransferRepo transferRepo;
 
     @Override
+    public List<Transfer> getTransfersFrom(int dep){
+        return transferRepo.getTransfersFrom(dep);
+    }
+
+    @Override
     public void sendItem(Transfer transfer){
         transferRepo.sendItem(transfer);
     }
