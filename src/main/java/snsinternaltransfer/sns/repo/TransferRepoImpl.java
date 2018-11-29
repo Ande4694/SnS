@@ -2,107 +2,235 @@ package snsinternaltransfer.sns.repo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import snsinternaltransfer.sns.models.Department;
-import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Repository
-public class TransferRepoImpl implements TransferRepo{
+public class TransferRepoImpl  implements TransferRepo{
 
     @Autowired
     Transfer transfer;
+    @Autowired
     JdbcTemplate template;
+    @Autowired
+    ItemRepo itemRepo;
+
+    int department;
+    String departmentto;
 
 
-    int departmentId;
 
-/*    @Override
-    public int getSenderDepartment(){
-        if (websec.userDetailsService().equals("glk")){
-            departmentId = 5;
+    @Override
+    public String getToFromViaInt(int id){
+
+        if (id==1){
+            return departmentto ="Nansensgade";
         }
-        if (websec.userDetailsService().equals("nansens")){
-            departmentId = 1;
+        if (id==2){
+            return departmentto ="Hellerup";
         }
-        if (websec.userDetailsService().equals("hell")){
-            departmentId = 2;
+        if (id==3){
+            return departmentto ="Østerbro";
         }
-        if (websec.userDetailsService().equals("øst")){
-            departmentId = 3;
+        if (id==4){
+            return departmentto ="Istedgade";
         }
-        if (websec.userDetailsService().equals("istedgade")){
-            departmentId = 4;
+        if (id==5){
+            return departmentto ="Gammel Kongevej";
         }
-        if (websec.userDetailsService().equals("gardens")){
-            departmentId = 12;
+        if (id==6){
+            return departmentto ="Valby";
         }
-        if (websec.userDetailsService().equals("valby")){
-            departmentId = 6;
+        if (id==7){
+            return departmentto ="Lyngby";
         }
-        if (websec.userDetailsService().equals("lyngby")){
-            departmentId = 7;
+        if (id==8){
+            return departmentto ="Tivoli Hotel";
         }
-        if (websec.userDetailsService().equals("hotel")){
-            departmentId = 8;
+        if (id==9){
+            return departmentto ="Rungsted";
         }
-        if (websec.userDetailsService().equals("rungsted")){
-            departmentId = 9;
+        if (id==10){
+            return departmentto ="Borgergade";
         }
-        if (websec.userDetailsService().equals("borgergade")){
-            departmentId = 10;
+        if (id==11){
+            return departmentto ="Krudthuset";
         }
-        if (websec.userDetailsService().equals("krudthuset")){
-            departmentId = 11;
+        if (id==12){
+            return departmentto ="Tivoli Gardens";
+        }
+        if (id==13){
+            return departmentto ="Baghuset";
+        }
+        return departmentto = "error loading";
+    }
+
+
+    @Override
+    public int getToFromViaName(String name){
+
+
+        if (name.equals("Gammel Kongevej")){
+            return department = 5;
+        }
+        if (name.equals("Nansensgade")){
+            return department = 1;
+        }
+        if (name.equals("Hellerup")){
+            return department = 2;
+        }
+        if (name.equals("Østerbro")){
+            return department = 3;
+        }
+        if (name.equals("Istedgade")){
+            return department = 4;
+        }
+        if (name.equals("Valby")){
+            return department = 6;
+        }
+        if (name.equals("Tivoli Hotel")){
+            return department = 8;
+        }
+        if (name.equals("Lyngby")){
+            return department = 7;
+        }
+        if (name.equals("Rungsted")){
+            return department = 9;
+        }
+        if (name.equals("Borgergade")){
+            return department = 10;
+        }
+        if (name.equals("Krudthuset")){
+            return department = 11;
+        }
+        if (name.equals("Tivoli Garden")){
+            return department = 12;
+        }
+        if (name.equals("Baghuset")){
+            return department = 13;
         }
 
-        return departmentId;
-    }*/
+        return department;
+    }
+
+    @Override
+    public void deleteTransfer(int id){
+        String sql = "DELETE FROM sns.sendings WHERE idSendings=?";
+
+        this.template.update(sql, id);
+    }
 
     @Override
     public void sendItem(Transfer transfer)  {
-        String sql ="INSERT INTO sns.sendings VALUES (default, ?,?,?,?,?,?,?,?)";
+        String sql ="INSERT INTO sns.sendings  VALUES (default ,?,?,?,?,?,?,?,?)";
 
-        int from = 10 ;
-        int to = transfer.getTo();
+
+        int to = getToFromViaName(transfer.getTo());
+        int from = getToFromViaName(transfer.getFrom());
         Date date = transfer.getSendingDate();
-        int item = transfer.getItem().getId();
-        double totalPrice = transfer.getAmount()* getItem(transfer.getItem().getName()).getUnitPrice();
-        int itemCode = getItem(transfer.getItem().getName()).getItemCode();
-        String senderName = transfer.getSenderName();
-        double amount = transfer.getAmount();
+        String item = transfer.getItem();
+        String sender = transfer.getSenderName();
+        Double amount = transfer.getAmount();
 
-        this.template.update(sql, from, to, date, item, totalPrice, itemCode, senderName, amount);
+        double totalPrice = amount* itemRepo.getItem(item).getUnitPrice();
+        int itemCode = itemRepo.getItem(item).getItemCode();
 
-        // get from skal "java" regner ud for os
+        this.template.update(sql, from, to, date, item, totalPrice, itemCode, sender, amount);
+
+
     }
 
     @Override
-    public Item getItem(String itemName) {
-        String sql = "SELECT name, unitPrice, itemCode  FROM sns.items WHERE name="+itemName+
-                "INNER JOIN itemcodes on sns.items.itemCode=itemcodes.iditemCodes";
-                    // VI SKAL LIGE DOBBELTCHECKE DET HER INNER JOIN
+    public List<Transfer> getAllTransfers(){
+        String sql ="SELECT * FROM sns.sendings";
+
+        return this.template.query(sql, new ResultSetExtractor<List<Transfer>>() {
+            @Override
+            public List<Transfer> extractData(ResultSet rs) throws SQLException, DataAccessException {
+                int id, from, to, itemCode;
+                String item, senderName;
+                double totalPrice, amount;
+                Date sendingDate;
 
 
-        RowMapper<Item> rm = new BeanPropertyRowMapper<>(Item.class);
-        Item item = template.queryForObject(sql, rm);
+                ArrayList<Transfer> allTransfers = new ArrayList<>();
 
-        return item;
+                while (rs.next()) {
+                    id = rs.getInt("idSendings");
+                    from = rs.getInt("from");
+                    to = rs.getInt("to");
+                    sendingDate = rs.getDate("date");
+                    item = rs.getString("item");
+                    totalPrice = rs.getDouble("price");
+                    itemCode = rs.getInt("itemCodes");
+                    senderName = rs.getString("senderName");
+                    amount = rs.getDouble("amount");
+
+
+                    // convert fra int til string i to / from
+                    String fromDep = getToFromViaInt(from);
+                    String toDep = getToFromViaInt(to);
+
+
+                    allTransfers.add(new Transfer(id, fromDep, toDep, sendingDate, item, totalPrice, itemCode, senderName, amount));
+                }
+                return allTransfers;
+            }
+        });
     }
 
     @Override
-    public Department getDepartment(int departmentId) {
-        String sql = "Select department FROM sns.department WHERE deartmentID="+departmentId;
+    public Transfer selectTransfer(int id) {
+        String sql = "SELECT * FROM sns.sendings WHERE idSendings=?";
 
-        RowMapper<Department> rm = new BeanPropertyRowMapper<>(Department.class);
-        Department department = template.queryForObject(sql, rm);
-
-        return department;
+        RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
+        Transfer transfer = template.queryForObject(sql, rm, id);
+        return transfer;
 
     }
+
+    @Override
+    public void updateTransfer(Transfer transfer, int id) {
+
+
+        String sql = "UPDATE sns.sendings " +
+                "SET `from`=?, `to`=?, date=?, item=?, price=?, itemCodes=?, senderName=?, amount=? " +
+                "WHERE idSendings =" + id;
+
+
+
+        int from =getToFromViaName(transfer.getFrom());
+        int to = getToFromViaName(transfer.getTo());
+
+
+        this.template.update(sql, from, to, transfer.getSendingDate(),transfer.getItem(), transfer.getTotalPrice(), transfer.getItemCode(), transfer.getSenderName(), transfer.getAmount());
+
+
+    }
+
+    @Override
+    public List<Transfer> searchTransferByDep(String from) {
+
+        String sql = "SELECT * FROM sns.sendings WHERE `from` =?";
+
+        RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
+
+        List<Transfer> searched = template.query(sql, rm, from);
+        return searched;
+    }
+
+
+
+
 }

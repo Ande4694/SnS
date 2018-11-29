@@ -1,7 +1,6 @@
 package snsinternaltransfer.sns.models;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +10,14 @@ import java.util.Date;
 public class Transfer {
 
     private int id;
-    private int from;
-    private int to;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String from;
+    private String to;
+    private int fromInt;
+    private int toInt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    // VI SKAL HUSKE AT MATCHE FORMAT MED HTML
     private Date sendingDate;
-    private Item item;
+    private String item;
     private double totalPrice;
     private int itemCode;
     private String senderName;
@@ -24,7 +26,8 @@ public class Transfer {
     public Transfer() {
     }
 
-    public Transfer(int from, int to, Date sendingDate, Item item, double totalPrice, int itemCode, String senderName, double amount) {
+    public Transfer(int id, int fromInt, int toInt, Date sendingDate, String item, double totalPrice, int itemCode, String senderName, double amount) {
+        this.id = id;
         this.from = from;
         this.to = to;
         this.sendingDate = sendingDate;
@@ -35,40 +38,46 @@ public class Transfer {
         this.amount = amount;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public int getFrom() {
-        return from;
-    }
-
-    public void setFrom(int from) {
+    public Transfer(int id, String from, String to, Date sendingDate, String item, double totalPrice, int itemCode, String senderName, double amount) {
+        this.id = id;
         this.from = from;
-    }
-
-    public int getTo() {
-        return to;
-    }
-
-    public void setTo(int to) {
         this.to = to;
-    }
-
-    public Date getSendingDate() {
-        return sendingDate;
-    }
-
-    public void setSendingDate(Date sendingDate) {
         this.sendingDate = sendingDate;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
         this.item = item;
+        this.totalPrice = totalPrice;
+        this.itemCode = itemCode;
+        this.senderName = senderName;
+        this.amount = amount;
+    }
+
+    public Transfer(String from, String to, Date sendingDate, String item, String senderName, double amount) {
+        this.from = from;
+        this.to = to;
+        this.sendingDate = sendingDate;
+        this.item = item;
+
+        this.senderName = senderName;
+        this.amount = amount;
+    }
+
+    public int getFromInt() {
+        return fromInt;
+    }
+
+    public void setFromInt(int fromInt) {
+        this.fromInt = fromInt;
+    }
+
+    public int getToInt() {
+        return toInt;
+    }
+
+    public void setToInt(int toInt) {
+        this.toInt = toInt;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getTotalPrice() {
@@ -85,6 +94,42 @@ public class Transfer {
 
     public void setItemCode(int itemCode) {
         this.itemCode = itemCode;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public Date getSendingDate() {
+        return sendingDate;
+    }
+
+    public void setSendingDate(Date sendingDate) {
+        this.sendingDate = sendingDate;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
     }
 
     public String getSenderName() {
