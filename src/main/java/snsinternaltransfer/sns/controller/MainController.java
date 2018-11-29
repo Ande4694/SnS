@@ -150,6 +150,23 @@ public class MainController {
         return "adminMenu";
     }
 
+    @GetMapping("/deleteSending/{deleted}")
+    public String deleteSending(@PathVariable("deleted") int idForDelete) {
+
+        log.info("Thomas has tried to delete: " + idForDelete);
+
+        // tilføjes til admin only
+
+        if (transferService.selectTranfer(idForDelete) != null) {
+
+            transferService.deleteSending(idForDelete);
+
+        }
+
+
+        return "redirect:/adminMenu";
+    }
+
     @GetMapping("/itemList")
     public String itemList(Model model){
 

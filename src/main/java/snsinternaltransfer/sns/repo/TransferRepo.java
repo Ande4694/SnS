@@ -72,7 +72,7 @@ public class TransferRepo  {
         if (id==13){
             return departmentto ="Baghuset";
         }
-        return departmentto;
+        return departmentto = "error loading";
     }
 
 
@@ -122,7 +122,11 @@ public class TransferRepo  {
         return department;
     }
 
+    public void deleteTransfer(int id){
+        String sql = "DELETE FROM sns.sendings WHERE idSendings=?";
 
+        this.template.update(sql, id);
+    }
 
     public void sendItem(Transfer transfer)  {
         String sql ="INSERT INTO sns.sendings  VALUES (default ,?,?,?,?,?,?,?,?)";

@@ -17,6 +17,10 @@ public class TransferService {
         transferRepo.sendItem(transfer);
     }
 
+    public void deleteSending(int id){
+        transferRepo.deleteTransfer(id);
+    }
+
     public List<Transfer> getAllTransfers(){
         return transferRepo.getAllTransfers();
     }
