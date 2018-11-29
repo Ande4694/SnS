@@ -109,6 +109,7 @@ public class MainController {
 
         //HTML MANGLER DOUBLE PÅ amount
         // HTML MANGLER DROP DOWN PÅ TO OG FROM
+        // logout url er /logout
 
         /*
         brug disse navne:
@@ -155,7 +156,6 @@ public class MainController {
 
         log.info("Thomas has tried to delete: " + idForDelete);
 
-        // tilføjes til admin only
 
         if (transferService.selectTranfer(idForDelete) != null) {
 
@@ -174,7 +174,6 @@ public class MainController {
 
         model.addAttribute("update", new Transfer());
 
-        // admin only
 
         tempId = idForUpdate;
 
@@ -195,7 +194,7 @@ public class MainController {
         log.info("edit item was done on item: "+transfer.getItem());
 
 
-        // admin only
+
         transferService.updateTransfer(transfer, tempId);
         // HTML med drop down på to og from
 
@@ -209,7 +208,6 @@ public class MainController {
         model.addAttribute("items", itemService.getAllItems());
 
         //mangler search med javascript funtion i html
-        // skal tilføjes til admin only
 
         log.info("itemList call");
         return "itemList";
@@ -220,7 +218,6 @@ public class MainController {
 
         log.info("Thomas has tried to delete: " + idForDelete);
 
-        // tilføjes til admin only
 
         if (itemService.selectItem(idForDelete) != null) {
 
@@ -239,7 +236,6 @@ public class MainController {
 
         model.addAttribute("update", new Item());
 
-        // admin only
 
         tempId = idForUpdate;
 
@@ -260,7 +256,6 @@ public class MainController {
         log.info("edit item was done on item: "+item.getName());
 
 
-        // admin only
         itemService.updateItem(item, tempId);
 
 
@@ -274,7 +269,6 @@ public class MainController {
 
         model.addAttribute("newItem", new Item());
 
-        // skal tilføjes til admin only
 
         return "createItem";
     }

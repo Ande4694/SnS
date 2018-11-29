@@ -52,7 +52,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/creatItem").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/editItem").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/itemList").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/itemList").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/updateItem").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/updateSending").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/deleteSending").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/deleteItem").access("hasRole('ROLE_ADMIN')");
 
         // When the user has logged in as XX.
         // But access a page that requires role YY,
@@ -69,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")//
                 .passwordParameter("password")
                 // Config for Logout Page
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/index");
 
     }
 }
