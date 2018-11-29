@@ -45,7 +45,7 @@ public class ExcelRepo {
                 "snsgrp5k"
         );
 
-        File f = new File("sheets\\TransferSheet"+transferService.getFromViaInt(dep)+".xlsx");
+        File f = new File("TransferSheet"+transferService.getFromViaInt(dep)+".xlsx");
         Statement statement = connect.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date >"+ after);
         XSSFWorkbook workbook = new XSSFWorkbook();
