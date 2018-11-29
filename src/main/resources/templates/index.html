@@ -325,7 +325,7 @@
         <h1>Login</h1>
         <input type="text" name="username" placeholder="Username" class="frontsize-u"/>
         <input type="password" name="password" placeholder="Password" class="frontsize-u"/>
-        <input name="submit" type="submit" value="Login" class="frontsize-l"/>
+        <button onclick="Login()" type="submit" class="frontsize-l button" >Login</button>
     </form>
 </div>
 
@@ -351,9 +351,13 @@
     }
     function LastChance() {
         if (confirm("LAST CHANCE!")) {
-            document.getElementById('id01').style.display='block'
+            document.getElementById('id01').style.display = 'block'
             /*window.location.href = "http://localhost:5000/userCreate";*/
         }
+    }
+    function Login() {
+        location.replace("https://www.w3schools.com")
+    }
 
 </script>
 

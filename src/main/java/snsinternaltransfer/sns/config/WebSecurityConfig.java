@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import snsinternaltransfer.sns.service.UserDetailsServiceImpl;
 
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -34,6 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 
     }
+    @Autowired
+    CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -67,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Submit URL of login page.
                 .loginProcessingUrl("/j_spring_security_check") // Submit URL
                 .loginPage("/")//
-                .defaultSuccessUrl("/")//
+                .successHandler(customizeAuthenticationSuccessHandler)
                 .failureUrl("/?error=true")//
                 .usernameParameter("username")//
                 .passwordParameter("password")
