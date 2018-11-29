@@ -27,9 +27,53 @@ public class TransferRepo  {
     ItemRepo itemRepo;
 
     int department;
+    String departmentto;
 
 
 
+    public String getToFromViaInt(int id){
+
+        if (id==1){
+            return departmentto ="Nansensgade";
+        }
+        if (id==2){
+            return departmentto ="Hellerup";
+        }
+        if (id==3){
+            return departmentto ="Østerbro";
+        }
+        if (id==4){
+            return departmentto ="Istedgade";
+        }
+        if (id==5){
+            return departmentto ="Gammel Kongevej";
+        }
+        if (id==6){
+            return departmentto ="Valby";
+        }
+        if (id==7){
+            return departmentto ="Lyngby";
+        }
+        if (id==8){
+            return departmentto ="Tivoli Hotel";
+        }
+        if (id==9){
+            return departmentto ="Rungsted";
+        }
+        if (id==10){
+            return departmentto ="Borgergade";
+        }
+        if (id==11){
+            return departmentto ="Krudthuset";
+        }
+        if (id==12){
+            return departmentto ="Tivoli Gardens";
+        }
+        if (id==13){
+            return departmentto ="Baghuset";
+        }
+        return departmentto;
+    }
 
 
     public int getToFromViaName(String name){
@@ -125,7 +169,12 @@ public class TransferRepo  {
                     amount = rs.getDouble("amount");
 
 
-                    allTransfers.add(new Transfer(id, from, to, sendingDate, item, totalPrice, itemCode, senderName, amount));
+                    // convert fra int til string i to / from
+                    String fromDep = getToFromViaInt(from);
+                    String toDep = getToFromViaInt(to);
+
+
+                    allTransfers.add(new Transfer(id, fromDep, toDep, sendingDate, item, totalPrice, itemCode, senderName, amount));
                 }
                 return allTransfers;
             }

@@ -138,7 +138,13 @@ public class MainController {
     }
 
     @GetMapping("/adminMenu")
-    public String adminMenu(){
+    public String adminMenu(Model model){
+
+        model.addAttribute("sendings",transferService.getAllTransfers());
+
+        // mangler også en fin lille search java script
+
+
 
         log.info("adminMenu call");
         return "adminMenu";
@@ -161,6 +167,8 @@ public class MainController {
 
         log.info("Thomas has tried to delete: " + idForDelete);
 
+        // tilføjes til admin only
+
         if (itemService.selectItem(idForDelete) != null) {
 
             itemService.deleteItem(idForDelete);
@@ -177,6 +185,8 @@ public class MainController {
         log.info("Thomas has tried to update: " + idForUpdate);
 
         model.addAttribute("update", new Item());
+
+        // admin only
 
         tempId = idForUpdate;
 
@@ -197,6 +207,7 @@ public class MainController {
         log.info("edit item was done on item: "+item.getName());
 
 
+        // admin only
         itemService.updateItem(item, tempId);
 
 
@@ -219,6 +230,7 @@ public class MainController {
     public String createItem(@ModelAttribute Item item){
 
         itemService.createItem(item);
+
 
         log.info("someone created a new item: "+item.getName());
 

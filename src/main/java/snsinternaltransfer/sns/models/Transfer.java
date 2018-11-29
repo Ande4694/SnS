@@ -38,6 +38,18 @@ public class Transfer {
         this.amount = amount;
     }
 
+    public Transfer(int id, String from, String to, Date sendingDate, String item, double totalPrice, int itemCode, String senderName, double amount) {
+        this.id = id;
+        this.from = from;
+        this.to = to;
+        this.sendingDate = sendingDate;
+        this.item = item;
+        this.totalPrice = totalPrice;
+        this.itemCode = itemCode;
+        this.senderName = senderName;
+        this.amount = amount;
+    }
+
     public Transfer(String from, String to, Date sendingDate, String item, String senderName, double amount) {
         this.from = from;
         this.to = to;
