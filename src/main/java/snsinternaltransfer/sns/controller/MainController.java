@@ -167,6 +167,42 @@ public class MainController {
         return "redirect:/adminMenu";
     }
 
+    @GetMapping("/updateSending/{updated}")
+    public String updateSending(@PathVariable("updated") int idForUpdate, Model model) {
+
+        log.info("Thomas has tried to update: " + idForUpdate);
+
+        model.addAttribute("update", new Transfer());
+
+        // admin only
+
+        tempId = idForUpdate;
+
+        if (transferService.selectTranfer(idForUpdate) != null) {
+
+            return "/updateSending";
+
+        }
+
+
+        return "redirect:/adminMenu";
+    }
+
+    @PostMapping("/updateSending")
+    public String updateSending(@ModelAttribute Transfer transfer) {
+
+
+        log.info("edit item was done on item: "+transfer.getItem());
+
+
+        // admin only
+        transferService.updateTransfer(transfer, tempId);
+        // HTML med drop down på to og from
+
+
+        return "redirect:/adminMenu";
+    }
+
     @GetMapping("/itemList")
     public String itemList(Model model){
 
@@ -218,7 +254,7 @@ public class MainController {
     }
 
     @PostMapping("/updateItem")
-    public String update(@ModelAttribute Item item) {
+    public String updateItem(@ModelAttribute Item item) {
 
 
         log.info("edit item was done on item: "+item.getName());

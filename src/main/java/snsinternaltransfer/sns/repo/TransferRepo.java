@@ -198,10 +198,16 @@ public class TransferRepo  {
 
 
         String sql = "UPDATE sns.sendings " +
-                "SET from=?, to=?, date=?, item=?, price=?, itemCodes=?, senderName=?, amount=? " +
+                "SET `from`=?, `to`=?, date=?, item=?, price=?, itemCodes=?, senderName=?, amount=? " +
                 "WHERE idSendings =" + id;
 
-        this.template.update(sql, transfer.getFromInt(), transfer.getToInt(), transfer.getSendingDate(), transfer.getTotalPrice(), transfer.getItemCode(), transfer.getSenderName(), transfer.getAmount());
+
+
+        int from =getToFromViaName(transfer.getFrom());
+        int to = getToFromViaName(transfer.getTo());
+
+
+        this.template.update(sql, from, to, transfer.getSendingDate(),transfer.getItem(), transfer.getTotalPrice(), transfer.getItemCode(), transfer.getSenderName(), transfer.getAmount());
 
 
     }
