@@ -45,7 +45,7 @@ public class ExcelRepo {
                 "snsgrp5k"
         );
 
-        File f = new File("TransferSheet"+dep+".xlsx");
+        File f = new File("TransferSheet"+transferService.getFromViaInt(dep)+".xlsx");
 
 
 
@@ -128,20 +128,6 @@ public class ExcelRepo {
         write(12, date);
         write(13, date);
 
-        //Open the first excel file.
-        Workbook SourceBook1 = new Workbook("F:\\Downloads\\charts.xlsx");
-
-        //Define the second source book.
-        //Open the second excel file.
-        Workbook SourceBook2 = new Workbook("F:\\Downloads\\picture.xlsx");
-
-        //Combining the two workbooks
-        SourceBook1.combine(SourceBook2);
-
-        SourceBook1.
-
-        //Save the target book file.
-        SourceBook1.save("F:\\Downloads\\combined.xlsx");
 
     }
 
