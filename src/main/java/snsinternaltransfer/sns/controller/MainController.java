@@ -213,6 +213,20 @@ public class MainController {
         return "itemList";
     }
 
+    @GetMapping("/editItem")
+    public String editItem(Model model){
+
+        log.info("editItem call");
+        return "editItem";
+    }
+
+    @GetMapping("/searchItem")
+    public String searchItem(Model model){
+
+        log.info("searchItem call");
+        return "searchItem";
+    }
+
     @GetMapping("/deleteItem/{deleted}")
     public String deleteItem(@PathVariable("deleted") int idForDelete) {
 
