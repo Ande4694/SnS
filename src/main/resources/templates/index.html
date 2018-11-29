@@ -325,7 +325,7 @@
         <h1>Login</h1>
         <input type="text" name="username" placeholder="Username" class="frontsize-u"/>
         <input type="password" name="password" placeholder="Password" class="frontsize-u"/>
-        <button onclick="Login()" type="submit" class="frontsize-l button" >Login</button>
+        <button type="submit" class="frontsize-l button" >Login</button>
     </form>
 </div>
 
@@ -339,26 +339,6 @@
             modal.style.display = "none";
         }
     }
-    function myFunction() {
-        if (confirm("Are you sure?")) {
-            AreYouSure()
-        }
-    }
-    function AreYouSure() {
-        if (confirm("ARE YOU ABSOLUT SURE MATE?")) {
-            LastChance()
-        }
-    }
-    function LastChance() {
-        if (confirm("LAST CHANCE!")) {
-            document.getElementById('id01').style.display = 'block'
-            /*window.location.href = "http://localhost:5000/userCreate";*/
-        }
-    }
-    function Login() {
-        location.replace("https://www.w3schools.com")
-    }
-
 </script>
 
 </body>

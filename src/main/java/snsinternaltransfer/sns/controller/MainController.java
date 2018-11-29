@@ -143,7 +143,7 @@ public class MainController {
 
         model.addAttribute("sendings",transferService.getAllTransfers());
 
-        // mangler også en fin lille search java script
+        // mangler også en fin lille search java script Done
 
 
 
@@ -207,7 +207,7 @@ public class MainController {
 
         model.addAttribute("items", itemService.getAllItems());
 
-        //mangler search med javascript funtion i html
+        //mangler search med javascript funtion i html DONE
 
         log.info("itemList call");
         return "itemList";

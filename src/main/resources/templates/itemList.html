@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="../static/stylesMain.css" th:href="@{/styleMain.css}">
 </head>
 <body>
-<div class="hero-image"></div>
+<div class="hero-image">
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Title.." title="Type in a name">
+</div>
 <div class="topnav">
     <a href="/">Back</a>
     <a href="adminMenu">Excel</a>
@@ -30,5 +32,24 @@
         <a href="/createItem">
             <button class="button"><span>Add new item</span></button>
         </a>
+<script>
+    function SearchJava() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
