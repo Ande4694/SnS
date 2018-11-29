@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 public class MainController {
 
     private final Logger log = Logger.getLogger(MainController.class.getName());
+    private int tempId;
 
     @Autowired
     AppUserDAO appUserDAO;
@@ -165,6 +166,38 @@ public class MainController {
             itemService.deleteItem(idForDelete);
 
         }
+
+
+        return "redirect:/itemList";
+    }
+
+    @GetMapping("/updateItem/{updated}")
+    public String updateItem(@PathVariable("updated") int idForUpdate, Model model) {
+
+        log.info("Thomas has tried to update: " + idForUpdate);
+
+        model.addAttribute("update", new Item());
+
+        tempId = idForUpdate;
+
+        if (itemService.selectItem(idForUpdate) != null) {
+
+            return "/updateItem";
+
+        }
+
+
+        return "redirect:/itemList";
+    }
+
+    @PostMapping("/updateItem")
+    public String update(@ModelAttribute Item item) {
+
+
+        log.info("edit item was done on item: "+item.getName());
+
+
+        itemService.updateItem(item, tempId);
 
 
         return "redirect:/itemList";

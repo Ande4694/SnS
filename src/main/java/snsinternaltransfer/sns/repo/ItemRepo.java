@@ -87,8 +87,8 @@ public class ItemRepo  {
 
 
         String sql = "UPDATE sns.items " +
-                "SET name=?, unitPrice=?, itemCode=?" +
-                "WHERE idmovies =" + id;
+                "SET name=?, unitPrice=?, itemCode=? " +
+                "WHERE idItems =" + id;
 
         this.template.update(sql, item.getName(), item.getUnitPrice(), item.getItemCode());
 
