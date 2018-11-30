@@ -2,6 +2,7 @@ package snsinternaltransfer.sns.repo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +14,7 @@ import snsinternaltransfer.sns.service.UserDetailsServiceImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -203,17 +205,20 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
 
+
         int to = getToFromViaName(transfer.getTo());
-        int from = getToViaUsername(transfer.getFrom());
-        Date date = transfer.getSendingDate();
         String item = transfer.getItem();
         String sender = transfer.getSenderName();
         Double amount = transfer.getAmount();
 
+
+        // alt det som systemet klarer for os
         double totalPrice = amount* itemRepo.getItem(item).getUnitPrice();
         int itemCode = itemRepo.getItem(item).getItemCode();
+        LocalDate a = LocalDate.now();
+        int from = getToViaUsername(transfer.getFrom());
 
-        this.template.update(sql, from, to, date, item, amount, sender, totalPrice, itemCode);
+        this.template.update(sql, from, to, a, item, amount, sender, totalPrice, itemCode);
 
 
     }
@@ -277,7 +282,7 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
 
-        int from =getToFromViaName(transfer.getFrom());
+        int from = getToFromViaName(transfer.getFrom());
         int to = getToFromViaName(transfer.getTo());
 
 
@@ -289,11 +294,12 @@ public class TransferRepoImpl  implements TransferRepo{
     @Override
     public List<Transfer> searchTransferByDep(String from) {
 
+
         String sql = "SELECT * FROM sns.sendings WHERE `from` =?";
 
         RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
 
-        List<Transfer> searched = template.query(sql, rm, from);
+        List<Transfer> searched = template.query(sql, rm, getToFromViaName(from));
         return searched;
     }
 
