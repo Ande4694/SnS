@@ -277,7 +277,7 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
 
-        int from =getToFromViaName(transfer.getFrom());
+        int from = getToFromViaName(transfer.getFrom());
         int to = getToFromViaName(transfer.getTo());
 
 
