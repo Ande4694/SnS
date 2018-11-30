@@ -272,7 +272,7 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
         String sql = "UPDATE sns.sendings " +
-                "SET `from`=?, `to`=?, date=?, item=?, price=?, itemCodes=?, senderName=?, amount=? " +
+                "SET `from`=?, `to`=?, date=?, item=?, totalPrice=?, itemCode=?, senderName=?, amount=? " +
                 "WHERE idSendings =" + id;
 
 

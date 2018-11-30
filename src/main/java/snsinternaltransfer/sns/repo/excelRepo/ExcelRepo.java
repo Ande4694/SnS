@@ -68,7 +68,7 @@ public class ExcelRepo {
         cell.setCellValue("PRICE");
         cell = row.createCell(7);
         cell.setCellValue("ITEM CODE");
-        int i = 2;
+        int i = 3;
 
 
         while(resultSet.next()) {
