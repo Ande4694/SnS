@@ -212,13 +212,14 @@ public class TransferRepoImpl  implements TransferRepo{
         Double amount = transfer.getAmount();
 
 
+
         // alt det som systemet klarer for os
         double totalPrice = amount* itemRepo.getItem(item).getUnitPrice();
         int itemCode = itemRepo.getItem(item).getItemCode();
-        LocalDate a = LocalDate.now();
+
         int from = getToViaUsername(transfer.getFrom());
 
-        this.template.update(sql, from, to, a, item, amount, sender, totalPrice, itemCode);
+        this.template.update(sql, from, to, transfer.getSendingDate(), item, amount, sender, totalPrice, itemCode);
 
 
     }

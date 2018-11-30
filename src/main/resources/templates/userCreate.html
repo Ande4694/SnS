@@ -20,7 +20,7 @@
 <div>
     <form id="form" class="box" th:action="@{/create}" th:object="${movie}" method="Post">
         <h1>Create Request</h1>
-        <input type="hidden" id="start" name="trip-start" required value="2018-11-29" min="2018-11-29" class="button"/>
+        <input type="date" id="start" name="trip-start" required value="2018-11-29" min="2018-11-29" class="button" th:field="${transfer.sendingDate}"/>
         <input type="hidden" th:field="${transfer.from}">
 
 
