@@ -19,21 +19,56 @@
         <hr>
 
         <p>Enter from</p>
-        <input type="text" th:field="${update.from}">
-        <p>Enter to</p>
-        <input type="text" th:field="${update.to}">
-        <p>Enter Date</p>
+        <select name="Department" class="frontsize-l button" th:field="${update.from}">
+            <option value="">Department from</option>
+            <option value="Nansensgade">Nansensgade</option>
+            <option value="Hellerup">Hellerup</option>
+            <option value="Østerbro">Østerbro</option>
+            <option value="Istedgade">Istedgade</option>
+            <option value="Gammel Kongevej">Gammel Kongevej</option>
+            <option value="Valby">Valby</option>
+            <option value="Lyngby">Lyngby</option>
+            <option value="Tivoli Hotel">Tivoli Hotel</option>
+            <option value="Rungsted">Rungsted</option>
+            <option value="Borgergade">Borgergade</option>
+            <option value="Krudthuset">Krudthuset</option>
+            <option value="Tivoli Garden">Tivoli Garden</option>
+            <option value="Baghuset">Baghuset</option>
+        </select>
+        <select name="Department" class="frontsize-l button" th:field="${update.to}">
+            <option value="">Department to</option>
+            <option value="Nansensgade">Nansensgade</option>
+            <option value="Hellerup">Hellerup</option>
+            <option value="Østerbro">Østerbro</option>
+            <option value="Istedgade">Istedgade</option>
+            <option value="Gammel Kongevej">Gammel Kongevej</option>
+            <option value="Valby">Valby</option>
+            <option value="Lyngby">Lyngby</option>
+            <option value="Tivoli Hotel">Tivoli Hotel</option>
+            <option value="Rungsted">Rungsted</option>
+            <option value="Borgergade">Borgergade</option>
+            <option value="Krudthuset">Krudthuset</option>
+            <option value="Tivoli Garden">Tivoli Garden</option>
+            <option value="Baghuset">Baghuset</option>
+        </select>
+
         <input type="date" th:field= "${update.sendingDate}" >
         <p>Enter Item</p>
-        <input type="text" th:field="${update.item}">
-        <p>Enter Item code</p>
+
+        <select name="Item" class="frontsize-l button" th:field="${update.item}">
+            <option value="">Select Item</option>
+            <option value="Laks">Laks</option>
+            <option value="Tuna">Tuna</option>
+            <option value="Sea bass">Sea Bass</option>
+        </select>
+
         <input type="text" th:field="${update.itemCode}">
         <p>Enter total price</p>
         <input type="text" th:field="${update.totalPrice}">
         <p>Enter your name</p>
         <input type="text" th:field="${update.senderName}">
         <p>Enter amount</p>
-        <input type="number" th:field="${update.amount}">
+        <input type="number" step="any" th:field="${update.amount}">
 
 
         <input class="registerbtn" type="submit" value="Submit"/>
