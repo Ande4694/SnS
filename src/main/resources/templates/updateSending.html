@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Menu</title>
+    <link rel="stylesheet" type="text/css" href="../static/stylesMain.css" th:href="@{/styleMain.css}">
+</head>
+<body>
+<div class="topnav">
+    <a href="/">Back</a>
+    <a class="active" href="adminMenu">Excel</a>
+    <a href="itemList">Item List</a>
+    <a href="/">Log off</a>
+</div>
+
+<div class="container">
+    <h1>Create Actor</h1>
+    <form th:action="@{/updateSending}" th:object="${update}" method="Post">
+        <hr>
+
+        <p>Enter from</p>
+        <input type="text" th:field="${update.from}">
+        <p>Enter to</p>
+        <input type="text" th:field="${update.to}">
+        <p>Enter Date</p>
+        <input type="date" th:field= "${update.sendingDate}" >
+        <p>Enter Item</p>
+        <input type="text" th:field="${update.item}">
+        <p>Enter Item code</p>
+        <input type="text" th:field="${update.itemCode}">
+        <p>Enter total price</p>
+        <input type="text" th:field="${update.totalPrice}">
+        <p>Enter your name</p>
+        <input type="text" th:field="${update.senderName}">
+        <p>Enter amount</p>
+        <input type="number" th:field="${update.amount}">
+
+
+        <input class="registerbtn" type="submit" value="Submit"/>
+
+
+        <hr>
+    </form>
+</div>
+<div class="logo-TopRight"> <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="150" height="50"> </div>
+</body>
+</html>

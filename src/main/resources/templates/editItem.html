@@ -30,6 +30,24 @@
     <h2>Edit Item</h2>
     <p>maybe some excel or Database :)</p>
 </div>
+<div class="container">
+    <h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>
+    <form th:action="@{/excel}" th:object="${date}" method="Post">
+        <hr>
 
+
+
+        <p>Enter Date</p>
+        <input type="hidden" th:field= "${date.name}" >
+
+
+
+
+        <input class="registerbtn" type="submit" value="send"/>
+
+
+        <hr>
+    </form>
+</div>
 </body>
 </html>
