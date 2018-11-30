@@ -5,26 +5,19 @@ public class AppUser {
     private Long userId;
     private String userName;
     private String encrytedPassword;
-    private int department;
+
 
     public AppUser() {
 
     }
 
-    public AppUser(Long userId, String userName, String encrytedPassword, int department) {
+    public AppUser(Long userId, String userName, String encrytedPassword) {
         this.userId = userId;
         this.userName = userName;
         this.encrytedPassword = encrytedPassword;
-        this.department = department;
+
     }
 
-    public int getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(int department) {
-        this.department = department;
-    }
 
     public Long getUserId() {
         return userId;

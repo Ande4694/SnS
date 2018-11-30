@@ -19,9 +19,9 @@ public class AppUserMapper implements RowMapper<AppUser>{
         Long userId = rs.getLong("User_Id");
         String userName = rs.getString("User_Name");
         String encrytedPassword = rs.getString("Encryted_Password");
-        int department = rs.getInt("department");
 
-        return new AppUser(userId, userName, encrytedPassword, department);
+
+        return new AppUser(userId, userName, encrytedPassword);
     }
 
 }

@@ -289,11 +289,12 @@ public class TransferRepoImpl  implements TransferRepo{
     @Override
     public List<Transfer> searchTransferByDep(String from) {
 
+
         String sql = "SELECT * FROM sns.sendings WHERE `from` =?";
 
         RowMapper<Transfer> rm = new BeanPropertyRowMapper<>(Transfer.class);
 
-        List<Transfer> searched = template.query(sql, rm, from);
+        List<Transfer> searched = template.query(sql, rm, getToFromViaName(from));
         return searched;
     }
 
