@@ -5,18 +5,22 @@
     <title>Admin Menu</title>
     <link rel="stylesheet" type="text/css" href="../static/stylesAdmin.css" th:href="@{/styleAdmin.css}">
 
+<style>
+    .hej{
+        color: #fafffd;
+    }
 
+</style>
 </head>
-<body bgcolor="#BABABA">
+<body bgcolor="#fafffd">
 
 <div class = "logo-RightCorner"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="100" width="184"></div>
 
 <div class="sidenav">
     <a href="/adminMenu">Start</a>
     <a href="/itemList">Item List</a>
-    <a href="/userCreate">Send Item</a>
     <a href="/searchItem">Search Item</a>
-    <a href="/editItem">Edit Excel</a>
+    <a href="/editItem">Edit Excel(knap)</a>
     <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
@@ -31,6 +35,53 @@
 <div class="main">
     <h2>Admin Menu</h2>
     <p>Some Text here, maybe excel :)</p>
+    <table id="myTable">
+        <thead>
+        <tr class="header">
+            <th style="width:25%;">Transfer Id</th>
+            <th style="width:25%;">Sending department</th>
+            <th style="width:25%;">Receiving department</th>
+            <th style="width:25%;">Date of transfer</th>
+            <th style="width:25%;">Item name</th>
+            <th style="width:25%;">Total price</th>
+            <th style="width:25%;">Item code</th>
+            <th style="width:25%;">Sender name</th>
+            <th style="width:25%;">Amount</th>
+            <th style="width:25%;">Options</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sendings: ${sendings}">
+            <td th:text="${sendings.id}"/>
+            <td th:text="${sendings.from}"/>
+            <td th:text="${sendings.to}"/>
+            <td th:text="${sendings.sendingDate}"/>
+            <td th:text="${sendings.item}"/>
+            <td th:text="${sendings.totalPrice}"/>
+            <td th:text="${sendings.itemCode}"/>
+            <td th:text="${sendings.senderName}"/>
+            <td th:text="${sendings.amount}"/>
+
+
+            <td>
+                <div class="dropdown">
+                    <button class="dropbtn">Options</button>
+                    <div class="dropdown-content">
+                        <a th:href="${'updateSending/' + sendings.id}">
+                            Update</button>
+                        </a>
+                        <a th:href="${'deleteSending/' + sendings.id}">
+                            Delete</button>
+                        </a>
+                    </div>
+                </div>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
 </div>
 </body>
 <script>
