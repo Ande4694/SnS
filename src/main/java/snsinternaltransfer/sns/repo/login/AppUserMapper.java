@@ -23,5 +23,5 @@ public class AppUserMapper implements RowMapper<AppUser>{
 
         return new AppUser(userId, userName, encrytedPassword);
     }
-
+//
 }
