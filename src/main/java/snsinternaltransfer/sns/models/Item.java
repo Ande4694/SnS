@@ -1,6 +1,5 @@
 package snsinternaltransfer.sns.models;
 
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,6 +11,13 @@ public class Item {
     private int itemCode;
 
     public Item(String name, double unitPrice, int itemCode) {
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.itemCode = itemCode;
+    }
+
+    public Item(int id, String name, double unitPrice, int itemCode) {
+        this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;
         this.itemCode = itemCode;
