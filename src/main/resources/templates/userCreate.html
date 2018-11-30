@@ -2,88 +2,35 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head> <link rel="shortcut icon"href="https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/f1/6d/08/f16d0880-85fa-b16b-9b5c-f94b4ea173bd/AppIcon-1x_U007emarketing-85-220-4.png/246x0w.jpg"/>
     <meta charset="UTF-8">
-    <title>UserCreate</title>
-    <link rel="stylesheet" type="text/css" href="../static/stylesMain.css" th:href="@{/styleMain.css}">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/stylesAdmin.css" th:href="@{/styleAdmin.css}">
 </head>
-<body>
+<body bgcolor="#BABABA">
 
+<div class = "logo-RightCorner"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="100" width="184"></div>
 
+<div class="sidenav">
+    <a href="/adminMenu">Start</a>
+    <a href="/itemList">Item List</a>
+    <a href="/userCreate">Send Item</a>
+    <a href="/searchItem">Search Item</a>
+    <a href="/editItem">Edit Excel</a>
+    <a href="/createItem">Add new Item</a>
 
-<div class="hero-image"></div>
+    <div class="logo-LeftCorner">
+        <form th:action="@{/logout}" method="post">
+            <input class="Logoutbutton" type="submit" value="Sign Out"/>
+        </form>
 
-<div class="tm-signOut">
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
+        <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="200" height="75">
+    </div>
 </div>
 
-<div>
-    <form id="form" class="box" th:action="@{/create}" th:object="${movie}" method="Post">
-        <h1>Create Request</h1>
-        <input type="date" id="start" name="trip-start" required value="2018-11-29" min="2018-11-29" class="button"/>
-        <input type="hidden" th:field="${transfer.from}">
-
-       <select name="Department" class="frontsize-l button">
-            <option value="Nansensgade">Nansensgade</option>
-            <option value="Hellerup">Hellerup</option>
-            <option value="Østerbro">Østerbro</option>
-            <option value="Istedgade">Istedgade</option>
-            <option value="Gammel Kongevej">Gammel Kongevej</option>
-            <option value="Valby">Valby</option>
-            <option value="Lyngby">Lyngby</option>
-            <option value="Tivoli Hotel">Tivoli Hotel</option>
-            <option value="Rungsted">Rungsted</option>
-            <option value="Borgergade">Borgergade</option>
-            <option value="Krudthuset">Krudthuset</option>
-            <option value="Tivoli Garden">Tivoli Garden</option>
-            <option value="Baghuset">Baghuset</option>
-    </select>
-
-        <input type="text" name="Item" required  placeholder="Enter item"  class="frontsize-l"/>
-        <input type="number" step="any" name ="Amount" required placeholder="Enter amount" class="frontsize-l button"/>
-        <input type="text" name ="Name" required placeholder="Enter name" class="frontsize-l"/>
-        <select name="Department" class="frontsize-l button">
-            <option value="Nansensgade">Nansensgade</option>
-            <option value="Hellerup">Hellerup</option>
-            <option value="Østerbro">Østerbro</option>
-            <option value="Istedgade">Istedgade</option>
-            <option value="Gammel Kongevej">Gammel Kongevej</option>
-            <option value="Valby">Valby</option>
-            <option value="Lyngby">Lyngby</option>
-            <option value="Tivoli Hotel">Tivoli Hotel</option>
-            <option value="Rungsted">Rungsted</option>
-            <option value="Borgergade">Borgergade</option>
-            <option value="Krudthuset">Krudthuset</option>
-            <option value="Tivoli Garden">Tivoli Garden</option>
-            <option value="Baghuset">Baghuset</option>
-        </select>
-        <input onclick="Sure()" type="submit" name ="Submit" value="Submit" class="frontsize-l" id="submit-button"/>
-
-    </form>
+<div class="main">
+    <h2>Create Item</h2>
+    <p>Some Text here, maybe some boxes </p>
 </div>
-<script>
-    function Sure() {
-        if (confirm("Are you sure?")) {
-            AreYouSure()
-        }
-    }
-    function AreYouSure() {
-        if (confirm("ARE YOU ABSOLUT SURE MATE?")) {
-            LastChance()
-        }
-    }
-    function LastChance() {
-        if (confirm("LAST CHANCE!")) {
-            var form = document.getElementById('form');
-            var submitButton = document.getElementById('submit-button');
-            sendButton.addEventListener('click', send);
 
-            function send(e) {
-                submitButton.click();
-            }
 
-        }
-    }
-</script>
 </body>
 </html>
