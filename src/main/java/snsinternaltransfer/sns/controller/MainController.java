@@ -24,7 +24,6 @@ import snsinternaltransfer.sns.service.TransferService;
 import snsinternaltransfer.sns.utility.WebUtils;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Logger;
 
 @org.springframework.stereotype.Controller

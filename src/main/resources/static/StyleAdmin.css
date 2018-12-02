@@ -99,7 +99,7 @@ body {
 }
 
 .logo-RightCorner {
-    position: absolute;
+    position: fixed;
     right: -7px;
     top: 5PX;
 }
@@ -179,9 +179,3 @@ th {
     background-color: #ddd;
 }
 
-div.ex3 {
-    background-color: lightblue;
-    width: 110px;
-    height: 110px;
-    overflow: auto;
-}
