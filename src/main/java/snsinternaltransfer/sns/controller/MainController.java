@@ -149,7 +149,7 @@ public class MainController {
         model.addAttribute("sendings", transferService.getAllTransfers());
 
         // mangler også en fin lille search java script Done
-
+        model.addAttribute("date", new Item());
 
         log.info("adminMenu call");
         return "adminMenu";
