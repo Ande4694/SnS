@@ -13,8 +13,6 @@
 <div class="sidenav">
     <a href="/adminMenu">Start</a>
     <a class="active" href="/itemList">Item List</a>
-    <a href="/editItem">Edit Excel(knap)</a>
-    <a href="/searchItem">Search Item</a>
     <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
@@ -41,13 +39,15 @@
 <div class="main">
     <h2>Item List</h2>
     <p>List with Item, java/Script Search</p>
-    <input type="text" id="myInput" placeholder="Search in table" >
+
     <div class="search-container">
-        <form class="example" action="/searchByTitle/" method="get" style="max-width:1000px">
-            <input type="text" placeholder="Search.." name="Search">
+        <form class="example" action="/searchItem/" method="get" style="max-width:1000px">
+            <input type="text" placeholder="Search.." >
             <button type="submit" value="Search"><span>Search by Item</span><i class="fa fa-search"></i></button>
         </form>
     </div>
+
+    <input type="text" id="myInput" placeholder="Search in table" >
 
     <div class="container">
 
@@ -98,12 +98,6 @@
 </a>
 </div>
 
-    <div class="search-container main">
-        <form class="example" action="/searchByTitle/" method="get" style="max-width:1000px">
-            <input type="text" placeholder="Java Search.." name="Search">
-            <button type="submit" value="Search"><span>Search by Item</span><i class="fa fa-search"></i></button>
-        </form>
-    </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>

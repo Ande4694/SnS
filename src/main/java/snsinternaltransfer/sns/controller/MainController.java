@@ -178,6 +178,7 @@ public class MainController {
 
         model.addAttribute("update", new Transfer());
         model.addAttribute("date", new Item());
+        model.addAttribute("sendings", transferService.getAllTransfers());
 
 
         tempId = idForUpdate;
@@ -258,6 +259,7 @@ public class MainController {
 
         model.addAttribute("update", new Item());
         model.addAttribute("date", new Item());
+        model.addAttribute("items", itemService.getAllItems());
 
 
         tempId = idForUpdate;

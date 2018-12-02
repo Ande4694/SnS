@@ -12,8 +12,6 @@
 <div class="sidenav">
     <a href="/adminMenu">Start</a>
     <a class="active" href="/itemList">Item List</a>
-    <a href="/editItem">Edit Excel(knap)</a>
-    <a href="/searchItem">Search Item</a>
     <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
@@ -46,13 +44,13 @@
 
 
         <p>Enter name</p>
-        <input type="text" th:field="${update.name}"/>
+        <input type="text" th:field="${update.name}" required/>
 
         <p>Enter unit price</p>
-        <input type="number" th:field="${update.unitPrice}"/>
+        <input type="number" th:field="${update.unitPrice}" required/>
 
         <p>Enter item code</p>
-        <input type="number" th:field="${update.itemCode}"/>
+        <input type="number" th:field="${update.itemCode}" required/>
 
 
         <input class="registerbtn" type="submit" value="Submit"/>

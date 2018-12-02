@@ -12,8 +12,6 @@
 <div class="sidenav">
     <a class="active" href="/adminMenu">Start</a>
     <a href="/itemList">Item List</a>
-    <a href="/editItem">Edit Excel(knap)</a>
-    <a href="/searchItem">Search Item</a>
     <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
@@ -40,12 +38,13 @@
 
     <div class="container">
         <h1>Update Sending</h1>
-        <p>Updating Sending: {updated}</p>
+        <p> You are updating this Sending: (Anders i might need you help here)[[${#httpServletRequest.remoteUser}]]
+        </p>
         <form th:action="@{/updateSending}" th:object="${update}" method="Post">
             <hr>
 
             <p>Enter from</p>
-            <select name="Department" class="frontsize-l button" th:field="${update.from}">
+            <select name="Department" class="frontsize-l button" th:field="${update.from}" required>
                 <option value="">Department from</option>
                 <option value="Nansensgade">Nansensgade</option>
                 <option value="Hellerup">Hellerup</option>
@@ -61,7 +60,7 @@
                 <option value="Tivoli Garden">Tivoli Garden</option>
                 <option value="Baghuset">Baghuset</option>
             </select>
-            <select name="Department" class="frontsize-l button" th:field="${update.to}">
+            <select name="Department" class="frontsize-l button" th:field="${update.to}" required>
                 <option value="">Department to</option>
                 <option value="Nansensgade">Nansensgade</option>
                 <option value="Hellerup">Hellerup</option>
@@ -78,23 +77,22 @@
                 <option value="Baghuset">Baghuset</option>
             </select>
 
-            <input type="date" th:field= "${update.sendingDate}" >
-            <p>Enter Item</p>
+            <input type="date" th:field= "${update.sendingDate}" required>
+            <p>Enter Item and Item code</p>
 
-            <select name="Item" class="frontsize-l button" th:field="${update.item}">
+            <select name="Item" class="frontsize-l button" th:field="${update.item}" required>
                 <option value="">Select Item</option>
                 <option value="Laks">Laks</option>
                 <option value="Tuna">Tuna</option>
                 <option value="Sea bass">Sea Bass</option>
             </select>
-
-            <input type="text" th:field="${update.itemCode}">
+            <input type="text" th:field="${update.totalPrice}" required>
             <p>Enter total price</p>
-            <input type="text" th:field="${update.totalPrice}">
+            <input type="text" th:field="${update.totalPrice}" required>
             <p>Enter your name</p>
-            <input type="text" th:field="${update.senderName}">
+            <input type="text" th:field="${update.senderName}" required>
             <p>Enter amount</p>
-            <input type="number" step="any" th:field="${update.amount}">
+            <input type="number" step="any" th:field="${update.amount}" required>
 
 
             <input class="registerbtn" type="submit" value="Submit"/>
