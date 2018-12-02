@@ -335,4 +335,12 @@ public class MainController {
         return "redirect:adminMenu";
     }
 
+    @GetMapping("/error")
+    public String error(Model model){
+        log.info("Someone got a error");
+
+        return "error";
+    }
+
+
 }
