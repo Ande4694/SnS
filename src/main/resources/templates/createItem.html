@@ -14,9 +14,21 @@
     <a href="/itemList">Item List</a>
     <a href="/editItem">Edit Excel(knap)</a>
     <a href="/searchItem">Search Item</a>
-    <a href="/createItem">Add new Item</a>
+    <a class="active" href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
+
+
+        <!--<h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>-->
+
+
+        <form th:action="@{/excel}" th:object="${date}" method="Post">
+            <input type="hidden" th:field= "${date.name}" >
+            <input class="Excelbutton" type="submit" value="Excel"/>
+        </form>
+
+
+
         <form th:action="@{/logout}" method="post">
             <input class="Logoutbutton" type="submit" value="Sign Out"/>
         </form>

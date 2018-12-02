@@ -209,6 +209,7 @@ public class MainController {
     public String itemList(Model model) {
 
         model.addAttribute("items", itemService.getAllItems());
+        model.addAttribute("date", new Item());
 
         //mangler search med javascript funtion i html DONE
 
@@ -218,6 +219,7 @@ public class MainController {
 
     @GetMapping("/editItem")
     public String editItem(Model model) {
+        model.addAttribute("date", new Item());
 
         log.info("editItem call");
         return "editItem";
@@ -225,6 +227,7 @@ public class MainController {
 
     @GetMapping("/searchItem")
     public String searchItem(Model model) {
+        model.addAttribute("date", new Item());
 
         log.info("searchItem call");
         return "searchItem";
@@ -232,6 +235,7 @@ public class MainController {
 
     @GetMapping("/deleteItem/{deleted}")
     public String deleteItem(@PathVariable("deleted") int idForDelete) {
+
 
         log.info("Thomas has tried to delete: " + idForDelete);
 
@@ -270,6 +274,7 @@ public class MainController {
     public String updateItem(@ModelAttribute Item item) {
 
 
+
         log.info("edit item was done on item: " + item.getName());
 
 
@@ -281,6 +286,7 @@ public class MainController {
 
     @GetMapping("/createItem")
     public String createItem(Model model) {
+        model.addAttribute("date", new Item());
 
         log.info("someone is trying to create an item");
 
@@ -304,6 +310,7 @@ public class MainController {
 
     @GetMapping("/excel")
     public String excel(Model model) {
+        
 
         log.info("someone called /excel");
 
