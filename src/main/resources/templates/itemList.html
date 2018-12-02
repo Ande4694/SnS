@@ -3,21 +3,31 @@
 <head> <link rel="shortcut icon"href="https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/f1/6d/08/f16d0880-85fa-b16b-9b5c-f94b4ea173bd/AppIcon-1x_U007emarketing-85-220-4.png/246x0w.jpg"/>
     <meta charset="UTF-8">
     <title>Item List</title>
-    <link rel="stylesheet" type="text/css" href="../static/stylesAdmin.css" th:href="@{/styleAdmin.css}">
+    <link rel="stylesheet" type="text/css" href="../static/styleAdmin.css" th:href="@{/styleAdmin.css}">
+    <link rel = "stylesheet" type = "text/css" href = "../static/styleAdmin.css" />
 </head>
-<body bgcolor="#BABABA">
+<body bgcolor="#fafffd">
 
 <div class = "logo-RightCorner"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="100" width="184"></div>
 
 <div class="sidenav">
     <a href="/adminMenu">Start</a>
-    <a href="/itemList">Item List</a>
-    <a href="/userCreate">Send Item</a>
-    <a href="/searchItem">Search Item</a>
-    <a href="/editItem">Edit Excel</a>
+    <a class="active" href="/itemList">Item List</a>
     <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
+
+
+        <!--<h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>-->
+
+
+        <form th:action="@{/excel}" th:object="${date}" method="Post">
+            <input type="hidden" th:field= "${date.name}" >
+            <input class="Excelbutton" type="submit" value="Excel"/>
+        </form>
+
+
+
         <form th:action="@{/logout}" method="post">
             <input class="Logoutbutton" type="submit" value="Sign Out"/>
         </form>
@@ -29,13 +39,15 @@
 <div class="main">
     <h2>Item List</h2>
     <p>List with Item, java/Script Search</p>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Java Script search" title="Type in a name">
+
     <div class="search-container">
-        <form class="example" action="/searchByTitle/" method="get" style="max-width:1000px">
-            <input type="text" placeholder="Search.." name="Search">
+        <form class="example" action="/searchItem/" method="get" style="max-width:1000px">
+            <input type="text" placeholder="Search.." >
             <button type="submit" value="Search"><span>Search by Item</span><i class="fa fa-search"></i></button>
         </form>
     </div>
+
+    <input type="text" id="myInput" placeholder="Search in table" >
 
     <div class="container">
 
@@ -43,14 +55,15 @@
         <table id="myTable">
             <thead>
             <tr class="header">
-                <th style="width:25%;">Item Id</th>
-                <th style="width:25%;">Name</th>
-                <th style="width:25%;">Unit Price</th>
-                <th style="width:25%;">Item Code</th>
+                <th style="width:25%;" onclick="sortTableNumber(0)">Item Id</th>
+                <th style="width:25%;" onclick="sortTable(1)">Name</th>
+                <th style="width:25%;" onclick="sortTableNumber(2)">Unit Price</th>
+                <th style="width:25%;" onclick="sortTableNumber(3)">Item Code</th>
+                <th style="width:25%;">Option</th>
 
             </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable2">
             <tr th:each="items: ${items}">
                 <td th:text="${items.id}"/>
                 <td th:text="${items.name}"/>
@@ -85,28 +98,104 @@
 </a>
 </div>
 
-    <div class="search-container main">
-        <form class="example" action="/searchByTitle/" method="get" style="max-width:1000px">
-            <input type="text" placeholder="Java Search.." name="Search">
-            <button type="submit" value="Search"><span>Search by Item</span><i class="fa fa-search"></i></button>
-        </form>
-    </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    function SearchJava() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable2 tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
         table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir = "asc";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /*check if the two rows should switch place,
+                based on the direction, asc or desc:*/
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch= true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount ++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+
+    function sortTableNumber(m) {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("myTable");
+        switching = true;
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[m];
+                y = rows[i + 1].getElementsByTagName("TD")[m];
+                //check if the two rows should switch place:
+                if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
             }
         }
     }

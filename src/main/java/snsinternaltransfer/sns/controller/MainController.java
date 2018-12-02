@@ -24,7 +24,6 @@ import snsinternaltransfer.sns.service.TransferService;
 import snsinternaltransfer.sns.utility.WebUtils;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Logger;
 
 @org.springframework.stereotype.Controller
@@ -129,7 +128,7 @@ public class MainController {
         model.addAttribute("sendings", transferService.getAllTransfers());
 
         // mangler også en fin lille search java script Done
-
+        model.addAttribute("date", new Item());
 
         log.info("adminMenu call");
         return "adminMenu";
@@ -157,6 +156,8 @@ public class MainController {
         log.info("Thomas has tried to update: " + idForUpdate);
 
         model.addAttribute("update", new Transfer());
+        model.addAttribute("date", new Item());
+        model.addAttribute("sendings", transferService.getAllTransfers());
 
 
         tempId = idForUpdate;
@@ -189,6 +190,7 @@ public class MainController {
     public String itemList(Model model) {
 
         model.addAttribute("items", itemService.getAllItems());
+        model.addAttribute("date", new Item());
 
         //mangler search med javascript funtion i html DONE
 
@@ -198,6 +200,7 @@ public class MainController {
 
     @GetMapping("/editItem")
     public String editItem(Model model) {
+        model.addAttribute("date", new Item());
 
         log.info("editItem call");
         return "editItem";
@@ -205,6 +208,7 @@ public class MainController {
 
     @GetMapping("/searchItem")
     public String searchItem(Model model) {
+        model.addAttribute("date", new Item());
 
         log.info("searchItem call");
         return "searchItem";
@@ -212,6 +216,7 @@ public class MainController {
 
     @GetMapping("/deleteItem/{deleted}")
     public String deleteItem(@PathVariable("deleted") int idForDelete) {
+
 
         log.info("Thomas has tried to delete: " + idForDelete);
 
@@ -232,6 +237,8 @@ public class MainController {
         log.info("Thomas has tried to update: " + idForUpdate);
 
         model.addAttribute("update", new Item());
+        model.addAttribute("date", new Item());
+        model.addAttribute("items", itemService.getAllItems());
 
 
         tempId = idForUpdate;
@@ -250,6 +257,7 @@ public class MainController {
     public String updateItem(@ModelAttribute Item item) {
 
 
+
         log.info("edit item was done on item: " + item.getName());
 
 
@@ -261,6 +269,7 @@ public class MainController {
 
     @GetMapping("/createItem")
     public String createItem(Model model) {
+        model.addAttribute("date", new Item());
 
         log.info("someone is trying to create an item");
 
@@ -285,6 +294,7 @@ public class MainController {
     @GetMapping("/excel")
     public String excel(Model model) {
 
+
         log.info("someone called /excel");
 
 
@@ -303,5 +313,13 @@ public class MainController {
 
         return "redirect:adminMenu";
     }
+
+    @GetMapping("/error")
+    public String error(Model model){
+        log.info("Someone got a error");
+
+        return "error";
+    }
+
 
 }
