@@ -177,6 +177,7 @@ public class MainController {
         log.info("Thomas has tried to update: " + idForUpdate);
 
         model.addAttribute("update", new Transfer());
+        model.addAttribute("date", new Item());
 
 
         tempId = idForUpdate;
@@ -256,6 +257,7 @@ public class MainController {
         log.info("Thomas has tried to update: " + idForUpdate);
 
         model.addAttribute("update", new Item());
+        model.addAttribute("date", new Item());
 
 
         tempId = idForUpdate;
@@ -310,7 +312,7 @@ public class MainController {
 
     @GetMapping("/excel")
     public String excel(Model model) {
-        
+
 
         log.info("someone called /excel");
 
