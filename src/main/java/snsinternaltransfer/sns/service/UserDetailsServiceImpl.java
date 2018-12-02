@@ -42,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         System.out.println("Found User: " + appUser);
-        userName = appUser.getUserName();
+        username = appUser.getUserName();
 
         // [ROLE_USER, ROLE_ADMIN,..]
         List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());

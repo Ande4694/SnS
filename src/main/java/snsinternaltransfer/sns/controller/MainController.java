@@ -112,26 +112,6 @@ public class MainController {
 
         transferService.sendItem(transfer);
 
-        //HTML MANGLER DOUBLE PÅ amount                   DONE
-        // HTML MANGLER DROP DOWN PÅ TO OG FROM           Done
-        // logout url er /logout                           ok
-
-        /*
-        brug disse navne:
-        Nansensgade
-        Hellerup
-        Østerbro
-        Istedgade
-        Gammel Kongevej
-        Valby
-        Lyngby
-        Tivoli Hotel
-        Rungsted
-        Borgergade
-        Krudthuset
-        Tivoli Garden
-        Baghuset
-         */
 
         log.info("from:" + transfer.getFrom());
         log.info("to:" + transfer.getTo());

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import snsinternaltransfer.sns.controller.MainController;
 import snsinternaltransfer.sns.models.Transfer;
 import snsinternaltransfer.sns.service.UserDetailsServiceImpl;
 
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Repository
 public class TransferRepoImpl  implements TransferRepo{
@@ -33,6 +35,8 @@ public class TransferRepoImpl  implements TransferRepo{
 
     int department;
     String departmentto;
+    private final Logger log = Logger.getLogger(MainController.class.getName());
+
 
 
 
@@ -189,7 +193,7 @@ public class TransferRepoImpl  implements TransferRepo{
             return department = 13;
         }
 
-        return department;
+        return department = 13;
     }
 
     @Override
@@ -212,14 +216,13 @@ public class TransferRepoImpl  implements TransferRepo{
         Double amount = transfer.getAmount();
 
 
-
         // alt det som systemet klarer for os
         double totalPrice = amount* itemRepo.getItem(item).getUnitPrice();
         int itemCode = itemRepo.getItem(item).getItemCode();
+        LocalDate a = LocalDate.now();
+        int from = getToViaUsername(user.getUsername());
 
-        int from = getToViaUsername(transfer.getFrom());
-
-        this.template.update(sql, from, to, transfer.getSendingDate(), item, amount, sender, totalPrice, itemCode);
+        this.template.update(sql, from, to, a, item, amount, sender, totalPrice, itemCode);
 
 
     }
@@ -284,7 +287,9 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
         int from = getToFromViaName(transfer.getFrom());
+        log.info("from: "+from);
         int to = getToFromViaName(transfer.getTo());
+        log.info("to: "+to);
 
 
         this.template.update(sql, from, to, transfer.getSendingDate(),transfer.getItem(), transfer.getTotalPrice(), transfer.getItemCode(), transfer.getSenderName(), transfer.getAmount());

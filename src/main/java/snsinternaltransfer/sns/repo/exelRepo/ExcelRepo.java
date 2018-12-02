@@ -10,21 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import snsinternaltransfer.sns.controller.MainController;
-import snsinternaltransfer.sns.models.Transfer;
 import snsinternaltransfer.sns.service.TransferService;
 
-import javax.swing.tree.DefaultTreeCellEditor;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Logger;
 
 @Repository
@@ -47,7 +40,9 @@ public class ExcelRepo {
 
         File f = new File("TransferSheet"+transferService.getFromViaInt(dep)+".xlsx");
         Statement statement = connect.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date >"+ after);
+        ResultSet resultSet = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date >"+ after.toString());
+        ///// select * from sns.sendings where `from`= 5 and date > '2018-11-01'   giver det rigtige, men linien over giver ALT
+
         XSSFWorkbook workbook = new XSSFWorkbook();
         String sheetname = transferService.getFromViaInt(dep);
         XSSFSheet spreadsheet = workbook.createSheet(sheetname);
@@ -76,7 +71,15 @@ public class ExcelRepo {
             cell = row.createCell(1);
             cell.setCellValue(transferService.getFromViaInt(resultSet.getInt("to")));
             cell = row.createCell(2);
-            cell.setCellValue(resultSet.getDate("date"));
+
+
+            ///L 43 format??
+            log.info("todays date"+after.toString());
+            log.info("date"+resultSet.getDate("date"));
+            String dateSt = resultSet.getDate("date").toString();
+            cell.setCellValue(dateSt);
+
+
             cell = row.createCell(3);
             cell.setCellValue(resultSet.getString("item"));
             cell = row.createCell(4);

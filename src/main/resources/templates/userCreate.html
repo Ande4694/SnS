@@ -18,21 +18,21 @@
 </div>
 
 <div>
-    <form id="form" class="box" th:action="@{/create}" th:object="${movie}" method="Post">
+    <form id="form" class="box" th:action="@{/userCreate}" th:object="${movie}" method="Post">
         <h1>Create Request</h1>
-        <input type="date" id="start" name="trip-start" required value="2018-11-29" min="2018-11-29" class="button" th:field="${transfer.sendingDate}"/>
+        <input type="hidden" id="start" name="trip-start" required value="2018-11-29" min="2018-11-29" class="button" th:field="${transfer.sendingDate}"/>
         <input type="hidden" th:field="${transfer.from}">
 
 
-        <select name="Item" class="frontsize-l button">
+        <select name="Item" class="frontsize-l button" th:field="${transfer.item}">
             <option value="">Select your Item</option>
             <option value="Laks">Laks</option>
             <option value="Tuna">Tuna</option>
             <option value="Sea bass">Sea Bass</option>
         </select>
-        <input type="number" step="any" name ="Amount" required placeholder="Enter amount" class="frontsize-l button"/>
-        <input type="text" name ="Name" required placeholder="Enter name" class="frontsize-l"/>
-        <select name="Department" class="frontsize-l button">
+        <input type="number" step="any" name ="Amount" required placeholder="Enter amount" class="frontsize-l button" th:field="${transfer.amount}"/>
+        <input type="text" name ="Name" required placeholder="Enter name" class="frontsize-l" th:field="${transfer.senderName}"/>
+        <select name="Department" class="frontsize-l button" th:field="${transfer.to}">
             <option value="">Department to</option>
             <option value="Nansensgade">Nansensgade</option>
             <option value="Hellerup">Hellerup</option>
@@ -56,23 +56,14 @@
 <script>
     function Sure() {
         if (confirm("Are you sure?")) {
-            AreYouSure()
-        }
-    }
-    function AreYouSure() {
-        if (confirm("ARE YOU ABSOLUT SURE MATE?")) {
-            LastChance()
-        }
-    }
-    function LastChance() {
-        if (confirm("LAST CHANCE!")) {
             var form = document.getElementById('form');
             var submitButton = document.getElementById('submit-button');
             sendButton.addEventListener('click', send);
             function send(e) {
                 submitButton.click();
-            }
         }
+    }
+
     }
 </script>
 </body>
