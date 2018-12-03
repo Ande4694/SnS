@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head> <link rel="shortcut icon"href="https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/f1/6d/08/f16d0880-85fa-b16b-9b5c-f94b4ea173bd/AppIcon-1x_U007emarketing-85-220-4.png/246x0w.jpg"/>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="StyleAdmin.css">
+    <title>Admin Menu</title>
+    <link rel="stylesheet" type="text/css" href="../static/StyleAdmin.css" th:href="@{/StyleAdmin.css}">
 </head>
 <body bgcolor="#fafffd">
 
@@ -11,7 +11,7 @@
 
 <div class="sidenav">
     <a href="/adminMenu">Start</a>
-    <a href="/itemList">Item List</a>
+    <a class="active" href="/itemList">Item List</a>
     <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
@@ -34,29 +34,29 @@
         <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="200" height="75">
     </div>
 </div>
-
 <div class="main">
-    <h2>Edit Item</h2>
-    <p>maybe some excel or Database :)</p>
-</div>
+
 <div class="container">
-    <h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>
-    <form th:action="@{/excel}" th:object="${date}" method="Post">
-        <hr>
+    <h1>Update Item</h1>
+    <p>Updating item: </p>
+    <hr>
+    <form th:action="@{/updateItem}" th:object="${update}" method="Post">
 
 
+        <p>Enter name</p>
+        <input type="text" th:field="${update.name}" required/>
 
-        <p>Enter Date</p>
-        <input type="hidden" th:field= "${date.name}" >
+        <p>Enter unit price</p>
+        <input type="number" th:field="${update.unitPrice}" required/>
+
+        <p>Enter item code</p>
+        <input type="number" th:field="${update.itemCode}" required/>
 
 
-
-
-        <input class="registerbtn" type="submit" value="send"/>
-
-
-        <hr>
+        <input class="registerbtn" type="submit" value="Submit"/>
     </form>
+    <hr>
+</div>
 </div>
 </body>
 </html>
