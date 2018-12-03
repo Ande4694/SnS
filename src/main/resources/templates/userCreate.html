@@ -3,56 +3,66 @@
 <head> <link rel="shortcut icon"href="https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/f1/6d/08/f16d0880-85fa-b16b-9b5c-f94b4ea173bd/AppIcon-1x_U007emarketing-85-220-4.png/246x0w.jpg"/>
     <meta charset="UTF-8">
     <title>UserCreate</title>
-    <link rel="stylesheet" type="text/css" href="../static/styleMain.css" th:href="@{/styleMain.css}">
+    <link rel="stylesheet" type="text/css" href="../static/StyleMain.css" th:href="@{/StyleMain.css}">
 </head>
 <body>
 
 
 
-<div class="hero-image"></div>
+<div class="hero-image">
+    <div class="hero-text">
+        <div>
+            <img class = "logo-topmid2" src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="150" width="300">
+            <form id="form" class="box2" th:action="@{/userCreate}" th:object="${movie}" method="Post">
+                <h1>Create Request</h1>
+                <input type="hidden" id="start" name="trip-start" required value="2018-11-29" min="2018-11-29" class="button" th:field="${transfer.sendingDate}"/>
+                <input type="hidden" th:field="${transfer.from}">
 
-<div class="tm-signOut">
+
+                <select type="text" name="Item" class="frontsize-l button" th:field="${transfer.item}">
+                    <option value="">Select your Item</option>
+                    <option value="Laks">Laks</option>
+                    <option value="Tuna">Tuna</option>
+                    <option value="Sea bass">Sea Bass</option>
+                </select>
+                <input type="number" step="any" name ="Amount" required placeholder="Enter amount" class="frontsize-l button" th:field="${transfer.amount}"/>
+                <input type="text" name ="Name" required placeholder="Enter name" class="frontsize-l" th:field="${transfer.senderName}"/>
+                <select type="text" name="Department" class="frontsize-l button" th:field="${transfer.to}">
+                    <option value="">Department to</option>
+                    <option value="Nansensgade">Nansensgade</option>
+                    <option value="Hellerup">Hellerup</option>
+                    <option value="Østerbro">Østerbro</option>
+                    <option value="Istedgade">Istedgade</option>
+                    <option value="Gammel Kongevej">Gammel Kongevej</option>
+                    <option value="Valby">Valby</option>
+                    <option value="Lyngby">Lyngby</option>
+                    <option value="Tivoli Hotel">Tivoli Hotel</option>
+                    <option value="Rungsted">Rungsted</option>
+                    <option value="Borgergade">Borgergade</option>
+                    <option value="Krudthuset">Krudthuset</option>
+                    <option value="Tivoli Garden">Tivoli Garden</option>
+                    <option value="Baghuset">Baghuset</option>
+
+                </select>
+                <input onclick="Sure()" type="submit" name ="Submit" value="Submit" class="frontsize-l" id="submit-button"/>
+
+            </form>
+        </div>
+
+    </div>
     <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
+        <input class="Logoutbutton RightCornor" type="submit" value="Sign Out"/>
     </form>
-</div>
 
-<div>
-    <form id="form" class="box" th:action="@{/userCreate}" th:object="${movie}" method="Post">
-        <h1>Create Request</h1>
-        <input type="hidden" id="start" name="trip-start" required value="2018-11-29" min="2018-11-29" class="button" th:field="${transfer.sendingDate}"/>
-        <input type="hidden" th:field="${transfer.from}">
+    <div class="logo-LeftCorner">
+        <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="300" height="100">
+    </div>
 
 
-        <select name="Item" class="frontsize-l button" th:field="${transfer.item}">
-            <option value="">Select your Item</option>
-            <option value="Laks">Laks</option>
-            <option value="Tuna">Tuna</option>
-            <option value="Sea bass">Sea Bass</option>
-        </select>
-        <input type="number" step="any" name ="Amount" required placeholder="Enter amount" class="frontsize-l button" th:field="${transfer.amount}"/>
-        <input type="text" name ="Name" required placeholder="Enter name" class="frontsize-l" th:field="${transfer.senderName}"/>
-        <select name="Department" class="frontsize-l button" th:field="${transfer.to}">
-            <option value="">Department to</option>
-            <option value="Nansensgade">Nansensgade</option>
-            <option value="Hellerup">Hellerup</option>
-            <option value="Østerbro">Østerbro</option>
-            <option value="Istedgade">Istedgade</option>
-            <option value="Gammel Kongevej">Gammel Kongevej</option>
-            <option value="Valby">Valby</option>
-            <option value="Lyngby">Lyngby</option>
-            <option value="Tivoli Hotel">Tivoli Hotel</option>
-            <option value="Rungsted">Rungsted</option>
-            <option value="Borgergade">Borgergade</option>
-            <option value="Krudthuset">Krudthuset</option>
-            <option value="Tivoli Garden">Tivoli Garden</option>
-            <option value="Baghuset">Baghuset</option>
 
-        </select>
-        <input onclick="Sure()" type="submit" name ="Submit" value="Submit" class="frontsize-l" id="submit-button"/>
 
-    </form>
-</div>
+
+
 <script>
     function Sure() {
         if (confirm("Are you sure?")) {
