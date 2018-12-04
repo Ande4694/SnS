@@ -168,11 +168,11 @@ span.psw {
     }
 }
 .box{
-    width: 300px;
-    padding: 40px;
+    width: 313px;
+    padding: 70px;
     position: absolute;
-    top: 23%;
-    left: 36%;
+    top: 14%;
+    left: 32%;
     background: #191919;
     text-align: center;
     border-radius: 50px;
@@ -323,3 +323,18 @@ span.psw {
     right: 11px;
     bottom: 847px;
 }
+ .avatar {
+     width: 100px;
+     height: 100px;
+     position: absolute;
+     left: calc(50% - 50%);
+     top: -50px;
+ }
+
+ img.avatar {
+     width: 40%;
+     border-radius: 50%;
+     position: absolute;
+     left: 150px;
+     top: -43px;
+ }
