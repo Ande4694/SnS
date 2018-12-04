@@ -1,4 +1,4 @@
-package snsinternaltransfer.sns.repo.exelRepo;
+package snsinternaltransfer.sns.utility;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -86,7 +86,6 @@ public class ExcelUtils {
         }
     }
 
-    //retrieve field names from a POJO class
     private static List<String> getFieldNamesForClass(Class<?> clazz) throws Exception {
         List<String> fieldNames = new ArrayList<String>();
         Field[] fields = clazz.getDeclaredFields();
@@ -96,7 +95,6 @@ public class ExcelUtils {
         return fieldNames;
     }
 
-    //capitalize the first letter of the field name for retriving value of the field later
     private static String capitalize(String s) {
         if (s.length() == 0)
             return s;

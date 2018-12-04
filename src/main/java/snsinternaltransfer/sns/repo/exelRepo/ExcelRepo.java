@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import snsinternaltransfer.sns.controller.MainController;
 import snsinternaltransfer.sns.models.Transfer;
 import snsinternaltransfer.sns.repo.TransferRepo;
+import snsinternaltransfer.sns.utility.ExcelUtils;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -87,19 +88,19 @@ public class ExcelRepo {
         List<Transfer> bag = getAllTransfersFromCertainDep(13);
 
 
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Nansensgade", nan);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Hellerup", hel);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Østerbro", øst);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Istedgade", ist);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Gammel Kongevej", glk);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Valby", val);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Lyngby", lyn);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Tivoli Hotel", hot);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Rungsted", run);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Borgergade", bor);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Krudthuset", kru);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Tivoli Gardens", gar);
-        excelUtils.writeToExcelInMultiSheets("TransferSheet.xlsx", "Baghuset", bag);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Nansensgade", nan);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Hellerup", hel);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Østerbro", øst);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Istedgade", ist);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Gammel Kongevej", glk);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Valby", val);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Lyngby", lyn);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Tivoli Hotel", hot);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Rungsted", run);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Borgergade", bor);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Krudthuset", kru);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Tivoli Gardens", gar);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Baghuset", bag);
     }
 
 
