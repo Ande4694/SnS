@@ -14,15 +14,6 @@
 
     <a onclick="document.getElementById('id01').style.display='block'" class = "button2 button2Position" >Login</a>
 
-    <div th:if="${#request.getParameter('error') == 'true'}"
-         style="color:red;margin:10px 0px;">
-        Login Failed!!!<br />
-        Reason :
-        <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
-              th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
-                Static summary
-         </span>
-    </div>
 </div>
     <div id="id01" class="modal">
         <form  class="box animate" th:action="@{/j_spring_security_check}" method='POST'>
@@ -32,7 +23,15 @@
             <button type="submit" class="frontsize-l button" >Login</button>
         </form>
     </div>
-
+    <div th:if="${#request.getParameter('error') == 'true'}"
+         style="color:red;margin: 0px 0px;position: absolute;left: 441px;bottom: 194px;">
+        Login Failed!!!<br />
+        Reason :
+        <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+              th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
+    </div>
 </div>
 </div>
 <div class="logo-LeftCorner"><img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="300" height="100"></div>
