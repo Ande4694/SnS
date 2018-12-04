@@ -99,7 +99,7 @@ body {
 }
 
 .logo-RightCorner {
-    position: fixed;
+    position: absolute;
     right: -7px;
     top: 5PX;
 }

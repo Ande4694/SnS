@@ -4,14 +4,8 @@
     <meta charset="UTF-8">
     <title>Admin Menu</title>
     <link rel="stylesheet" href="StyleAdmin.css">
-
-<style>
-    .hej{
-        color: #fafffd;
-    }
-
-</style>
 </head>
+
 <body bgcolor="#fafffd">
 
 <div class = "logo-RightCorner"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="100" width="184"></div>
@@ -53,7 +47,7 @@
             <th style="width:25%;" onclick="sortTableNumber(0)">Transfer Id</th>
             <th style="width:25%;" onclick="sortTable(1)">Sending department</th>
             <th style="width:25%;" onclick="sortTable(2)">Receiving department</th>
-            <th style="width:25%;" onclick="sortTableNumber(3)">Date of transfer</th>
+            <th style="width:25%;" onclick="sortTable(3)">Date of transfer</th>
             <th style="width:25%;" onclick="sortTable(4)">Item name</th>
             <th style="width:25%;" onclick="sortTableNumber(5)">Total price</th>
             <th style="width:25%;" onclick="sortTableNumber(6)">Item code</th>
@@ -163,9 +157,11 @@
     }
 
     function sortTableNumber(m) {
-        var table, rows, switching, i, x, y, shouldSwitch;
+        var table, rows, switching, i, x, y, shouldSwitch, dir2, switchcount2 = 0;
         table = document.getElementById("myTable");
         switching = true;
+        //Set the sorting direction to ascending:
+        dir2 = "123";
         /*Make a loop that will continue until
         no switching has been done:*/
         while (switching) {
@@ -182,17 +178,35 @@
                 x = rows[i].getElementsByTagName("TD")[m];
                 y = rows[i + 1].getElementsByTagName("TD")[m];
                 //check if the two rows should switch place:
-                if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                    //if so, mark as a switch and break the loop:
-                    shouldSwitch = true;
-                    break;
+                if (dir2 == "123") {
+                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir2 == "321"){
+                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
+
             }
             if (shouldSwitch) {
                 /*If a switch has been marked, make the switch
                 and mark that a switch has been done:*/
                 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                 switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount2 ++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount2 == 0 && dir2 == "123") {
+                    dir2 = "321";
+                    switching = true;
+                }
             }
         }
     }
