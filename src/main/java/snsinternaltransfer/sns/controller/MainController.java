@@ -11,13 +11,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
-import snsinternaltransfer.sns.repo.excelRepo.ExcelRepo;
+import snsinternaltransfer.sns.repo.exelRepo.ExcelRepo;
 import snsinternaltransfer.sns.repo.login.AppUserDAO;
 import snsinternaltransfer.sns.service.ItemService;
 import snsinternaltransfer.sns.service.TransferService;
@@ -293,11 +291,11 @@ public class MainController {
     }
 
     @PostMapping("/excel")
-    public String excel(@ModelAttribute String s) throws IOException, ClassNotFoundException, SQLException {
+    public String excel(@ModelAttribute String s)  {
 
         log.info("someone is writing to excel with all info from after: ");
 
-        excelRepo.writeAll(s);
+        excelRepo.writeAllToExcel(s);
 
         return "redirect:adminMenu";
     }
