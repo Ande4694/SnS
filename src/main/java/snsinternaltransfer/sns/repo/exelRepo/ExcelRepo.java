@@ -40,7 +40,7 @@ public class ExcelRepo {
 
         File f = new File("TransferSheet"+transferService.getFromViaInt(dep)+".xlsx");
         Statement statement = connect.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date >"+ after.toString());
+        ResultSet resultSet = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date > "+ "'"+after.toString()+"'");
         ///// select * from sns.sendings where `from`= 5 and date > '2018-11-01'   giver det rigtige, men linien over giver ALT
 
         XSSFWorkbook workbook = new XSSFWorkbook();

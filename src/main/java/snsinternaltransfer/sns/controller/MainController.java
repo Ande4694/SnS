@@ -52,31 +52,19 @@ public class MainController {
 
     }
 
-    @RequestMapping(value = "/adminPage", method = RequestMethod.GET)
-    public String adminPage(Model model, Principal principal) {
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("userInfo", userInfo);
-
-        return "adminPage";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping("/login")
     public String loginPage(Model model) {
 
         return "login";
     }
 
-    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
+    @GetMapping("/logoutSuccessful")
     public String logoutSuccessfulPage(Model model) {
         model.addAttribute("title", "Logout");
         return "logoutSuccessfulPage";
     }
 
-
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    @GetMapping("/403")
     public String accessDenied(Model model, Principal principal) {
 
         if (principal != null) {
