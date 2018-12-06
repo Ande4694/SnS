@@ -3,13 +3,15 @@ package snsinternaltransfer.sns.controller;
 
 
 
-import java.io.IOException;
+import java.io.*;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +47,7 @@ public class MainController {
 
     private final Logger log = Logger.getLogger(MainController.class.getName());
     private int tempId;
-    private static final String DIRECTORY = "C:/temp";
+    private static final String DIRECTORY = System.getProperty("java.io.tmpdir");
     private static final String DEFAULT_FILE_NAME = "TransferSheet.xlsx";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 
@@ -68,8 +70,6 @@ public class MainController {
             @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
 
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-        System.out.println("fileName: " + fileName);
-        System.out.println("mediaType: " + mediaType);
 
         Path path = Paths.get(DIRECTORY + "/" + DEFAULT_FILE_NAME);
         byte[] data = Files.readAllBytes(path);
@@ -83,6 +83,61 @@ public class MainController {
                 // Content-Lengh
                 .contentLength(data.length) //
                 .body(resource);
+
+
+    }
+
+    @RequestMapping("/download1")
+    public ResponseEntity<InputStreamResource> downloadFile1(
+            @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
+
+        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
+        System.out.println("fileName: " + fileName);
+        System.out.println("mediaType: " + mediaType);
+
+        File file = new File(DIRECTORY + "/" + fileName);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+        return ResponseEntity.ok()
+                // Content-Disposition
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+                // Content-Type
+                .contentType(mediaType)
+                // Contet-Length
+                .contentLength(file.length()) //
+                .body(resource);
+    }
+
+    @GetMapping("/download3")
+    public void downloadFile3(HttpServletResponse resonse,
+                              @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
+
+        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
+        System.out.println("fileName: " + fileName);
+        System.out.println("mediaType: " + mediaType);
+
+        File file = new File(DIRECTORY + "/" + fileName);
+
+        // Content-Type
+        // application/pdf
+        resonse.setContentType(mediaType.getType());
+
+        // Content-Disposition
+        resonse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName());
+
+        // Content-Length
+        resonse.setContentLength((int) file.length());
+
+        BufferedInputStream inStream = new BufferedInputStream(new FileInputStream(file));
+        BufferedOutputStream outStream = new BufferedOutputStream(resonse.getOutputStream());
+
+        byte[] buffer = new byte[1024];
+        int bytesRead = 0;
+        while ((bytesRead = inStream.read(buffer)) != -1) {
+            outStream.write(buffer, 0, bytesRead);
+        }
+        outStream.flush();
+        inStream.close();
     }
 
     @GetMapping("/")
@@ -143,6 +198,7 @@ public class MainController {
         transferService.sendItem(transfer);
 
 
+
         log.info("from:" + transfer.getFrom());
         log.info("to:" + transfer.getTo());
         log.info("date:" + transfer.getSendingDate());
@@ -159,6 +215,19 @@ public class MainController {
         model.addAttribute("sendings", transferService.getAllTransfers());
 
         // mangler også en fin lille search java script Done
+
+
+
+        ///// DELETE FILE?????
+
+
+
+
+
+
+
+
+
         model.addAttribute("date", new Item());
 
         log.info("adminMenu call");
@@ -343,7 +412,10 @@ public class MainController {
 
         excelRepo.writeAllToExcel(s);
 
+        log.info("dir : " + System.getProperty("java.io.tmpdir"));
         return "redirect:download";
+        //return "redirect:download1";
+        //return "redirect:download3";
     }
 
 
