@@ -1,127 +1,107 @@
-package snsinternaltransfer.sns.repo.excelRepo;
+package snsinternaltransfer.sns.repo.exelRepo;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import snsinternaltransfer.sns.controller.MainController;
-import snsinternaltransfer.sns.service.TransferService;
+import snsinternaltransfer.sns.models.Transfer;
+import snsinternaltransfer.sns.repo.TransferRepo;
+import snsinternaltransfer.sns.utility.ExcelUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Repository
 public class ExcelRepo {
 
     @Autowired
-    TransferService transferService;
+    ExcelUtils excelUtils;
+
+    @Autowired
+    JdbcTemplate template;
+
+    @Autowired
+    TransferRepo transferRepo;
 
     private final Logger log = Logger.getLogger(MainController.class.getName());
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
+    public List<Transfer> getAllTransfersFromCertainDep(int dep){
+        LocalDate after = YearMonth.now().atDay( 1 );
+        String sql ="select * from sns.sendings where `from`= "+dep+" and date > "+ "'"+after.toString()+"'";
+
+        return this.template.query(sql, new ResultSetExtractor<List<Transfer>>() {
+            @Override
+            public List<Transfer> extractData(ResultSet rs) throws SQLException, DataAccessException {
+                int id, from, to, itemCode;
+                String item, senderName;
+                double totalPrice, amount;
+                Date sendingDate;
 
 
-    public void write(int dep, LocalDate after)throws SQLException, ClassNotFoundException, IOException{
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connect = DriverManager.getConnection(
-                "jdbc:mysql://snsgrp5k.ctjynaaxvgot.eu-central-1.rds.amazonaws.com:3306/sns" ,
-                "snsgrp5k" ,
-                "snsgrp5k"
-        );
+                List<Transfer> allTransfers = new ArrayList<>();
 
-        File f = new File("TransferSheet"+transferService.getFromViaInt(dep)+".xlsx");
-        Statement statement = connect.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from sns.sendings where `from`= "+dep+" and date > "+ "'"+after.toString()+"'");
-        ///// select * from sns.sendings where `from`= 5 and date > '2018-11-01'   giver det rigtige, men linien over giver ALT
-
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        String sheetname = transferService.getFromViaInt(dep);
-        XSSFSheet spreadsheet = workbook.createSheet(sheetname);
-
-        XSSFRow row = spreadsheet.createRow(1);
-        XSSFCell cell;
-        cell = row.createCell(1);
-        cell.setCellValue("TO");
-        cell = row.createCell(2);
-        cell.setCellValue("DATE");
-        cell = row.createCell(3);
-        cell.setCellValue("ITEM");
-        cell = row.createCell(4);
-        cell.setCellValue("AMOUNT");
-        cell = row.createCell(5);
-        cell.setCellValue("SENDERS NAME");
-        cell = row.createCell(6);
-        cell.setCellValue("PRICE");
-        cell = row.createCell(7);
-        cell.setCellValue("ITEM CODE");
-        int i = 2;
+                while (rs.next()) {
+                    id = rs.getInt("idSendings");
+                    from = rs.getInt("from");
+                    to = rs.getInt("to");
+                    sendingDate = rs.getDate("date");
+                    item = rs.getString("item");
+                    totalPrice = rs.getDouble("totalPrice");
+                    itemCode = rs.getInt("itemCode");
+                    senderName = rs.getString("senderName");
+                    amount = rs.getDouble("amount");
 
 
-        while(resultSet.next()) {
-            row = spreadsheet.createRow(i);
-            cell = row.createCell(1);
-            cell.setCellValue(transferService.getFromViaInt(resultSet.getInt("to")));
-            cell = row.createCell(2);
+                    // convert fra int til string i to / from
+                    String fromDep = transferRepo.getToFromViaInt(from);
+                    String toDep = transferRepo.getToFromViaInt(to);
 
 
-            ///L 43 format??
-            log.info("todays date"+after.toString());
-            log.info("date"+resultSet.getDate("date"));
-            String dateSt = resultSet.getDate("date").toString();
-            cell.setCellValue(dateSt);
-
-
-            cell = row.createCell(3);
-            cell.setCellValue(resultSet.getString("item"));
-            cell = row.createCell(4);
-            cell.setCellValue(resultSet.getDouble("amount"));
-            cell = row.createCell(5);
-            cell.setCellValue(resultSet.getString("senderName"));
-            cell = row.createCell(6);
-            cell.setCellValue(resultSet.getDouble("totalPrice"));
-            cell = row.createCell(7);
-            cell.setCellValue(resultSet.getInt("itemCode"));
-            i++;
-        }
-        FileOutputStream out = new FileOutputStream(f);
-        workbook.write(out);
-        out.close();
-        log.info("written: "+sheetname);
-
+                    allTransfers.add(new Transfer(id, fromDep, toDep, sendingDate, item, totalPrice, itemCode, senderName, amount));
+                }
+                return allTransfers;
+            }
+        });
     }
 
-    public void writeAll(String s)throws SQLException, ClassNotFoundException, IOException{
+    public void writeAllToExcel(String s){
+
+        List<Transfer> nan = getAllTransfersFromCertainDep(1);
+        List<Transfer> hel = getAllTransfersFromCertainDep(2);
+        List<Transfer> øst = getAllTransfersFromCertainDep(3);
+        List<Transfer> ist = getAllTransfersFromCertainDep(4);
+        List<Transfer> glk = getAllTransfersFromCertainDep(5);
+        List<Transfer> val = getAllTransfersFromCertainDep(6);
+        List<Transfer> lyn = getAllTransfersFromCertainDep(7);
+        List<Transfer> hot = getAllTransfersFromCertainDep(8);
+        List<Transfer> run = getAllTransfersFromCertainDep(9);
+        List<Transfer> bor = getAllTransfersFromCertainDep(10);
+        List<Transfer> kru = getAllTransfersFromCertainDep(11);
+        List<Transfer> gar = getAllTransfersFromCertainDep(12);
+        List<Transfer> bag = getAllTransfersFromCertainDep(13);
 
 
-
-        LocalDate date = YearMonth.now().atDay( 1 );
-
-
-        write(1, date);
-        write(2, date);
-        write(3, date);
-        write(4, date);
-        write(5, date);
-        write(6, date);
-        write(7, date);
-        write(8, date);
-        write(9, date);
-        write(10, date);
-        write(11, date);
-        write(12, date);
-        write(13, date);
-
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Nansensgade", nan);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Hellerup", hel);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Østerbro", øst);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Istedgade", ist);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Gammel Kongevej", glk);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Valby", val);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Lyngby", lyn);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Tivoli Hotel", hot);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Rungsted", run);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Borgergade", bor);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Krudthuset", kru);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Tivoli Gardens", gar);
+        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Baghuset", bag);
     }
-
 
 
 }

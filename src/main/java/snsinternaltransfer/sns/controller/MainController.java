@@ -4,6 +4,22 @@ package snsinternaltransfer.sns.controller;
 
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 
 
@@ -11,19 +27,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
-import snsinternaltransfer.sns.repo.excelRepo.ExcelRepo;
+import snsinternaltransfer.sns.repo.exelRepo.ExcelRepo;
+import snsinternaltransfer.sns.utility.ExcelUtils;
 import snsinternaltransfer.sns.repo.login.AppUserDAO;
 import snsinternaltransfer.sns.service.ItemService;
 import snsinternaltransfer.sns.service.TransferService;
+import snsinternaltransfer.sns.utility.MediaTypeUtils;
 import snsinternaltransfer.sns.utility.WebUtils;
 
-import java.sql.SQLException;
 import java.util.logging.Logger;
 
 @org.springframework.stereotype.Controller
@@ -31,6 +45,8 @@ public class MainController {
 
     private final Logger log = Logger.getLogger(MainController.class.getName());
     private int tempId;
+    private static final String DIRECTORY = "C:/temp";
+    private static final String DEFAULT_FILE_NAME = "TransferSheet.xlsx";
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 
     @Autowired
@@ -41,6 +57,33 @@ public class MainController {
     ItemService itemService;
     @Autowired
     ExcelRepo excelRepo;
+    @Autowired
+    ExcelUtils excelUtils;
+    @Autowired
+    ServletContext servletContext;
+
+
+    @GetMapping("/download")
+    public ResponseEntity<ByteArrayResource> downloadFile(
+            @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
+
+        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
+        System.out.println("fileName: " + fileName);
+        System.out.println("mediaType: " + mediaType);
+
+        Path path = Paths.get(DIRECTORY + "/" + DEFAULT_FILE_NAME);
+        byte[] data = Files.readAllBytes(path);
+        ByteArrayResource resource = new ByteArrayResource(data);
+
+        return ResponseEntity.ok()
+                // Content-Disposition
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
+                // Content-Type
+                .contentType(mediaType) //
+                // Content-Lengh
+                .contentLength(data.length) //
+                .body(resource);
+    }
 
     @GetMapping("/")
     public String index() {
@@ -292,22 +335,17 @@ public class MainController {
         return "excel";
     }
 
+
     @PostMapping("/excel")
-    public String excel(@ModelAttribute String s) throws IOException, ClassNotFoundException, SQLException {
+    public String excel(@ModelAttribute String s)  {
 
         log.info("someone is writing to excel with all info from after: ");
 
-        excelRepo.writeAll(s);
+        excelRepo.writeAllToExcel(s);
 
-        return "redirect:adminMenu";
+        return "redirect:download";
     }
 
-/*    @GetMapping("/error")
-    public String error(Model model){
-        log.info("Someone got a error");
-
-        return "error";
-    }*/
 
 
 }
