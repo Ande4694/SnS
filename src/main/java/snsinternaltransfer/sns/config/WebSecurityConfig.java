@@ -57,9 +57,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/itemList").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/updateItem/{updated}").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/updateSending").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/updateSending/{updated}").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/deleteSending").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/deleteItem").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/download").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/download1").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/download3").access("hasRole('ROLE_ADMIN')");
 
 
         // When the user has logged in as XX.

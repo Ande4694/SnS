@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -27,7 +27,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
         boolean admin = false;
 
-        logger.info("AT onAuthenticationSuccess(...) function!");
+        log.info("AT onAuthenticationSuccess(...) function!");
 
         for (GrantedAuthority auth : authentication.getAuthorities()) {
             if ("ROLE_ADMIN".equals(auth.getAuthority())){
