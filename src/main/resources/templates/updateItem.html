@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>Admin Menu</title>
     <link rel="stylesheet" type="text/css" href="../static/StyleAdmin.css" th:href="@{/StyleAdmin.css}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body bgcolor="#fafffd">
 
@@ -24,15 +22,13 @@
 
         <form th:action="@{/excel}" th:object="${date}" method="Post">
             <input type="hidden" th:field= "${date.name}" >
-            <button class="btn" name="Excel" value="Excel"><i class="fa fa-download"></i> Excel-file </button>
-        </form><br/>
+            <input class="Excelbutton" type="submit" value="Excel"/>
+        </form>
 
 
 
         <form th:action="@{/logout}" method="post">
-
-            <button class="btn2" name="Sign Out" value="Sign Out"><i class="fa fa-sign-out"></i> Sign Out </button>
-
+            <input class="Logoutbutton" type="submit" value="Sign Out"/>
         </form>
 
         <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="200" height="75">
@@ -48,7 +44,7 @@
 
 
         <p>Enter name</p>
-        <input type="text" th:placeholder="#{Item.name}" th:field="${update.name}" required/>
+        <input type="text" th:field="${update.name}" required/>
 
         <p>Enter unit price</p>
         <input type="number" th:field="${update.unitPrice}" required/>
