@@ -88,19 +88,19 @@ public class ExcelRepo {
         List<Transfer> bag = getAllTransfersFromCertainDep(13);
 
 
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Nansensgade", nan);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Hellerup", hel);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Østerbro", øst);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Istedgade", ist);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Gammel Kongevej", glk);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Valby", val);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Lyngby", lyn);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Tivoli Hotel", hot);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Rungsted", run);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Borgergade", bor);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Krudthuset", kru);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Tivoli Gardens", gar);
-        excelUtils.writeToExcelInMultiSheets("C:/temp/TransferSheet.xlsx", "Baghuset", bag);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Nansensgade", nan);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Hellerup", hel);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Østerbro", øst);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Istedgade", ist);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Gammel Kongevej", glk);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Valby", val);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Lyngby", lyn);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Tivoli Hotel", hot);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Rungsted", run);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Borgergade", bor);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Krudthuset", kru);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Tivoli Gardens", gar);
+        excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Baghuset", bag);
     }
 
 
