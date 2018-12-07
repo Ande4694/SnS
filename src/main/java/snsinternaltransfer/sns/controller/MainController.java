@@ -75,18 +75,15 @@ public class MainController {
 
         File a = new File(DIRECTORY + "/" + DEFAULT_FILE_NAME);
 
-        if (a.exists()) {
 
-            return ResponseEntity.ok()
-                    // Content-Disposition
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
-                    // Content-Type
-                    .contentType(mediaType) //
-                    // Content-Lengh
-                    .contentLength(data.length) //
-                    .body(resource);
-        }
-
+        return ResponseEntity.ok()
+                // Content-Disposition
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
+                // Content-Type
+                .contentType(mediaType) //
+                // Content-Lengh
+                .contentLength(data.length) //
+                .body(resource);
 
     }
 
