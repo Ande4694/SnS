@@ -73,14 +73,19 @@ public class MainController {
         byte[] data = Files.readAllBytes(path);
         ByteArrayResource resource = new ByteArrayResource(data);
 
-        return ResponseEntity.ok()
-                // Content-Disposition
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
-                // Content-Type
-                .contentType(mediaType) //
-                // Content-Lengh
-                .contentLength(data.length) //
-                .body(resource);
+        File a = new File(DIRECTORY + "/" + DEFAULT_FILE_NAME);
+
+        if (a.exists()) {
+
+            return ResponseEntity.ok()
+                    // Content-Disposition
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
+                    // Content-Type
+                    .contentType(mediaType) //
+                    // Content-Lengh
+                    .contentLength(data.length) //
+                    .body(resource);
+        }
 
 
     }
@@ -430,7 +435,11 @@ public class MainController {
 
 
         log.info("asd"+ System.getProperty("java.io."));
-        return "redirect:download";
+            File a = new File(DIRECTORY + "/" + DEFAULT_FILE_NAME);
+            if (a.exists()){
+                return "redirect:download";
+            } else return "redirect:adminMenu";
+
         //return "redirect:download1";
         //return "redirect:download3";
     }
