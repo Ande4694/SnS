@@ -60,8 +60,6 @@ public class MainController {
     @Autowired
     ExcelRepo excelRepo;
     @Autowired
-    ExcelUtils excelUtils;
-    @Autowired
     ServletContext servletContext;
 
 
@@ -264,7 +262,7 @@ public class MainController {
 
         if (transferService.selectTranfer(idForUpdate) != null) {
 
-            return "/updateSending";
+            return "updateSending";
 
         }
 
@@ -345,7 +343,7 @@ public class MainController {
 
         if (itemService.selectItem(idForUpdate) != null) {
 
-            return "/updateItem";
+            return "updateItem";
 
         }
 
@@ -413,6 +411,25 @@ public class MainController {
         excelRepo.writeAllToExcel(s);
 
         log.info("dir : " + System.getProperty("java.io.tmpdir"));
+
+
+        File curDir = new File(System.getProperty("java.io.tmpdir"));
+
+
+            File[] filesList = curDir.listFiles();
+            for(File f : filesList){
+
+                if(f.isFile()){
+
+
+                    log.info("ba: "+f.getName());
+                    log.info("ba: "+f.getAbsolutePath());
+                }
+            }
+
+
+
+        log.info("asd"+ System.getProperty("java.io."));
         return "redirect:download";
         //return "redirect:download1";
         //return "redirect:download3";
