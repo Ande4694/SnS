@@ -320,8 +320,8 @@ span.psw {
 
 .RightCornor {
     position: absolute;
-    right: 11px;
-    bottom: 847px;
+    right: 82px;
+    bottom: 833px;
 }
  .avatar {
      width: 100px;
@@ -338,3 +338,18 @@ span.psw {
      left: 150px;
      top: -43px;
  }
+
+.btn2 {
+    background-color: #d30100;
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 40px;
+}
+
+/* Darker background on mouse-over */
+.btn2:hover {
+    background-color: #a41f00;
+}
