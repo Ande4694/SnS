@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Admin Menu</title>
     <link rel="stylesheet" type="text/css" href="../static/StyleAdmin.css" th:href="@{/StyleAdmin.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body bgcolor="#fafffd">
 
@@ -12,23 +14,18 @@
 <div class="sidenav">
     <a href="/adminMenu">Start</a>
     <a class="active" href="/itemList">Item List</a>
-    <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
 
-
-        <!--<h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>-->
-
-
         <form th:action="@{/excel}" th:object="${date}" method="Post">
             <input type="hidden" th:field= "${date.name}" >
-            <input class="Excelbutton" type="submit" value="Excel"/>
-        </form>
-
-
+            <button class="btn" name="Excel" value="Excel"><i class="fa fa-download"></i> Excel-file </button>
+        </form><br/>
 
         <form th:action="@{/logout}" method="post">
-            <input class="Logoutbutton" type="submit" value="Sign Out"/>
+
+            <button class="btn2" name="Sign Out" value="Sign Out"><i class="fa fa-sign-out"></i> Sign Out </button>
+
         </form>
 
         <img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="200" height="75">

@@ -144,8 +144,8 @@ span.psw {
 }
 .logo-topmid2 {
     position: absolute;
-    right: 10px;
-    top: -130px;
+    right: 7px;
+    top: -73px;
 }
 /* Add Zoom Animation */
 .animate {
@@ -319,9 +319,9 @@ span.psw {
 }
 
 .RightCornor {
-    position: absolute;
-    right: 82px;
-    bottom: 833px;
+    position: fixed;
+    right: 444px;
+    bottom: 8px;
 }
  .avatar {
      width: 100px;

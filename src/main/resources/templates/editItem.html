@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="StyleAdmin.css">
 </head>
+
 <body bgcolor="#fafffd">
 
 <div class = "logo-RightCorner"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="100" width="184"></div>
@@ -12,13 +13,8 @@
 <div class="sidenav">
     <a href="/adminMenu">Start</a>
     <a href="/itemList">Item List</a>
-    <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
-
-
-        <!--<h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>-->
-
 
         <form th:action="@{/excel}" th:object="${date}" method="Post">
             <input type="hidden" th:field= "${date.name}" >
@@ -45,16 +41,10 @@
     <form th:action="@{/excel}" th:object="${date}" method="Post">
         <hr>
 
-
-
         <p>Enter Date</p>
         <input type="hidden" th:field= "${date.name}" >
 
-
-
-
         <input class="registerbtn" type="submit" value="send"/>
-
 
         <hr>
     </form>

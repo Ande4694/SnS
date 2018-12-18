@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body bgcolor="#fafffd">
 
 <div class = "logo-RightCorner"><img src="https://takeaway.sticksnsushi.com/images/logo.svg?lc2867" height="100" width="184"></div>
@@ -14,20 +15,14 @@
 <div class="sidenav">
     <a href="/adminMenu">Start</a>
     <a class="active" href="/itemList">Item List</a>
-    <a href="/createItem">Add new Item</a>
 
     <div class="logo-LeftCorner">
-
-
-        <!--<h1>Create Request [[${#httpServletRequest.remoteUser}]]</h1>-->
 
 
         <form th:action="@{/excel}" th:object="${date}" method="Post">
             <input type="hidden" th:field= "${date.name}" >
             <button class="btn" name="Excel" value="Excel"><i class="fa fa-download"></i> Excel-file </button>
         </form><br/>
-
-
 
         <form th:action="@{/logout}" method="post">
 
@@ -41,14 +36,8 @@
 
 <div class="main">
     <h2>Item List</h2>
-    <p>List with Item, java/Script Search</p>
 
-    <div class="search-container">
-        <form class="example" action="/searchItem/" method="get" style="max-width:1000px">
-            <input type="text" placeholder="Search.." >
-            <button type="submit" value="Search"><span>Search by Item</span><i class="fa fa-search"></i></button>
-        </form>
-    </div>
+
 
     <input type="text" id="myInput" placeholder="Search in table" >
 
@@ -94,13 +83,10 @@
     </div>
 </div>
 
-
-
 <a href="/createItem">
     <button class="button"><span>Add new item</span></button>
 </a>
 </div>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
