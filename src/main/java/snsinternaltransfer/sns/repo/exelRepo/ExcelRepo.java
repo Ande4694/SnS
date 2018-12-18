@@ -30,7 +30,6 @@ public class ExcelRepo {
     @Autowired
     TransferRepo transferRepo;
 
-    private final Logger log = Logger.getLogger(MainController.class.getName());
 
     public List<Transfer> getAllTransfersFromCertainDep(int dep){
         LocalDate after = YearMonth.now().atDay( 1 );
@@ -73,6 +72,7 @@ public class ExcelRepo {
 
     public void writeAllToExcel(String s){
 
+        // henter lister fra databasen "where from = ?"
         List<Transfer> nan = getAllTransfersFromCertainDep(1);
         List<Transfer> hel = getAllTransfersFromCertainDep(2);
         List<Transfer> øst = getAllTransfersFromCertainDep(3);
@@ -88,6 +88,7 @@ public class ExcelRepo {
         List<Transfer> bag = getAllTransfersFromCertainDep(13);
 
 
+        // skriver til excel, i forksillige faner/sheets
         excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Nansensgade", nan);
         excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Hellerup", hel);
         excelUtils.writeToExcelInMultiSheets(System.getProperty("java.io.tmpdir")+"TransferSheet.xlsx", "Østerbro", øst);

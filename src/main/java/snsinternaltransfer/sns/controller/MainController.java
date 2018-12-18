@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.*;
 import snsinternaltransfer.sns.models.Item;
 import snsinternaltransfer.sns.models.Transfer;
 import snsinternaltransfer.sns.repo.exelRepo.ExcelRepo;
-import snsinternaltransfer.sns.utility.ExcelUtils;
 import snsinternaltransfer.sns.repo.login.AppUserDAO;
 import snsinternaltransfer.sns.service.ItemService;
 import snsinternaltransfer.sns.service.TransferService;
@@ -87,58 +86,6 @@ public class MainController {
 
     }
 
-    @RequestMapping("/download1")
-    public ResponseEntity<InputStreamResource> downloadFile1(
-            @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
-
-        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-        System.out.println("fileName: " + fileName);
-        System.out.println("mediaType: " + mediaType);
-
-        File file = new File(DIRECTORY + "/" + fileName);
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-
-        return ResponseEntity.ok()
-                // Content-Disposition
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
-                // Content-Type
-                .contentType(mediaType)
-                // Contet-Length
-                .contentLength(file.length()) //
-                .body(resource);
-    }
-
-    @GetMapping("/download3")
-    public void downloadFile3(HttpServletResponse resonse,
-                              @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
-
-        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-        System.out.println("fileName: " + fileName);
-        System.out.println("mediaType: " + mediaType);
-
-        File file = new File(DIRECTORY + "/" + fileName);
-
-        // Content-Type
-        // application/pdf
-        resonse.setContentType(mediaType.getType());
-
-        // Content-Disposition
-        resonse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName());
-
-        // Content-Length
-        resonse.setContentLength((int) file.length());
-
-        BufferedInputStream inStream = new BufferedInputStream(new FileInputStream(file));
-        BufferedOutputStream outStream = new BufferedOutputStream(resonse.getOutputStream());
-
-        byte[] buffer = new byte[1024];
-        int bytesRead = 0;
-        while ((bytesRead = inStream.read(buffer)) != -1) {
-            outStream.write(buffer, 0, bytesRead);
-        }
-        outStream.flush();
-        inStream.close();
-    }
 
     @GetMapping("/")
     public String index() {
@@ -151,7 +98,7 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String loginPage(Model model) {
+    public String loginPage() {
 
         return "login";
     }
@@ -199,6 +146,7 @@ public class MainController {
 
 
 
+        // brugt til fejlfinding
         log.info("from:" + transfer.getFrom());
         log.info("to:" + transfer.getTo());
         log.info("date:" + transfer.getSendingDate());
@@ -212,22 +160,10 @@ public class MainController {
     @GetMapping("/adminMenu")
     public String adminMenu(Model model) {
 
+        // tilføjer alle transfers til udskrift
         model.addAttribute("sendings", transferService.getAllTransfers());
 
-        // mangler også en fin lille search java script Done
-
-
-
-        ///// DELETE FILE?????
-
-
-
-
-
-
-
-
-
+        // item er en tom string til at postmappe til at kalde excel-genereringen
         model.addAttribute("date", new Item());
 
         log.info("adminMenu call");
@@ -240,6 +176,7 @@ public class MainController {
         log.info("Thomas has tried to delete: " + idForDelete);
 
 
+        //test om den pågældende sending findes, før man sletter
         if (transferService.selectTranfer(idForDelete) != null) {
 
             transferService.deleteSending(idForDelete);
@@ -255,13 +192,20 @@ public class MainController {
 
         log.info("Thomas has tried to update: " + idForUpdate);
 
+        // tom transffer der settes senere ved post
         model.addAttribute("update", new Transfer());
+
+        // tom string til excel funktion
         model.addAttribute("date", new Item());
+
         model.addAttribute("sendings", transferService.getAllTransfers());
 
 
+        // bruges til holde det unikke id
         tempId = idForUpdate;
 
+
+        // tester om det pågældende transfer findes, før man updater
         if (transferService.selectTranfer(idForUpdate) != null) {
 
             return "updateSending";
@@ -280,7 +224,7 @@ public class MainController {
 
 
         transferService.updateTransfer(transfer, tempId);
-        // HTML med drop down på to og from
+
 
 
         return "redirect:/adminMenu";
@@ -289,10 +233,12 @@ public class MainController {
     @GetMapping("/itemList")
     public String itemList(Model model) {
 
+        // henter alle items
         model.addAttribute("items", itemService.getAllItems());
+
+        // til excel funktion
         model.addAttribute("date", new Item());
 
-        //mangler search med javascript funtion i html DONE
 
         log.info("itemList call");
         return "itemList";
@@ -300,19 +246,14 @@ public class MainController {
 
     @GetMapping("/editItem")
     public String editItem(Model model) {
+
+        // til excel funktion
         model.addAttribute("date", new Item());
 
         log.info("editItem call");
         return "editItem";
     }
 
-    @GetMapping("/searchItem")
-    public String searchItem(Model model) {
-        model.addAttribute("date", new Item());
-
-        log.info("searchItem call");
-        return "searchItem";
-    }
 
     @GetMapping("/deleteItem/{deleted}")
     public String deleteItem(@PathVariable("deleted") int idForDelete) {
@@ -321,6 +262,7 @@ public class MainController {
         log.info("Thomas has tried to delete: " + idForDelete);
 
 
+        // tester om itemmet med det unikke id findes, før man kalder slet funktion
         if (itemService.selectItem(idForDelete) != null) {
 
             itemService.deleteItem(idForDelete);
@@ -373,6 +315,7 @@ public class MainController {
 
         log.info("someone is trying to create an item");
 
+        // binder en tom "item" til keyen "newItem"
         model.addAttribute("newItem", new Item());
 
 
@@ -382,6 +325,7 @@ public class MainController {
     @PostMapping("/createItem")
     public String createItem(@ModelAttribute Item item) {
 
+        // setter det tomme item
         itemService.createItem(item);
 
 
@@ -410,11 +354,14 @@ public class MainController {
 
         log.info("someone is writing to excel with all info from after: ");
 
+        // skriver til excel
         excelRepo.writeAllToExcel(s);
 
+        // brugt til at finde hvor excel gemmes
         log.info("dir : " + System.getProperty("java.io.tmpdir"));
 
 
+        // returnere alt der findes på stien hvor excel burde gemmes
         File curDir = new File(System.getProperty("java.io.tmpdir"));
 
 
@@ -432,13 +379,13 @@ public class MainController {
 
 
         log.info("asd"+ System.getProperty("java.io."));
+
+            // tester om filen findes, før download funktionen kaldes
             File a = new File(DIRECTORY + "/" + DEFAULT_FILE_NAME);
             if (a.exists()){
                 return "redirect:download";
             } else return "redirect:adminMenu";
 
-        //return "redirect:download1";
-        //return "redirect:download3";
     }
 
 

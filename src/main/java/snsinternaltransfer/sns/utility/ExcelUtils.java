@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExcelUtils {
 
+
     public static <T> void writeToExcelInMultiSheets(final String fileName, final String sheetName,
                                                            final List<T> data) {
         File file = null;
@@ -86,6 +87,7 @@ public class ExcelUtils {
         }
     }
 
+    //finder headers til vores excel fil
     private static List<String> getFieldNamesForClass(Class<?> clazz) throws Exception {
         List<String> fieldNames = new ArrayList<String>();
         Field[] fields = clazz.getDeclaredFields();
@@ -95,6 +97,7 @@ public class ExcelUtils {
         return fieldNames;
     }
 
+    //første bogstav bliver uppercase
     private static String capitalize(String s) {
         if (s.length() == 0)
             return s;

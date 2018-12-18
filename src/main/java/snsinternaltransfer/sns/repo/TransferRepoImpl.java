@@ -56,6 +56,7 @@ public class TransferRepoImpl  implements TransferRepo{
 
     }
 
+    // konvertere int til string
     @Override
     public String getToFromViaInt(int id){
 
@@ -102,6 +103,7 @@ public class TransferRepoImpl  implements TransferRepo{
     }
 
 
+    // konvertere string til int
     @Override
     public int getToViaUsername(String username){
 
@@ -149,6 +151,7 @@ public class TransferRepoImpl  implements TransferRepo{
         return department;
     }
 
+    // konvertere brugernavn til int
     @Override
     public int getToFromViaName(String name){
 
