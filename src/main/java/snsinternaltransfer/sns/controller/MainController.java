@@ -55,9 +55,9 @@ public class MainController {
     @RequestMapping(value = "/adminPage", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
 
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        User loginUser = (User) ((Authentication) principal).getPrincipal();
 
-        String userInfo = WebUtils.toString(loginedUser);
+        String userInfo = WebUtils.toString(loginUser);
         model.addAttribute("userInfo", userInfo);
 
         return "adminPage";
@@ -81,9 +81,9 @@ public class MainController {
     public String accessDenied(Model model, Principal principal) {
 
         if (principal != null) {
-            User loginedUser = (User) ((Authentication) principal).getPrincipal();
+            User loginUser = (User) ((Authentication) principal).getPrincipal();
 
-            String userInfo = WebUtils.toString(loginedUser);
+            String userInfo = WebUtils.toString(loginUser);
 
             model.addAttribute("userInfo", userInfo);
 
