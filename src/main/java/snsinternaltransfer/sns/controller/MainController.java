@@ -136,8 +136,12 @@ public class MainController {
 
         model.addAttribute("transfer", new Transfer());
 
+        model.addAttribute("search", itemService.searchItem("tuna"));
+
         return "userCreate";
     }
+
+
 
     @PostMapping("/userCreate")
     public String userCreate(@ModelAttribute Transfer transfer) {
