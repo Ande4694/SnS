@@ -51,6 +51,36 @@
             </form>
         </div>
 
+
+
+
+<!--
+
+        <div class="hurtig søg">
+
+            <table id="myTable">
+
+                <tbody id="myTable2">
+                <tr th:each="forEachKey: ${searchKey}">
+                    <td th:text="${forEachKey.name}"/>
+                    <td th:text="${forEachKey.unitPrice}"/>
+                    <td th:text="${forEachKey.itemCode}"/>
+
+
+
+
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    -->
+
+
+
     </div>
     <form th:action="@{/logout}" method="post">
         <input class="btn2 RightCornor" type="submit" value="Sign Out"/>

@@ -136,7 +136,7 @@ public class MainController {
 
         model.addAttribute("transfer", new Transfer());
 
-        model.addAttribute("search", itemService.searchItem("tuna"));
+        //model.addAttribute("searchKey", itemService.searchItem("tuna"));
 
         return "userCreate";
     }
