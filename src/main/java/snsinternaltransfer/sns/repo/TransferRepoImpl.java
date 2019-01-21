@@ -220,7 +220,7 @@ public class TransferRepoImpl  implements TransferRepo{
 
 
         // alt det som systemet klarer for os
-        double totalPrice = amount* itemRepo.getItem(item).getUnitPrice();
+        double totalPrice = amount        *           itemRepo.getItem(item).getUnitPrice();
         int itemCode = itemRepo.getItem(item).getItemCode();
         LocalDate a = LocalDate.now();
         int from = getToViaUsername(user.getUsername());

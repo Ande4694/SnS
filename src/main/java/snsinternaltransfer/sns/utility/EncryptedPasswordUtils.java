@@ -11,7 +11,7 @@ public class EncryptedPasswordUtils {
     }
 
     public static void main(String[] args) {
-        String password = "JonJon";
+        String password = "Tobias";
         String encryptedPassword = encryptedPassword(password);
 
         System.out.println("Encryted Password: " + encryptedPassword);

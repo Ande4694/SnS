@@ -35,7 +35,7 @@
 
     <div class="container">
         <h1>Update Sending</h1>
-        <p> You are updating this Sending: (Anders i might need you help here)[[${#httpServletRequest.remoteUser}]]
+        <p> You are updating this Sending:[[${#httpServletRequest.remoteUser}]]
         </p>
         <form th:action="@{/updateSending}" th:object="${update}" method="Post">
             <hr>
@@ -83,7 +83,7 @@
                 <option value="Tuna">Tuna</option>
                 <option value="Sea bass">Sea Bass</option>
             </select>
-            <input type="text" th:field="${update.totalPrice}" required>
+            <input type="text" th:field="${update.itemCode}" required>
             <p>Enter total price</p>
             <input type="text" th:field="${update.totalPrice}" required>
             <p>Enter your name</p>

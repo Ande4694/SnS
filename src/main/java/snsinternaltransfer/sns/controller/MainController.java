@@ -157,6 +157,7 @@ public class MainController {
         log.info("item:" + transfer.getItem());
         log.info("sender:" + transfer.getSenderName());
         log.info("amount:" + transfer.getAmount());
+        log.info("itemcode: "+transfer.getItem());
 
         return "redirect:/userCreate";
     }

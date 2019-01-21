@@ -15,7 +15,7 @@ public class Transfer {
     private int fromInt;
     private int toInt;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    // VI SKAL HUSKE AT MATCHE FORMAT MED HTML
+
     private Date sendingDate;
     private String item;
     private double totalPrice;
